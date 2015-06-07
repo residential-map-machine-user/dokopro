@@ -11,16 +11,11 @@ import Constants.AppConstants;
 import Utils.Util;
 
 public class CourseController extends BaseController {
-	public CourseController() {
-		setAuthFlag(AppConstants.AUTH_FLAG.AUTH_ALL_USER);
-	}
-	
 	/**
 	 * コース一覧ページへ飛ぶ
 	 */
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response){
-		setAuthFlag(AppConstants.AUTH_FLAG.AUTH_SIGNEDIN_USER);
 		try {
 			request.getServletContext().getRequestDispatcher(AppConstants.FOWARD_PATH.CONST_COURSE_INDEX_JSP).forward(request, response);
 		} catch (ServletException | IOException e) {
@@ -35,12 +30,17 @@ public class CourseController extends BaseController {
 	 * @param response
 	 */
 	public void detailAction(HttpServletRequest request, HttpServletResponse response){
-		setAuthFlag(AppConstants.AUTH_FLAG.AUTH_SIGNEDIN_USER);
 		try {
 			request.getServletContext().getRequestDispatcher(AppConstants.FOWARD_PATH.CONST_COURSE_DETAIL_JSP).forward(request, response);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+	
+	public void contentAction(HttpServletRequest request, HttpServletResponse response){
+		try{
+			request.getServletContext().getRequestDispatcher(AppConstants.FOWARD_PATH.Con))
 		}
 	}
 }

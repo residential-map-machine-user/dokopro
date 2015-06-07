@@ -41,7 +41,7 @@
 					<h1 class="hero-header">Life With Programming</h1>
 					<p class="hero-subtitle">Let’s start your creative life</p>
 					<div class="registerbuttonwraper">
-							<a class="button toplogin" href="<%=request.getContextPath() %>/front/account/">新規登録</a>
+							<a class="button toplogin" href="<%=request.getContextPath() %>/front/account">新規登録</a>
 					</div>
 				</div>
 				<div class="w-col w-col-3 catch_phrase_column"></div>

@@ -10,10 +10,6 @@ import BaseClasses.BaseController;
 import Constants.AppConstants;
 
 public class MypageController extends BaseController {
-	public MypageController() {
-		setAuthFlag(AppConstants.AUTH_FLAG.AUTH_ALL_USER);
-	}
-	
 	/**
 	 *マイページへ飛ぶ
 	 */

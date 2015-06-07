@@ -3,6 +3,8 @@ package FrontController;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.HashMap;
+import java.util.Map;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServlet;
@@ -16,13 +18,13 @@ import Constants.AppConstants;
 import Utils.Util;
 
 public class FrontControllerServlet extends HttpServlet {
-	//[TODO] 認証に必要なデータは基本的に暗号化しておく.(暗号化してデータベースに保存)暗号化して戻せないアルゴリズムにしておく
-	//[TODO] Auth認証の実装(google.facebook.twitter)
-	//[TODO] ユーザのパスワード再発行用のメールを送る
-	//[TODO] メール用のサーバーを作る。
-	//[TODO] アクセストークンをサーバに接続
-	//[TODO] レッドマインの導入
-	//[]
+	// [TODO] 認証に必要なデータは基本的に暗号化しておく.(暗号化してデータベースに保存)暗号化して戻せないアルゴリズムにしておく
+	// [TODO] Auth認証の実装(google.facebook.twitter)
+	// [TODO] ユーザのパスワード再発行用のメールを送る
+	// [TODO] メール用のサーバーを作る。
+	// [TODO] アクセストークンをサーバに接続
+	// [TODO] レッドマインの導入
+	// []
 	/**
 	 * 
 	 */
@@ -46,29 +48,33 @@ public class FrontControllerServlet extends HttpServlet {
 				BaseController controller = null;
 				// 取得したコントローラーをインスタンス化
 				controller = (BaseController) controllerClass.newInstance();
-				
-				//[TODO]HashMapおき換えてパスをkeyとして権限を取り出すその後userの権限と比較
-				//基本は弾いて該当するものがあった時だけ処理をする。
-				
-				// 権限チェック
-				if (controller.getAuthFlag() == AppConstants.AUTH_FLAG.AUTH_ALL_USER) {
-					// アクションの実行
-					doAction(controllerClass, controller, request, response,
-							uriObj);
-				} else if (controller.getAuthFlag() > AppConstants.AUTH_FLAG.AUTH_ALL_USER) {
-					UserBean user = (UserBean)request.getSession().getAttribute("USER_INF");
-					// 認証チェック
-					if (user != null && user.getAuthFlag() >= controller.getAuthFlag()) {
-						// アクションの実行
-						request.setAttribute("USER_AUTH_FLAG", user.getAuthFlag());
+				//権限チェック
+				Util.l(request.getRequestURI());
+				UserBean user = (UserBean) request.getSession().getAttribute(
+						"USER_INF");
+				if (AppConstants.AUTH_MAP.authMap.containsKey(request
+						.getRequestURI())) {
+					if (AppConstants.AUTH_MAP.authMap.get(request
+							.getRequestURI()) == AppConstants.AUTH_FLAG.AUTH_ALL_USER) {
+						 Util.l("すべてのユーザに対する処理");
 						doAction(controllerClass, controller, request,
 								response, uriObj);
-					}else{
-						controller.goLogin(request, response);
+					} else {
+						Util.l("すべてのユーザ以外の処理");
+						if(request.getSession().getAttribute("USER_INF") != null){
+							if((Integer)AppConstants.AUTH_MAP.authMap.get(request.getRequestURI()) <= user.getAuthFlag()){
+								doAction(controllerClass, controller, request,
+										response, uriObj);
+							}
+						}else{
+							controller.goLogin(request, response);
+							Util.l("権限エラー");
+						}
 					}
 				} else {
-					controller.goIndex(request, response);
-					Util.l("権限エラー ");
+					// [TODO]エラーページへ飛ばす メッセージは要求されたペーズは存在しません
+					Util.l("リクエストされたページは存在しません");
+					Util.l("定数のhashマップの確認をする");
 				}
 			} catch (InstantiationException | IllegalAccessException e) {
 				e.printStackTrace();

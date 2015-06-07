@@ -4,7 +4,7 @@ import java.sql.Date;
 
 public class UserBean {
 	private int userId;
-	private String userName;
+	private String accountName;
 	private String mail;
 	private String password;
 	private String createdAt;
@@ -16,11 +16,11 @@ public class UserBean {
 	public void setUserId(int userId) {
 		this.userId = userId;
 	}
-	public String getUserName() {
-		return userName;
+	public String getAccountName() {
+		return accountName;
 	}
-	public void setUserName(String userName) {
-		this.userName = userName;
+	public void setAccountName(String accountName) {
+		this.accountName = accountName;
 	}
 	public String getMail() {
 		return mail;

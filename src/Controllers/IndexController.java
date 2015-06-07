@@ -16,16 +16,11 @@ import Utils.Util;
 
 public class IndexController extends BaseController {
 	
-	public IndexController(){
-		setAuthFlag(AppConstants.AUTH_FLAG.AUTH_ALL_USER);
-	}
-	
 	/**
 	 * インデックスページへ飛ぶ
 	 */
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response){
-		setAuthFlag(AppConstants.AUTH_FLAG.AUTH_ALL_USER);
 		try {
 			request.getServletContext().getRequestDispatcher(AppConstants.FOWARD_PATH.CONST_INDEX_JSP).forward(request, response);
 		} catch (ServletException | IOException e) {

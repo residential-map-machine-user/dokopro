@@ -23,7 +23,7 @@
 										method="post">
 										<label for="name-2">ユーザー名:</label> <input class="w-input"
 											id="USER_NAME" type="text" placeholder="ユーザー名を入力してください"
-											name="USER_NAME" data-name="Name 2"> <label
+											name="ACCOUNT_NAME" data-name="Name 2"> <label
 											for="email-2">パスワード:</label> <input class="w-input"
 											id="PASSWORD" type="password" placeholder="パスワードを入力してください"
 											name="PASSWORD" data-name="Email 2" required="required">

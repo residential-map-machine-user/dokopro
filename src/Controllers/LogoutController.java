@@ -11,10 +11,6 @@ import Constants.AppConstants;
 import Utils.Util;
 
 public class LogoutController extends BaseController {
-	public LogoutController(){
-		setAuthFlag(AppConstants.AUTH_FLAG.AUTH_ALL_USER);
-	}
-	
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response){
 		try {

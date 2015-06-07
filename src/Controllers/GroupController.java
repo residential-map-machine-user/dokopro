@@ -10,20 +10,15 @@ import BaseClasses.BaseController;
 import Constants.AppConstants;
 import Utils.Util;
 
-public class TeamController extends BaseController {
-
-	public TeamController() {
-		setAuthFlag(AppConstants.AUTH_FLAG.AUTH_ALL_USER);
-	}
+public class GroupController extends BaseController {
 
 	// チーム一覧ページへ飛ぶ
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
-		setAuthFlag(AppConstants.AUTH_FLAG.AUTH_SIGNEDIN_USER);
 		try {
 			request.getServletContext()
 					.getRequestDispatcher(
-							AppConstants.FOWARD_PATH.CONST_TEAM_LIST_JSP)
+							AppConstants.FOWARD_PATH.CONST_GROUP_LIST_JSP)
 					.forward(request, response);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
@@ -37,7 +32,7 @@ public class TeamController extends BaseController {
 		try {
 			request.getServletContext()
 					.getRequestDispatcher(
-							AppConstants.FOWARD_PATH.CONST_TEAM_ADD_JSP)
+							AppConstants.FOWARD_PATH.CONST_GROUP_ADD_JSP)
 					.forward(request, response);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
@@ -51,7 +46,7 @@ public class TeamController extends BaseController {
 		try {
 			request.getServletContext()
 					.getRequestDispatcher(
-							AppConstants.FOWARD_PATH.CONST_TEAM_EDIT_JSP)
+							AppConstants.FOWARD_PATH.CONST_GROUP_EDIT_JSP)
 					.forward(request, response);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block

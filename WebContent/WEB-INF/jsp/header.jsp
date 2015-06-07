@@ -1,5 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
+<%@ page import="Beans.UserBean"%>
 <!DOCTYPE html>
 <!-- This site was created in Webflow. http://www.webflow.com-->
 <!-- Last Published: Sun May 10 2015 01:43:47 GMT+0000 (UTC) -->
@@ -44,17 +45,36 @@
 				src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
 				width="38">
 			</a> <a class="courselistnavitem"
-				href="<%=request.getContextPath()%>/front/course/">コース一覧</a> <a
+				href="<%=request.getContextPath()%>/front/course">コース一覧</a> <a
 				class="courselistnavitem"
-				href="<%=request.getContextPath()%>/front/team/">チーム一覧</a>
+				href="<%=request.getContextPath()%>/front/group">チーム一覧</a>
 			<div class="w-clearfix entrybuttonwrapper">
+				
+				<%if(request.getSession().getAttribute("USER_INF") == null){ %>
 				<div class="w-clearfix headerbuttonwrapper">
-					<a class="button" href="<%=request.getContextPath()%>/front/login/">&nbsp;ログイン</a>
+					<a class="button" href="<%=request.getContextPath()%>/front/login">&nbsp;ログイン</a>
 				</div>
 				<div class="w-clearfix headerbuttonwrapper">
 					<a class="button"
-						href="<%=request.getContextPath()%>/front/account/">新規登録</a>
+						href="<%=request.getContextPath()%>/front/account">新規登録</a>
 				</div>
+				<%}else{ %>
+				<%-- <a class="courselistnavitem"
+				href="<%=request.getContextPath()%>/front/course/mypage">マイページ</a> --%>
+				<div class="dropdown">
+  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
+  <% String account =((UserBean)request.getSession().getAttribute("USER_INF")).getAccountName();%>
+  <%=account %>
+    <span class="caret"></span>
+  </button>
+  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+  </ul>
+</div>
+				<% } %>
 			</div>
 			<nav class="w-nav-menu" role="navigation"></nav>
 		</div>

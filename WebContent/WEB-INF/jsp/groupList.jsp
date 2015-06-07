@@ -17,7 +17,7 @@
   <div class="w-section">
     <div class="w-container">
       <h1 class="teamlisthead">チーム一覧</h1>
-      <div><a class="button" href="<%=request.getContextPath()%>/front/team/add">チーム作成</a>
+      <div><a class="button" href="<%=request.getContextPath()%>/front/group/add">チーム作成</a>
       </div>
     </div>
   </div>

@@ -37,8 +37,8 @@
         <div class="w-row logincolumns">
           <div class="w-col w-col-6 login" id="separation">
             <div class="w-form">
-              <form id="email-form" name="email-form" data-name="Email Form" action="<%=request.getContextPath() %>/front/account/" method="post">
-                <label for="name-2">氏名</label>
+              <form id="email-form" name="email-form" data-name="Email Form" action="<%=request.getContextPath() %>/front/account" method="post">
+                <label for="name-2">アカウント名</label>
                 <input class="w-input" id="name-2" type="text" placeholder="アカウント名を入力してください" name="ACCOUNT_NAME" data-name="Name 2">
                 <label for="email-4">メールアドレス</label>
                 <input class="w-input" id="email-4" type="email" placeholder="メールアドレスを入力してください" name="MAIL" data-name="Email 4" required="required">

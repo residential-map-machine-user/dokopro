@@ -11,10 +11,6 @@ import BaseClasses.BaseController;
 import Constants.AppConstants;
 
 public class ErrorController extends BaseController {
-	public ErrorController(){
-		setAuthFlag(AppConstants.AUTH_FLAG.AUTH_ALL_USER);
-	}
-	
 	/**
 	 *エラーページへ飛ぶ 
 	 */

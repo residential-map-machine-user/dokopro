@@ -11,9 +11,6 @@ import Constants.AppConstants;
 import Utils.Util;
 
 public class AdminController extends BaseController {
-	public AdminController(){
-		setAuthFlag(AppConstants.AUTH_FLAG.AUTH_ALL_USER);
-	}
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		// アクションとユーザの権限の比較

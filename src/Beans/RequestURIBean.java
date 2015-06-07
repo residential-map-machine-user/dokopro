@@ -3,6 +3,7 @@ package Beans;
 public class RequestURIBean {
 	private String controllerPath = "";
 	private String actionPath = "";
+	private String requestPath= "";
 	public String getControllerPath() {
 		return controllerPath;
 	}
@@ -14,5 +15,11 @@ public class RequestURIBean {
 	}
 	public void setActionPath(String actionPath) {
 		this.actionPath = actionPath;
+	}
+	public void setRequestPath(String requestPath){
+		this.requestPath  = requestPath;
+	}
+	public String getRequestPath(){
+		return requestPath;
 	}
 }

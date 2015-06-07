@@ -31,24 +31,21 @@ public class UserDAO extends BaseDAO {
 			PreparedStatement prstmt = conn.prepareStatement(sql);
 			int incrementalSymbol = 1;
 			prstmt.setString(incrementalSymbol++,
-					request.getParameter("account_name"));
+					request.getParameter("ACCOUNT_NAME"));
 			prstmt.setString(incrementalSymbol++,
 					request.getParameter("PASSWORD"));
 			rs = prstmt.executeQuery();
 			// 結果の取得
 			if (rs.next()) {
-				user.setUserName(rs.getString("account_name"));
-				user.setPassword(rs.getString("password"));
-				user.setMail(rs.getString("mail"));
-				user.setCreatedAt(rs.getString("created_at"));
-				user.setUpdatedAt(rs.getString("updated_at"));
-				user.setUserId(rs.getInt("user_id"));
+				user.setAccountName(rs.getString("account_name"));
 				user.setAuthFlag(AppConstants.AUTH_FLAG.AUTH_SIGNEDIN_USER);
+				Util.l("データベース処理っている");
 			}
 		} catch (SQLException sqlException) {
 			sqlException.printStackTrace();
 		} finally {
 			finishConnection();
+			Util.l(user.getAccountName());
 			return user;
 		}
 	}
@@ -73,7 +70,7 @@ public class UserDAO extends BaseDAO {
 			while (rs.next()) {
 				UserBean user = new UserBean();
 				user.setUserId(rs.getInt("user_id"));
-				user.setUserName(rs.getString("account_name"));
+				user.setAccountName(rs.getString("account_name"));
 				userList.add(user);
 			}
 		} catch (SQLException e) {

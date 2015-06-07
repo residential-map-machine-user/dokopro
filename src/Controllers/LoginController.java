@@ -15,10 +15,6 @@ import Utils.Util;
 
 public class LoginController extends BaseController {
 	
-	public LoginController(){
-		setAuthFlag(AppConstants.AUTH_FLAG.AUTH_ALL_USER);
-	}
-	
 	/**
 	 * ログインページへ飛ぶ
 	 */
@@ -37,13 +33,16 @@ public class LoginController extends BaseController {
 	 * @param response
 	 */
 	public void mainAction(HttpServletRequest request, HttpServletResponse response){
+		Util.l("アクションは呼ばれている");
 		UserDAO dbObj = new UserDAO();
 		UserBean userObj = dbObj.selectUser(request);
-		if(userObj.getUserName() != null){
+		if(userObj.getAccountName() != null){
 			request.getSession().setAttribute("USER_INF", userObj);
 			Util.l(((UserBean)request.getSession().getAttribute("USER_INF")).getAuthFlag() + "");
 			//[TODO]　ログインしたあとに同じページに戻ってくる
 			goCourseIndex(request, response);
+		}else{
+			goError(request, response);
 		}
 	}
 }
