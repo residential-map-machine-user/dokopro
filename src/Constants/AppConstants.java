@@ -14,9 +14,11 @@ public class AppConstants {
 	public static class FOWARD_PATH{
 		public static final String CONST_INDEX_JSP = "/WEB-INF/jsp/index.jsp";
 		public static final String CONST_LOGIN_JSP = "/WEB-INF/jsp/login.jsp";
+		public static final String CONST_LOGOUT_JSP = "/WEB-INF/jsp/logout.jsp";
+		public static final String CONST_ERROR_JSP =  "/WEB-INF/jsp/error.jsp";
 		public static final String CONST_COURSE_DETAIL_JSP = "/WEB-INF/jsp/courseDetail.jsp";
 		public static final String CONST_COURSE_INDEX_JSP = "/WEB-INF/jsp/courseList.jsp";
-		public static final String CONST_LOGOUT_JSP = "/WEB-INF/jsp/logout.jsp";
+		public static final String CONST_COURSE_CONTENT_JSP= "/WEB-INF/jsp/courseContent.jsp";
 		public static final String CONST_ACCOUNT_EDIT_JSP = "/WEB-INF/jsp/accountSetting.jsp";
 		public static final String CONST_ACCOUNT_ADD_JSP = "/WEB-INF/jsp/accountAdd.jsp";
 		public static final String CONST_ACCOUNT_COMPLETE_JSP = "/WEB-INF/jsp/accountComplete.jsp";
@@ -25,8 +27,8 @@ public class AppConstants {
 		public static final String CONST_GROUP_LIST_JSP = "/WEB-INF/jsp/groupList.jsp";
 		public static final String CONST_GROUP_EDIT_JSP = "/WEB-INF/jsp/groupEdit.jsp";
 		public static final String CONST_GROUP_ADD_JSP = "/WEB-INF/jsp/groupAdd.jsp";
-		public static final String CONST_ERROR_JSP =  "/WEB-INF/jsp/error.jsp";
-		public static final String CONST_ADMIN_INDEX_JSP =  "/WEB-INF/jsp/adminindex.jsp";
+		public static final String CONST_GROUP_DETAIL_JSP = "/WEB-INF/jsp/groupDetail.jsp";
+		public static final String CONST_ADMIN_INDEX_JSP =  "/WEB-INF/jsp/adminSelect.jsp";
 		public static final String CONST_ADMIN_ADD_CONTENTS_JSP =  "/WEB-INF/jsp/adminaddcontents.jsp";
 	}
 	
@@ -52,11 +54,14 @@ public class AppConstants {
 				put("/dokopro/front/admin", AUTH_FLAG.AUTH_ALL_USER);
 				put("/dokopro/front/course", AUTH_FLAG.AUTH_ALL_USER);
 				put("/dokopro/front/course/detail", AUTH_FLAG.AUTH_ALL_USER);
+				put("/dokopro/front/course/content", AUTH_FLAG.AUTH_ALL_USER);
 				put("/dokopro/front/error", AUTH_FLAG.AUTH_ALL_USER);
 				put("/dokopro/front/mypage", AUTH_FLAG.AUTH_ALL_USER);
 				put("/dokopro/front/mypage/edit", AUTH_FLAG.AUTH_ALL_USER);
 				put("/dokopro/front/group", AUTH_FLAG.AUTH_ALL_USER);
+				put("/dokopro/front/group/add", AUTH_FLAG.AUTH_ALL_USER);
 				put("/dokopro/front/group/edit", AUTH_FLAG.AUTH_ALL_USER);
+				put("/dokopro/front/group/detail", AUTH_FLAG.AUTH_ALL_USER);
 				put("/dokopro/front/logout", AUTH_FLAG.AUTH_ALL_USER);
 				put("/dokopro/front/login", AUTH_FLAG.AUTH_ALL_USER);
 				put("/dokopro/front/login/main", AUTH_FLAG.AUTH_ALL_USER);

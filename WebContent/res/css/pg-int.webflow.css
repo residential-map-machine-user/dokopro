@@ -1,6 +1,6 @@
 body {
   height: 100%;
-  border-left-style: none;
+  border-radius: 0px;
   font-family: Montserrat, sans-serif;
   color: #333;
   font-size: 12px;
@@ -58,19 +58,28 @@ h6 {
 }
 p {
   display: block;
+  margin-right: 6px;
   margin-bottom: 5px;
+  margin-left: 12px;
+  padding-right: 4px;
+  float: none;
+  border-radius: 50px;
   font-family: Bitter, serif;
   color: #a1a1a1;
-  font-size: 15px;
+  font-size: 30px;
   line-height: 23px;
-  text-align: center;
+  text-align: left;
 }
 .button {
+  position: static;
   display: inline-block;
+  overflow-x: visible;
+  overflow-y: visible;
   height: 40px;
   margin-left: 0px;
   padding: 9px 21px;
-  float: left;
+  float: none;
+  clear: none;
   border-radius: 5px;
   background-color: #489fd9;
   box-shadow: rgba(255, 255, 255, 0.29) 0px 1px 0px 0px inset, rgba(0, 0, 0, 0.27) 0px 2px 11px 0px;
@@ -207,7 +216,7 @@ p {
   color: white;
   font-size: 42px;
   text-align: left;
-  text-shadow: rgba(0, 0, 0, 0.21) 0px 2px 0px;
+  text-shadow: rgba(0, 0, 0, 0.2) 0px 2px 0px;
 }
 .hero-subtitle {
   margin-bottom: 20px;
@@ -502,20 +511,21 @@ p {
   padding-bottom: 8px;
   float: left;
   color: white;
-  text-decoration:none;
 }
 .imagetop {
   width: 1000px;
   height: auto;
 }
 .topimagecontainer {
-  background-color: #266cbd;
+  border: 3px solid black;
+  border-radius: 0px;
+  background-color: #253445;
 }
 .catchphrasemypage {
   margin-top: -1px;
   padding-top: 53px;
-  color: white;
-  text-decoration: underline;
+  color: #d6cbcb;
+  text-decoration: none;
 }
 .designercontainer {
   margin-bottom: 20px;
@@ -536,7 +546,9 @@ p {
   margin-top: 49px;
   margin-bottom: 39px;
   padding-top: 0px;
-  border: 1px solid black;
+  border: 1px solid white;
+  border-radius: 50px;
+  box-shadow: #c5bcd1 1px 1px 3px 0px, white 0px 0px 6px 0px, white 0px 0px 12px 0px;
 }
 .courseexplanationcontainer {
   margin-right: 62px;
@@ -544,6 +556,7 @@ p {
 }
 .languagelist {
   padding: 49px 61px 72px;
+  font-family: Verdana, Geneva, sans-serif;
   text-align: center;
 }
 .html {
@@ -587,6 +600,7 @@ p {
   float: left;
 }
 .personalizedcontents {
+  font-size: 20px;
   text-align: left;
 }
 .heading {
@@ -666,7 +680,10 @@ p {
   text-align: left;
 }
 .teamnameing {
-  color: black;
+  border-bottom-style: solid;
+  border-bottom-color: #1f79ad;
+  color: #6876c4;
+  font-size: 20px;
 }
 .teamhowmuch {
   text-align: center;
@@ -713,6 +730,67 @@ p {
 .headerbuttonwrapper {
   margin-right: 38px;
   float: left;
+}
+.smallsectionquestion {
+  width: 50%;
+  height: 30px;
+  float: left;
+  border: 1px dotted black;
+}
+.smallse {
+  width: 50%;
+}
+.taemlistdecoration {
+  border: 1px solid #1aa1d6;
+}
+.teamlinedecoration {
+  margin-top: 15px;
+  margin-bottom: 15px;
+}
+.formposition {
+  width: 200px;
+  float: right;
+  text-align: right;
+}
+.coursedetailtitle {
+  color: #2a6b96;
+  font-size: 20px;
+}
+.unitcourseitem {
+  border: 1px dotted #59b1bd;
+}
+.selectedcourese {
+  margin-top: 26px;
+  margin-bottom: 27px;
+}
+.wrapperteaminfo {
+  display: block;
+  margin-top: 100px;
+}
+.teamtitle {
+  color: black;
+}
+.submitteamjoin {
+  text-align: center;
+}
+.teaminfo {
+  border: 1px solid #6d62d1;
+  border-radius: 100px;
+}
+.indexparagraph {
+  font-size: 20px;
+}
+.courseselectparagraph {
+  font-size: 20px;
+}
+.teamexplanationparagraph {
+  font-size: 20px;
+}
+.adminselect {
+  margin-top: 100px;
+}
+.groupeditwrapper {
+  margin-top: 50px;
 }
 @media (max-width: 991px) {
   p {

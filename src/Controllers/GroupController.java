@@ -53,4 +53,16 @@ public class GroupController extends BaseController {
 			e.printStackTrace();
 		}
 	}
+	
+	public void detailAction(HttpServletRequest request, HttpServletResponse response){
+		try {
+			request.getServletContext()
+					.getRequestDispatcher(
+							AppConstants.FOWARD_PATH.CONST_GROUP_DETAIL_JSP)
+					.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
 }

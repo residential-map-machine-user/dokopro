@@ -15,32 +15,47 @@ public class CourseController extends BaseController {
 	 * コース一覧ページへ飛ぶ
 	 */
 	@Override
-	public void execute(HttpServletRequest request, HttpServletResponse response){
+	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			request.getServletContext().getRequestDispatcher(AppConstants.FOWARD_PATH.CONST_COURSE_INDEX_JSP).forward(request, response);
+			request.getServletContext()
+					.getRequestDispatcher(
+							AppConstants.FOWARD_PATH.CONST_COURSE_INDEX_JSP)
+					.forward(request, response);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * コースの詳細(一番大きな)へ飛ぶ
+	 * 
 	 * @param request
 	 * @param response
 	 */
-	public void detailAction(HttpServletRequest request, HttpServletResponse response){
+	public void detailAction(HttpServletRequest request,
+			HttpServletResponse response) {
 		try {
-			request.getServletContext().getRequestDispatcher(AppConstants.FOWARD_PATH.CONST_COURSE_DETAIL_JSP).forward(request, response);
+			request.getServletContext()
+					.getRequestDispatcher(
+							AppConstants.FOWARD_PATH.CONST_COURSE_DETAIL_JSP)
+					.forward(request, response);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
 	}
-	
-	public void contentAction(HttpServletRequest request, HttpServletResponse response){
-		try{
-			request.getServletContext().getRequestDispatcher(AppConstants.FOWARD_PATH.Con))
+
+	public void contentAction(HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			request.getServletContext()
+					.getRequestDispatcher(
+							AppConstants.FOWARD_PATH.CONST_COURSE_CONTENT_JSP)
+					.forward(request, response);
+		} catch (ServletException | IOException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
 		}
 	}
 }

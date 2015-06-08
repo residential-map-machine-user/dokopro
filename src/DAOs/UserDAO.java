@@ -38,7 +38,13 @@ public class UserDAO extends BaseDAO {
 			// 結果の取得
 			if (rs.next()) {
 				user.setAccountName(rs.getString("account_name"));
-				user.setAuthFlag(AppConstants.AUTH_FLAG.AUTH_SIGNEDIN_USER);
+				user.setMail(rs.getString("mail"));
+				user.setAuthFlag(rs.getInt("auth_flag"));
+				user.setUserTypes(rs.getInt("user_types"));
+				user.setCreatedAt(rs.getDate("created_at"));
+				user.setUpdatedAt(rs.getDate("updated_at"));
+				user.setDeleteFlag(rs.getInt("delete_flag"));
+				user.setUserId(rs.getInt("user_id"));
 				Util.l("データベース処理っている");
 			}
 		} catch (SQLException sqlException) {
@@ -100,7 +106,7 @@ public class UserDAO extends BaseDAO {
 					&& checkUserPassword(password)) {
 				// パスワードの確認
 				if (password.equals(checkPassword)) {
-//					// 暗号化
+					// // 暗号化
 
 					String encryptedPassword = Encrypt.SHA512(password);
 					Util.l(encryptedPassword);
@@ -121,6 +127,57 @@ public class UserDAO extends BaseDAO {
 			e.printStackTrace();
 		}
 		return successNum;
+	}
+	
+	//[TODO]
+	public int updateAccountName(HttpServletRequest request) {
+		int successNum = 0;
+		try {
+			// フォームから送られてきた値の取得
+			String userName = request.getParameter("ACCOUNT_NAME");
+			String mail = request.getParameter("MAIL");
+			String password = request.getParameter("PASSWORD");
+			String newPassword =request.getParameter("NEW_PASSWORD");
+			String checkPassword = request.getParameter("CHECK_PASSWORD");
+			int userId = ((UserBean)request.getSession().getAttribute("USER_INF")).getUserId();
+			Util.l("ok1>>>>>" + userName + mail + password + checkPassword);
+			Util.l("チェック結果>>>>>" + checkUserName(userName) + checkEmail(mail)
+					+ checkUserPassword(password));
+			// 値の確認
+			if (checkUserName(userName) && checkEmail(mail)
+					&& checkUserPassword(password)) {
+				// パスワードの確認
+				if (password.equals(checkPassword)) {
+					// // 暗号化
+
+					String encryptedPassword = Encrypt.SHA512(password);
+					Util.l(encryptedPassword);
+					// sql文の作成
+					String sql = "UPDATE user_table SET mail=?, account_name=?, password=? WHERE user_id=? AND password=?;";
+					PreparedStatement prstmt = conn.prepareStatement(sql);
+					// 値のセット
+					prstmt.setString(1, mail);
+					prstmt.setString(2, userName);
+					prstmt.setString(3, encryptedPassword);
+					prstmt.setInt(4, userId);
+					prstmt.setString(5, password);
+					// SQL実行
+					successNum = prstmt.executeUpdate();
+					Util.l("成功件数" + successNum);
+				}
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return successNum;
+	}
+	
+	public int updateUserPassword(){
+		return 0;
+	}
+	
+	public int updateUserMail(){
+		return 0;
 	}
 
 	private boolean checkUserName(String userName) {

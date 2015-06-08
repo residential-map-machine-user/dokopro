@@ -26,7 +26,7 @@
       <div class="w-row">
         <div class="w-col w-col-3">
           <div>
-            <h1 class="teamnameing">HTMLer</h1>
+            <h1 class="teamnameing"><a href="<%=request.getContextPath()%>/front/group/detail">HTMLer</h1>
             <div>
               <p>HTMLが好きなチームです。</p>
               <div>

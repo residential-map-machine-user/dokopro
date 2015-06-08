@@ -1,6 +1,6 @@
 <!DOCTYPE html>
 <!-- This site was created in Webflow. http://www.webflow.com-->
-<!-- Last Published: Tue May 19 2015 07:37:33 GMT+0000 (UTC) -->
+<!-- Last Published: Mon Jun 08 2015 04:24:06 GMT+0000 (UTC) -->
 <html data-wf-site="5529405753ab13dd4efff00c" data-wf-page="5533fc6dfd7ee5b552c33f8a">
 <head>
   <meta charset="utf-8">
@@ -23,27 +23,6 @@
   <link rel="apple-touch-icon" href="images/webclip-slate.png">
 </head>
 <body>
-  <div class="w-nav navbarhome" data-collapse="all" data-animation="over-right" data-duration="400" data-contain="1" data-easing="ease-in" data-doc-height="1">
-    <div class="w-container">
-      <a class="w-nav-brand" href="#"><img src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg" width="38">
-      </a>
-      <nav class="w-nav-menu" role="navigation">
-        <div class="w-dropdown" data-delay="0">
-          <div class="w-dropdown-toggle dropdownmenu">
-            <div>Dropdown</div>
-            <div class="w-icon-dropdown-toggle"></div>
-          </div>
-          <nav class="w-dropdown-list"><a class="w-dropdown-link link1" href="#">アカウント設定</a><a class="w-dropdown-link" href="#">サインアウト</a><a class="w-dropdown-link" href="#">マイページ</a>
-          </nav>
-        </div>
-      </nav>
-      <div class="w-nav-button menubutton">
-        <h5>UserName</h5>
-      </div>
-      <div class="courselistnavitem">コース一覧</div>
-      <div class="courselistnavitem">チーム一覧</div>
-    </div>
-  </div>
   <div class="w-section">
     <div class="w-container tab">
       <div class="pic"><img class="slefpic" src="images/IMG_0181.JPG">
@@ -53,17 +32,17 @@
       <div>
         <div class="w-tabs" data-duration-in="300" data-duration-out="100">
           <div class="w-tab-menu">
-            <a class="w-tab-link w-inline-block" data-w-tab="Tab 1">
+            <a class="w-tab-link w--current w-inline-block" data-w-tab="Tab 1">
               <div>受講中コース</div>
             </a>
-            <a class="w-tab-link w--current w-inline-block" data-w-tab="Tab 2">
+            <a class="w-tab-link w-inline-block" data-w-tab="Tab 2">
               <div>参加チーム</div>
             </a>
           </div>
           <div class="w-tab-content">
-            <div class="w-tab-pane" data-w-tab="Tab 1">
+            <div class="w-tab-pane w--tab-active" data-w-tab="Tab 1">
               <div>
-                <div class="w-row">
+                <div class="w-row selectedcourese">
                   <div class="w-col w-col-3"><img src="images/HTML5_logo_and_wordmark.svg.png" width="175">
                   </div>
                   <div class="w-col w-col-3"><img class="php" src="images/phplogo-highres.png" width="188">
@@ -78,10 +57,11 @@
                     <div class="w-col w-col-3">
                       <ul class="w-list-unstyled">
                         <li>
-                          <div>HTML基礎　　　　　　　進捗率30%</div>
+                          <div>HTML基礎
+                            <br>進捗率30%</div>
                         </li>
-                        <li>HTMLを理解しよう&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;進捗率20%</li>
-                        <li>HTML応用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+                        <li>HTMLを理解しよう
+                          <br>進捗率20%</li>
                       </ul>
                     </div>
                     <div class="w-col w-col-3"></div>
@@ -91,36 +71,20 @@
                 </div>
               </div>
             </div>
-            <div class="w-tab-pane w--tab-active" data-w-tab="Tab 2">
+            <div class="w-tab-pane" data-w-tab="Tab 2">
               <div>
                 <div class="w-row">
                   <div class="w-col w-col-3">
-                    <ul class="w-list-unstyled">
-                      <li>デザイナー思考チーム</li>
-                      <li>デザイン王子</li>
-                      <li>erdesin</li>
-                    </ul>
+                    <ul class="w-list-unstyled"></ul>
                   </div>
                   <div class="w-col w-col-3">
-                    <ul class="w-list-unstyled">
-                      <li>HTML好きチーム</li>
-                      <li>HTMl王子</li>
-                      <li>erdesin</li>
-                    </ul>
+                    <ul class="w-list-unstyled"></ul>
                   </div>
                   <div class="w-col w-col-3">
-                    <ul class="w-list-unstyled">
-                      <li>Javaでいくチーム</li>
-                      <li>java王子</li>
-                      <li>erdesin</li>
-                    </ul>
+                    <ul class="w-list-unstyled"></ul>
                   </div>
                   <div class="w-col w-col-3">
-                    <ul class="w-list-unstyled">
-                      <li>phpでばりばりチーム</li>
-                      <li>デザイン王子</li>
-                      <li>erdesin</li>
-                    </ul>
+                    <ul class="w-list-unstyled"></ul>
                   </div>
                 </div>
               </div>

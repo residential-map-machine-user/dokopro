@@ -68,10 +68,10 @@
     <span class="caret"></span>
   </button>
   <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Action</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Another action</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Something else here</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="#">Separated link</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="<%=request.getContextPath() %>/front/mypage">マイページ</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="<%=request.getContextPath()%>/front/account/edit">アカウント設定</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="<%=request.getContextPath()%>/front/admin">管理者メニュー</a></li>
+    <li role="presentation"><a role="menuitem" tabindex="-1" href="<%=request.getContextPath()%>/front/logout">サインアウト</a></li>
   </ul>
 </div>
 				<% } %>

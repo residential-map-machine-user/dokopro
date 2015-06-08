@@ -28,6 +28,14 @@ public class AccountController extends BaseController {
 			} else if (request.getMethod().equals("POST")) {
 				UserDAO dbObj = new UserDAO();
 				int registerNum = dbObj.addUser(request);
+				if (registerNum == 1) {
+					request.getServletContext()
+							.getRequestDispatcher(
+									AppConstants.FOWARD_PATH.CONST_ACCOUNT_COMPLETE_JSP)
+							.forward(request, response);
+				} else {
+					goError(request, response);
+				}
 			}
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
@@ -39,10 +47,23 @@ public class AccountController extends BaseController {
 			HttpServletResponse response) {
 		// アクションの権限をセット
 		try {
-			request.getServletContext()
-					.getRequestDispatcher(
-							AppConstants.FOWARD_PATH.CONST_ACCOUNT_EDIT_JSP)
-					.forward(request, response);
+			if (request.getMethod().equals("GET")) {
+				request.getServletContext()
+						.getRequestDispatcher(
+								AppConstants.FOWARD_PATH.CONST_ACCOUNT_EDIT_JSP)
+						.forward(request, response);
+			} else if (request.getMethod().equals("POST")) {
+				UserDAO dbObj = new UserDAO();
+				int registerNum = dbObj.updateAccountName(request);
+				if (registerNum == 1) {
+					request.getServletContext()
+							.getRequestDispatcher(
+									AppConstants.FOWARD_PATH.CONST_ACCOUNT_COMPLETE_JSP)
+							.forward(request, response);
+				} else {
+					goError(request, response);
+				}
+			}
 		} catch (ServletException | IOException e) {
 			e.printStackTrace();
 		}

@@ -2,14 +2,24 @@ package Beans;
 
 import java.sql.Date;
 
+import com.mysql.fabric.xmlrpc.base.Data;
+
 public class UserBean {
 	private int userId;
 	private String accountName;
 	private String mail;
 	private String password;
-	private String createdAt;
-	private String updatedAt;
+	private Date createdAt;
+	private Date updatedAt;
 	private int authFlag;
+	private int userTypes;
+	private int deleteFlag;
+	public int getDeleteFlag(){
+		return deleteFlag;
+	}
+	public void setDeleteFlag(int deleteFlag){
+		this.deleteFlag = deleteFlag;
+	}
 	public int getUserId() {
 		return userId;
 	}
@@ -34,16 +44,16 @@ public class UserBean {
 	public void setPassword(String password) {
 		this.password = password;
 	}
-	public String getCreatedAt() {
+	public Date getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreatedAt(String createdAt) {
+	public void setCreatedAt(Date createdAt) {
 		this.createdAt = createdAt;
 	}
-	public String getUpdatedAt() {
+	public Date getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUpdatedAt(String updatedAt) {
+	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 	public int getAuthFlag() {
@@ -51,5 +61,11 @@ public class UserBean {
 	}
 	public void setAuthFlag(int authFlag) {
 		this.authFlag = authFlag;
+	}
+	public int getUserTypes() {
+		return userTypes;
+	}
+	public void setUserTypes(int userTypes) {
+		this.userTypes = userTypes;
 	}
 }

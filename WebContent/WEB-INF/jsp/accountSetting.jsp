@@ -36,21 +36,21 @@
         <div class="separationyoko"></div>
         <div class="changaccountinfowrapper">
           <div class="w-form">
-            <form id="email-form" name="email-form" data-name="Email Form">
+            <form id="email-form" name="email-form" action="<%=request.getContextPath() %>/front/account/edit" method="post">
               <label for="name">フルネーム</label>
               <input class="w-input" id="name" type="text" placeholder="Yuki Matsuyama" name="name" data-name="Name">
               <input class="w-button" type="submit" value="名前の変更" data-wait="Please wait...">
               <div class="changeemail">アドレスの変更</div>
               <label for="email">メールアドレス</label>
-              <input class="w-input" id="email" type="email" placeholder="sh.ghdyji@gmail.com" name="email" data-name="Email" required="required">
+              <input class="w-input" id="email" type="email" name="MAIL" data-name="Email" required="required">
               <input class="w-button" type="submit" value="メールアドレスの変更" data-wait="Please wait...">
               <div class="changpassword">パスワードの変更</div>
               <label for="email-2">古いパスワード</label>
-              <input class="w-input" id="email-2" type="email" placeholder="sh.ghdyji@gmail.com" name="email-2" data-name="Email 2" required="required">
+              <input class="w-input" id="email-2" type="password"  name="PASSWORD" data-name="Email 2" required="required">
               <label for="email-4">新しいパスワード</label>
-              <input class="w-input" id="email-4" type="email" placeholder="sh.ghdyji@gmail.com" name="email-4" data-name="Email 4" required="required">
+              <input class="w-input" id="email-4" type="password" name="NEW_PASSWORD" data-name="Email 4" required="required">
               <label for="email-3">新しいパスワード（ 確認）</label>
-              <input class="w-input" id="email-3" type="email" placeholder="sh.ghdyji@gmail.com" name="email-3" data-name="Email 3" required="required">
+              <input class="w-input" id="email-3" type="password"  name="CHECKPASSWORD" data-name="Email 3" required="required">
               <input class="w-button" type="submit" value="パスワードの変更" data-wait="Please wait...">
             </form>
             <div class="w-form-done">
