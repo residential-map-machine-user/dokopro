@@ -17,7 +17,28 @@ public class ProjectDAO extends BaseDAO {
 	// プロジェクトを編集するメソッド
 	// プロジェクトを削除するメソッド
 	// プロジェクトを表示するメソッド
-
+	
+	//プロジェクト作成用のメソッド
+	//とりあえずコミットレベル、プロジェクトの説明,プロジェクト名まであれば十分だとして進める.
+	public int addProject(HttpServletRequest request){
+		int successNum = 0;
+		try {
+			String projectName  = request.getParameter("PROJECT_NAME");
+			int commitLevel = Integer.parseInt(request.getParameter("COMMIT_LEVEL"));
+			String projectSummery = request.getParameter("PROJECT_SUMMERY");
+			String sql = "INSERT INTO table_group_project (project_name,project_summery,commit_level) values(?,?,?);";
+			PreparedStatement prstmt = conn.prepareStatement(sql);
+			int incrementalSymbol = 1;
+			prstmt.setString(incrementalSymbol++, projectName);
+			prstmt.setString(incrementalSymbol++,projectSummery);
+			prstmt.setInt(incrementalSymbol++, commitLevel);
+			successNum = prstmt.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return successNum;
+	}
+	
 	// プロジェクトを全権表示するメソッド
 	public List<ProjectBean> selectAllProject(HttpServletRequest request) {
 		List<ProjectBean> projectList = new ArrayList<>();
@@ -86,7 +107,7 @@ public class ProjectDAO extends BaseDAO {
 			 * table_group.group_id = table_project.group_Id;
 			 * この３つのセレクト文を使えばうまくuser_idからプロジェクト情報を取得してこれるはず
 			 */
-			String sql = "select table_group_project.project_id, table_group_project.project_name,table_group_project.commit_level,table_group_project.project_summery,table_group_project.project_type,table_group_project.created_at,table_group_project.updated_at from (table_user  INNER JOIN(table_group_member INNER JOIN(table_group  INNER JOIN table_group_project ON table_group.group_id = table_group_project.group_id) ON table_group_member.group_id = table_group.group_id) ON table_user.user_id = table_group_member.user_id) WHERE table_user.user_id=?";
+			String sql = "select table_group_project.project_id, table_group_project.project_name,table_group_project.commit_level, table_group_project.project_summery, table_group_project.project_type, table_group_project.created_at,table_group_project.updated_at from (table_user  INNER JOIN(table_group_member INNER JOIN(table_group  INNER JOIN table_group_project ON table_group.group_id = table_group_project.group_id) ON table_group_member.group_id = table_group.group_id) ON table_user.user_id = table_group_member.user_id) WHERE table_user.user_id=?";
 			PreparedStatement prstmt = conn.prepareStatement(sql);
 			int incrementalSymbol = 1;
 			prstmt.setInt(incrementalSymbol++, projectId);
@@ -105,5 +126,22 @@ public class ProjectDAO extends BaseDAO {
 			e.printStackTrace();
 		}
 		return projectList;
+	}
+
+	// プロジェクトの削除メソッド
+	public int deleteProject(HttpServletRequest request) {
+		int successNum = 0;
+		try {
+			int project_id = Integer.parseInt(request
+					.getParameter("PROJECT_ID"));
+			String sql = "UPDATE table_group_project set delete_flag=1 WHERE project_id=?;";
+			PreparedStatement prstmt = conn.prepareStatement(sql);
+			int incrementalSymbol = 1;
+			prstmt.setInt(incrementalSymbol++, project_id);
+			successNum = prstmt.executeUpdate();
+		} catch (SQLException e) {
+
+		}
+		return successNum;
 	}
 }

@@ -26,6 +26,8 @@ public class UserDAO extends BaseDAO {
 	// ユーザの全権表示
 	// パスヲード用にセレクトメソッド
 	// ログインのためのメソッド
+	
+	//ユーザグインするためのメソッド
 	@SuppressWarnings("finally")
 	public UserBean selectUserForLogin(HttpServletRequest request) {
 		// 該当するユーザー
@@ -62,12 +64,8 @@ public class UserDAO extends BaseDAO {
 			return user;
 		}
 	}
-
-	/**
-	 * 全てのユーザを取得
-	 * 
-	 * @return
-	 */
+	
+	//ユーザ全権を取得してくるためのメソッド
 	public List<UserBean> selectALLUserList() {
 		// ユーザーリスト
 		List<UserBean> userList = new ArrayList<>();
@@ -101,7 +99,8 @@ public class UserDAO extends BaseDAO {
 		}
 		return userList;
 	}
-
+	
+	//ユーザの追加用のメソッド
 	public int addUser(HttpServletRequest request) {
 		// 成功件数
 		int successNum = 0;
@@ -142,7 +141,7 @@ public class UserDAO extends BaseDAO {
 		return successNum;
 	}
 
-	// [TODO]
+	//ユーザのアカウント名の更新用のメソッド
 	public int updateAccountName(HttpServletRequest request) {
 		int successNum = 0;
 		try {
@@ -168,7 +167,8 @@ public class UserDAO extends BaseDAO {
 		}
 		return successNum;
 	}
-
+	
+	//ユーザのパスワード更新用のメソッド
 	public UserBean selectUserForUpdateByUserId(HttpServletRequest request) {
 		UserBean user = new UserBean();
 		ResultSet rs = null;
@@ -248,6 +248,8 @@ public class UserDAO extends BaseDAO {
 		}
 		return successNum;
 	}
+	
+	//ユーザのメールアドレス更新用のメソッド
 	public int updateUserMail(HttpServletRequest request) {
 		int successNum = 0;
 		try {
@@ -273,7 +275,8 @@ public class UserDAO extends BaseDAO {
 		}
 		return successNum;
 	}
-
+	
+	//ユーザ名の確認用のメソッド
 	private boolean checkUserName(String userName) {
 		if (userName == null) {
 			return false;
@@ -289,7 +292,8 @@ public class UserDAO extends BaseDAO {
 		Util.l("3つ目name");
 		return true;
 	}
-
+	
+	//パスワード確認用のメソッド
 	private boolean checkUserPassword(String password) {
 		if (password == null) {
 			return false;
@@ -305,7 +309,8 @@ public class UserDAO extends BaseDAO {
 		Util.l("3つ目pass");
 		return true;
 	}
-
+	
+	//メール確認用のメソッド
 	private boolean checkEmail(String mail) {
 		if (mail == null) {
 			return false;
