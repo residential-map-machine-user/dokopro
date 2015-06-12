@@ -11,6 +11,5 @@
 コンテンツの一覧を表示
 <a href="<%=request.getContextPath()%>/admin/addcontents">コンテンツ追加</a>
 <a href="<%=request.getContextPath()%>/admin/additem">アイテム追加</a>
-
 </body>
 </html>
