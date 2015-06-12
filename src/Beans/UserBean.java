@@ -2,8 +2,6 @@ package Beans;
 
 import java.sql.Date;
 
-import com.mysql.fabric.xmlrpc.base.Data;
-
 public class UserBean {
 	private int userId;
 	private String accountName;

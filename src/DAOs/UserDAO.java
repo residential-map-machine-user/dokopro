@@ -19,14 +19,21 @@ public class UserDAO extends BaseDAO {
 		startConnection();
 	}
 
+	// ユーザの追加
+	// ユーザの削除
+	// ユーザの編集
+	// 編集に関してはかなり細かい単位で変種可能にする
+	// ユーザの全権表示
+	// パスヲード用にセレクトメソッド
+	// ログインのためのメソッド
 	@SuppressWarnings("finally")
-	public UserBean selectUser(HttpServletRequest request) {
+	public UserBean selectUserForLogin(HttpServletRequest request) {
 		// 該当するユーザー
 		UserBean user = new UserBean();
 		ResultSet rs = null;
 		try {
 			// sql文の作成
-			String sql = "SELECT * FROM user_table"
+			String sql = "SELECT * FROM table_user"
 					+ " Where account_name = ? AND" + " password = ?;";
 			PreparedStatement prstmt = conn.prepareStatement(sql);
 			int incrementalSymbol = 1;
@@ -37,14 +44,14 @@ public class UserDAO extends BaseDAO {
 			rs = prstmt.executeQuery();
 			// 結果の取得
 			if (rs.next()) {
-				user.setAccountName(rs.getString("account_name"));
+				user.setUserId(rs.getInt("user_id"));
 				user.setMail(rs.getString("mail"));
 				user.setAuthFlag(rs.getInt("auth_flag"));
-				user.setUserTypes(rs.getInt("user_types"));
+				user.setAccountName(rs.getString("account_name"));
+				user.setDeleteFlag(rs.getInt("delete_flag"));
+				user.setUserTypes(rs.getInt("user_type"));
 				user.setCreatedAt(rs.getDate("created_at"));
 				user.setUpdatedAt(rs.getDate("updated_at"));
-				user.setDeleteFlag(rs.getInt("delete_flag"));
-				user.setUserId(rs.getInt("user_id"));
 				Util.l("データベース処理っている");
 			}
 		} catch (SQLException sqlException) {
@@ -66,7 +73,7 @@ public class UserDAO extends BaseDAO {
 		List<UserBean> userList = new ArrayList<>();
 		try {
 			// クエリ文作成
-			String sql = "SELECT * FROM user_table";
+			String sql = "SELECT * FROM table_user";
 			PreparedStatement prstmt = conn.prepareStatement(sql);
 			// 検索実行
 			ResultSet rs = null;
@@ -76,7 +83,13 @@ public class UserDAO extends BaseDAO {
 			while (rs.next()) {
 				UserBean user = new UserBean();
 				user.setUserId(rs.getInt("user_id"));
+				user.setMail(rs.getString("mail"));
+				user.setAuthFlag(rs.getInt("auth_flag"));
 				user.setAccountName(rs.getString("account_name"));
+				user.setDeleteFlag(rs.getInt("delete_flag"));
+				user.setUserTypes(rs.getInt("user_type"));
+				user.setCreatedAt(rs.getDate("created_at"));
+				user.setUpdatedAt(rs.getDate("updated_at"));
 				userList.add(user);
 			}
 		} catch (SQLException e) {
@@ -111,7 +124,7 @@ public class UserDAO extends BaseDAO {
 					String encryptedPassword = Encrypt.SHA512(password);
 					Util.l(encryptedPassword);
 					// sql文の作成
-					String sql = "INSERT INTO user_table (mail, account_name, password)"
+					String sql = "INSERT INTO table_user (mail, account_name, password)"
 							+ " values(?,?,?);";
 					PreparedStatement prstmt = conn.prepareStatement(sql);
 					// 値のセット
@@ -128,56 +141,137 @@ public class UserDAO extends BaseDAO {
 		}
 		return successNum;
 	}
-	
-	//[TODO]
+
+	// [TODO]
 	public int updateAccountName(HttpServletRequest request) {
 		int successNum = 0;
 		try {
 			// フォームから送られてきた値の取得
-			String userName = request.getParameter("ACCOUNT_NAME");
-			String mail = request.getParameter("MAIL");
-			String password = request.getParameter("PASSWORD");
-			String newPassword =request.getParameter("NEW_PASSWORD");
-			String checkPassword = request.getParameter("CHECK_PASSWORD");
-			int userId = ((UserBean)request.getSession().getAttribute("USER_INF")).getUserId();
-			Util.l("ok1>>>>>" + userName + mail + password + checkPassword);
-			Util.l("チェック結果>>>>>" + checkUserName(userName) + checkEmail(mail)
-					+ checkUserPassword(password));
-			// 値の確認
-			if (checkUserName(userName) && checkEmail(mail)
-					&& checkUserPassword(password)) {
-				// パスワードの確認
-				if (password.equals(checkPassword)) {
-					// // 暗号化
+			String accountName = request.getParameter("ACCOUNT_NAME");
+			int userId = ((UserBean) request.getSession().getAttribute(
+					"USER_INF")).getUserId();
+			Util.l("ok1>>>>>" + accountName);
+			Util.l("チェック結果>>>>>" + checkUserName(accountName));
+			// sql文の作成
+			String sql = "UPDATE table_user SET account_name=? WHERE user_id=?;";
+			PreparedStatement prstmt = conn.prepareStatement(sql);
+			int incrementalSymbol = 1;
+			// 値のセット
+			prstmt.setString(incrementalSymbol++, accountName);
+			prstmt.setInt(incrementalSymbol++, userId);
+			// SQL実行
+			successNum = prstmt.executeUpdate();
+			Util.l("成功件数" + successNum);
 
-					String encryptedPassword = Encrypt.SHA512(password);
-					Util.l(encryptedPassword);
-					// sql文の作成
-					String sql = "UPDATE user_table SET mail=?, account_name=?, password=? WHERE user_id=? AND password=?;";
-					PreparedStatement prstmt = conn.prepareStatement(sql);
-					// 値のセット
-					prstmt.setString(1, mail);
-					prstmt.setString(2, userName);
-					prstmt.setString(3, encryptedPassword);
-					prstmt.setInt(4, userId);
-					prstmt.setString(5, password);
-					// SQL実行
-					successNum = prstmt.executeUpdate();
-					Util.l("成功件数" + successNum);
-				}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return successNum;
+	}
+
+	public UserBean selectUserForUpdateByUserId(HttpServletRequest request) {
+		UserBean user = new UserBean();
+		ResultSet rs = null;
+		try {
+			// sql文の作成
+			String sql = "SELECT password account_name FROM table_user"
+					+ " Where user_id=?;";
+			PreparedStatement prstmt = conn.prepareStatement(sql);
+			int incrementalSymbol = 1;
+			rs = prstmt.executeQuery();
+			// 結果の取得
+			if (rs.next()) {
+				user.setPassword(rs.getString("password"));
+				user.setAccountName(rs.getString("account_name"));
+				Util.l("データベース処理っている");
+			}
+		} catch (SQLException sqlException) {
+			sqlException.printStackTrace();
+		} finally {
+			finishConnection();
+			Util.l(user.getAccountName());
+			return user;
+		}
+	}
+	
+	//ユーザのパスワードを更新するメソッド
+	public int updateUserPassword(HttpServletRequest request) {
+		int successNum = 0;
+		try {
+			UserBean bufferUserInf = selectUserForUpdateByUserId(request);
+			String password = request.getParameter("PASSWORD");
+			String newPassword = request.getParameter("NEW_PASSWORD");
+			String checkPassword = request.getParameter("CHECK_PASSWORD");
+			int userId = ((UserBean) request.getSession().getAttribute(
+					"UESR_INF")).getUserId();
+			UserBean user = selectUserForLogin(request);
+			Util.l("ok1>>>>>" + password + checkPassword + newPassword);
+			Util.l("チェック結果" + checkUserPassword(newPassword));
+			String encryptedOldPassword = Encrypt.SHA512(newPassword);
+			String encryptedNewPassword = Encrypt.SHA512(newPassword);
+			if (!encryptedOldPassword.equals(bufferUserInf.getPassword())) {
+				return successNum;
+			}
+			if (newPassword.equals(checkPassword)) {
+				// パスワードの暗号化
+				String sql = "UPDATE table_user SET password = ? WHERE user_id=? AND password=?";
+				PreparedStatement prstmt = conn.prepareStatement(sql);
+				int incrementalSymbol = 1;
+				prstmt.setString(incrementalSymbol++, password);
+				prstmt.setString(incrementalSymbol++,
+						bufferUserInf.getPassword());
+				prstmt.setString(incrementalSymbol++,
+						bufferUserInf.getAccountName());
+				successNum = prstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}
 		return successNum;
 	}
-	
-	public int updateUserPassword(){
-		return 0;
+
+	//ユーザ削除用のメソッド
+	public int deleteUser(HttpServletRequest request){
+		int successNum = 0;
+		try{
+			int userId = ((UserBean)request.getSession().getAttribute("USER_INF")).getUserId();
+			String accountName = request.getParameter("ACCOUNT_NAME");
+			String sql = "UPDATE table_user SET delete_flag=? WHERE user_id=?";
+			PreparedStatement prstmt = conn.prepareStatement(sql);
+			int incrementalSymbol = 1;
+			prstmt.setBoolean(incrementalSymbol++, true);
+			prstmt.setInt(incrementalSymbol++, userId);
+			successNum = prstmt.executeUpdate();
+		}catch(SQLException e){
+			e.printStackTrace();
+			return successNum;
+		}
+		return successNum;
 	}
-	
-	public int updateUserMail(){
-		return 0;
+	public int updateUserMail(HttpServletRequest request) {
+		int successNum = 0;
+		try {
+			// フォームから送られてきた値の取得
+			String mail = request.getParameter("MAIL");
+			int userId = ((UserBean) request.getSession().getAttribute(
+					"USER_INF")).getUserId();
+			Util.l("ok1>>>>>" + mail);
+			Util.l("チェック結果>>>>>" + checkUserName(mail));
+			// sql文の作成
+			String sql = "UPDATE table_user SET mail=? WHERE user_id=?;";
+			PreparedStatement prstmt = conn.prepareStatement(sql);
+			int incrementalSymbol = 1;
+			// 値のセット
+			prstmt.setString(incrementalSymbol++, mail);
+			prstmt.setInt(incrementalSymbol++, userId);
+			// SQL実行
+			successNum = prstmt.executeUpdate();
+			Util.l("成功件数" + successNum);
+
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}
+		return successNum;
 	}
 
 	private boolean checkUserName(String userName) {

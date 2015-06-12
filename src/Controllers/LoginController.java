@@ -35,7 +35,7 @@ public class LoginController extends BaseController {
 	public void mainAction(HttpServletRequest request, HttpServletResponse response){
 		Util.l("アクションは呼ばれている");
 		UserDAO dbObj = new UserDAO();
-		UserBean userObj = dbObj.selectUser(request);
+		UserBean userObj = dbObj.selectUserForLogin(request);
 		if(userObj.getAccountName() != null){
 			request.getSession().setAttribute("USER_INF", userObj);
 			Util.l(((UserBean)request.getSession().getAttribute("USER_INF")).getAuthFlag() + "");

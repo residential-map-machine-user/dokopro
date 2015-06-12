@@ -14,7 +14,7 @@ public class LogoutController extends BaseController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response){
 		try {
-			request.getSession().removeAttribute("USER_INF");
+			request.getSession().invalidate();
 			request.getServletContext().getRequestDispatcher(AppConstants.FOWARD_PATH.CONST_INDEX_JSP).forward(request, response);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
