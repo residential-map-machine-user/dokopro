@@ -1,88 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="Beans.UserBean"%>
 <!DOCTYPE html>
 <!-- This site was created in Webflow. http://www.webflow.com-->
 <!-- Last Published: Sun May 10 2015 01:43:47 GMT+0000 (UTC) -->
 <html data-wf-site="5529405753ab13dd4efff00c"
 	data-wf-page="554eb623e47085a40aa28f05">
 <head>
-<meta charset="utf-8">
-<title>header</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="Webflow">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/res/css/normalize.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/res/css/webflow.css">
-<link rel="stylesheet" type="text/css"
-	href="<%=request.getContextPath()%>/res/css/pg-int.webflow.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
-<script>
-	WebFont
-			.load({
-				google : {
-					families : [ "Montserrat:400,700",
-							"Bitter:400,700,400italic",
-							"Ubuntu:300,300italic,400,400italic,500,500italic,700,700italic" ]
-				}
-			});
-</script>
-<script type="text/javascript"
-	src="<%=request.getContextPath()%>/res/js/modernizr.js"></script>
-<link rel="shortcut icon" type="image/x-icon"
-	href="/<%=request.getContextPath()%>/res/images/webclip-slate.png">
-<link rel="apple-touch-icon"
-	href="/<%=request.getContextPath()%>/res/images/webclip-slate.png">
+  <meta charset="utf-8">
+  <title>Home</title>
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="generator" content="Webflow">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/res/css/normalize.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/res/css/webflow.css">
+  <link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/res/css/news-article.webflow.css">
+  <script src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+  <script>
+    WebFont.load({
+      google: {
+        families: ["Oswald:300,400,700","Droid Sans:400,700","Roboto:300,regular,500"]
+      }
+    });
+  </script>
+  <script type="text/javascript" src="<%=request.getContextPath() %>/resjs/webflow.js"></script>
+  <script type="text/javascript" src="<%=request.getContextPath() %>/resjs/modernizr.js"></script>
+  <link rel="shortcut icon" type="image/x-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/favicon.ico">
+  <link rel="apple-touch-icon" href="https://daks2k3a4ib2z.cloudfront.net/img/webclip.png">
 </head>
-<div class="headercontainer">
-	<div class="w-nav navbarhome" data-collapse="all"
-		data-animation="over-right" data-duration="400" data-easing="ease-in"
-		data-doc-height="1">
-		<div class="w-clearfix">
-			<a class="w-nav-brand" href="#"> <img
-				src="https://d3e54v103j8qbb.cloudfront.net/img/image-placeholder.svg"
-				width="38">
-			</a> <a class="courselistnavitem"
-				href="<%=request.getContextPath()%>/front/course">コース一覧</a> <a
-				class="courselistnavitem"
-				href="<%=request.getContextPath()%>/front/group">チーム一覧</a>
-			<div class="w-clearfix entrybuttonwrapper">
-				
-				<%if(request.getSession().getAttribute("USER_INF") == null){ %>
-				<div class="w-clearfix headerbuttonwrapper">
-					<a class="button" href="<%=request.getContextPath()%>/front/login">&nbsp;ログイン</a>
-				</div>
-				<div class="w-clearfix headerbuttonwrapper">
-					<a class="button"
-						href="<%=request.getContextPath()%>/front/account">新規登録</a>
-				</div>
-				<%}else{ %>
-				<%-- <a class="courselistnavitem"
-				href="<%=request.getContextPath()%>/front/course/mypage">マイページ</a> --%>
-				<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-  <% String account =((UserBean)request.getSession().getAttribute("USER_INF")).getAccountName();%>
-  <%=account %>
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="<%=request.getContextPath() %>/front/mypage">マイページ</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="<%=request.getContextPath()%>/front/account/edit">アカウント設定</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="<%=request.getContextPath()%>/front/admin">管理者メニュー</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="<%=request.getContextPath()%>/front/logout">サインアウト</a></li>
-  </ul>
-</div>
-				<% } %>
-			</div>
-			<nav class="w-nav-menu" role="navigation"></nav>
-		</div>
-	</div>
-	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="<%=request.getContextPath()%>/res/js/webflow.js"></script>
-	<!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
-</div>
+  <div class="w-nav left-navigation" data-collapse="medium" data-animation="default" data-duration="400" data-no-scroll="1"><a class="w-nav-brand logo-link" href="#"><h1 class="brand-text">LiveDoorRSSNews</h1></a>
+    <nav class="w-nav-menu nav-menu" role="navigation"><a class="w-nav-link nav-link" href="#home">Home</a><a class="w-nav-link nav-link" href="#about">国内</a><a class="w-nav-link nav-link" href="#gallery">海外</a><a class="w-nav-link nav-link" href="#gallery">IT•経済</a><a class="w-nav-link nav-link" href="#gallery">芸能</a><a class="w-nav-link nav-link" href="#gallery">スポーツ</a><a class="w-nav-link nav-link" href="#gallery">映画</a><a class="w-nav-link nav-link" href="#about">グルメ</a><a class="w-nav-link nav-link" href="#about">国内</a><a class="w-nav-link nav-link" href="#about">女子</a><a class="w-nav-link nav-link" href="#about">トレンド</a>
+    </nav>
+    <div class="w-nav-button hamburger-button">
+      <div class="w-icon-nav-menu"></div>
+    </div>
+    <div class="w-hidden-medium w-hidden-small w-hidden-tiny social-footer"></div>
+  </div>
 </html>
