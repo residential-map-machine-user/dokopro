@@ -16,3 +16,4 @@ http://bitnami-redmine-ac8c.cloudapp.net/projects/dokopro
 
 
 リリース予定は7/13
+# RSSReader490
