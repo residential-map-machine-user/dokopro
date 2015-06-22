@@ -1,120 +1,177 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="Beans.ItemBean" %>
-<%@ page import="java.util.*" %>
 <!DOCTYPE html>
 <!-- This site was created in Webflow. http://www.webflow.com-->
 <!-- Last Published: Mon Apr 20 2015 01:31:28 GMT+0000 (UTC) -->
-
+<html data-wf-site="5529405753ab13dd4efff00c"
+	data-wf-page="5529405753ab13dd4efff00e">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
+<meta charset="utf-8">
+<title>Slate Template</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<meta name="generator" content="Webflow">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/res/css/normalize.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/res/css/webflow.css">
+<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/res/css/pg-int.webflow.css">
+<script
+	src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
+<script>
+	WebFont
+			.load({
+				google : {
+					families : [ "Montserrat:400,700",
+							"Bitter:400,700,400italic",
+							"Ubuntu:300,300italic,400,400italic,500,500italic,700,700italic" ]
+				}
+			});
+</script>
+<script type="text/javascript" src="<%=request.getContextPath() %>/res/js/modernizr.js"></script>
+<link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath() %>/res/images/webclip-slate.png">
+<link rel="apple-touch-icon" href="<%=request.getContextPath() %>/res/images/webclip-slate.png">
+</head>
 <body>
+	<header class="w-section navbar">
 	<jsp:include page="/WEB-INF/jsp/header.jsp"/>
-	<% ArrayList<ItemBean> itemList = new ArrayList<ItemBean>();
-	itemList = (ArrayList<ItemBean>)request.getAttribute("food"); %>
-  <div class="content">
-    <div class="banner" id="home">
-      <div class="hero-title-wrapper">
-        <h1 class="hero-heading">Choose Your news</h1>
-      </div>
-    </div>
-    <div class="w-section section" id="about">
-      <div class="w-container">
-        <div class="section-title-group">
-          <h2 class="section-heading centered">NEws List</h2>
-          <div class="section-subheading center">broadcasted latest news</div>
-        </div>
-        <div class="w-row">
-          <div class="w-col w-col-3 col-spc"><img class="grid-image" src="<%=request.getContextPath() %>/res/images/feather-12-black.svg" width="100">
-            <h3>国内</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p><a class="link" href="#">Text Link</a>
-          </div>
-          <div class="w-col w-col-3 col-spc"><img class="grid-image" src="<%=request.getContextPath() %>/res/images/feather-05-black.svg" width="100">
-            <h3>海外</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p><a class="link" href="#">Text Link</a>
-          </div>
-          <div class="w-col w-col-3 col-spc"><img class="grid-image" src="<%=request.getContextPath() %>/res/images/feather-24-black.svg" width="100">
-            <h3>IT•経済</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p><a class="link" href="#">Text Link</a>
-          </div>
-          <div class="w-col w-col-3 col-spc"><img class="grid-image" src="<%=request.getContextPath() %>/res/images/feather-66-black.svg" width="100">
-            <h3>芸能</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p><a class="link" href="#">Text Link</a>
-          </div>
-        </div>
-        <div class="w-row">
-          <div class="w-col w-col-3 col-spc"><img class="grid-image" src="<%=request.getContextPath() %>/res/images/feather-12-black.svg" width="100">
-            <h3>スポーツ</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p><a class="link" href="#">Text Link</a>
-          </div>
-          <div class="w-col w-col-3 col-spc"><img class="grid-image" src="<%=request.getContextPath() %>/res/images/feather-05-black.svg" width="100">
-            <h3>映画</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p><a class="link" href="#">Text Link</a>
-          </div>
-          <div class="w-col w-col-3 col-spc"><img class="grid-image" src="<%=request.getContextPath() %>/res/images/feather-24-black.svg" width="100">
-            <h3>グルメ</h3>
-            <p><%=itemList.get(0).getDescription() %></p><a class="link" href="#">Text Link</a>
-          </div>
-          <div class="w-col w-col-3 col-spc"><img class="grid-image" src="<%=request.getContextPath() %>/res/images/feather-66-black.svg" width="100">
-            <h3>国内</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p><a class="link" href="#">Text Link</a>
-          </div>
-        </div>
-        <div class="w-row">
-          <div class="w-col w-col-3 col-spc"><img class="grid-image" src="<%=request.getContextPath() %>/res/images/feather-12-black.svg" width="100">
-            <h3>女子</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p><a class="link" href="#">Text Link</a>
-          </div>
-          <div class="w-col w-col-3 col-spc"><img class="grid-image" src="<%=request.getContextPath() %>/res/images/feather-05-black.svg" width="100">
-            <h3>トレンド</h3>
-            <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Suspendisse varius enim in eros elementum tristique.</p><a class="link" href="#">Text Link</a>
-          </div>
-          <div class="w-col w-col-3 col-spc">
-            <h3></h3>
-            <p></p>
-            <a class="link" href="#"></a>
-          </div>
-          <div class="w-col w-col-3 col-spc">
-            <h3></h3>
-            <p></p>
-            <a class="link" href="#"></a>
-          </div>
-        </div>
-      </div>
-    </div>
-    <div class="w-section section section-gray" id="contact">
-      <div class="w-container">
-        <div class="section-title-group">
-          <h2 class="section-heading centered">Contact Form</h2>
-          <div class="section-subheading center">This is some text inside of a div block.</div>
-        </div>
-        <div class="w-form form-wrapper squeezed">
-          <form id="email-form" name="email-form" data-name="Email Form">
-            <div class="w-row">
-              <div class="w-col w-col-6 col-0">
-                <input class="w-input form-field" id="name-7" type="text" placeholder="Name" name="name-7" data-name="Name 7">
-              </div>
-              <div class="w-col w-col-6 col-0">
-                <input class="w-input form-field" id="email-9" type="email" placeholder="Email" name="email-9" data-name="Email 9" required="required">
-              </div>
-            </div>
-            <textarea class="w-input form-field text-area" id="field-4" placeholder="Message" name="field-4" data-name="Field 4"></textarea>
-            <input class="w-button button full-width" type="submit" value="Send Message" data-wait="Please wait...">
-          </form>
-          <div class="w-form-done success-message">
-            <p class="p-form">Thank you! Your submission has been received!</p>
-          </div>
-          <div class="w-form-fail success-message">
-            <p class="p-form">Oops! Something went wrong while submitting the form :(</p>
-          </div>
-        </div>
-      </div>
-    </div>
-    <footer class="w-section footer center">
-      <div class="w-container">
-        <div class="footer-text">Copyright Incredible. Made in Webflow.</div>
-      </div>
-    </footer>
-  </div>
-  <script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-  <!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+	</header>
+	<div class="w-section section hero">
+		<div class="w-container">
+			<div class="w-row">
+				<div class="w-col w-col-9 catch_phrase_column">
+					<h1 class="hero-header">Life With Programming</h1>
+					<p class="hero-subtitle">Let’s start your creative life</p>
+					<div class="registerbuttonwraper">
+							<a class="button toplogin" href="<%=request.getContextPath() %>/front/account">新規登録</a>
+					</div>
+				</div>
+				<div class="w-col w-col-3 catch_phrase_column"></div>
+			</div>
+		</div>
+	</div>
+	<div class="w-section w-hidden-small w-hidden-tiny section grey"></div>
+	<div class="w-section w-clearfix section" id="features">
+		<div class="w-container">
+			<div class="w-row">
+				<div class="w-col w-col-6">
+					<h2>Android Application</h2>
+					<p>AdnroidOSを使った開発はもはやスマートフォンだけに止まりません。Wearableといった時計から車やロボットにいたるところでの導入が開始されています。一緒にAndroidの開発を学びましょう.</p>
+					<div class="w-row">
+						<div class="w-col w-col-4 w-col-small-4 w-col-tiny-4">
+							<div class="icon-title">Album</div>
+							<img src="<%=request.getContextPath() %>/res/images/album.png" width="57"
+								alt="52af8d1ca41389d367000039_album.png">
+						</div>
+						<div class="w-col w-col-4 w-col-small-4 w-col-tiny-4">
+							<div class="icon-title">Funnel</div>
+							<img src="<%=request.getContextPath() %>/res/images/filter.png" width="57px"
+								alt="52af8d22a41389d36700003a_filter.png">
+						</div>
+						<div class="w-col w-col-4 w-col-small-4 w-col-tiny-4">
+							<div class="icon-title">Folders</div>
+							<img src="<%=request.getContextPath() %>/res/images/folder.png" width="57px"
+								alt="52af8d28a41389d36700003b_folder.png">
+						</div>
+					</div>
+				</div>
+				<div class="w-col w-col-6 center">
+					<img src="<%=request.getContextPath() %>/res/images/android_pic_top.png" width="510"
+						alt="5529f77e416f90126f4e71f5_android_pic_top.png">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="w-section section grey">
+		<div class="w-container">
+			<div class="w-row">
+				<div class="w-col w-col-6 center">
+					<img src="<%=request.getContextPath() %>/res/images/web_programming.png" width="323"
+						alt="5529f8aa3b36ca374dffdd8e_web_programming.png">
+				</div>
+				<div class="w-col w-col-6">
+					<h2>Web Programming</h2>
+					<p>最近は優れた見かけや機能を持ったWebサイトを見かけることも多くなってきました。canvasを使うことで、今までにないWebサイトを見かけるようになってきました。一緒にクリエイティブなWebサイトを作りましょう。</p>
+					<div class="w-row">
+						<div class="w-col w-col-4 w-col-small-4 w-col-tiny-4">
+							<div class="icon-title">Standard</div>
+							<img src="<%=request.getContextPath() %>/res/images/basic.png" width="57px"
+								alt="52af8d56aae9d4d56700005b_basic.png">
+						</div>
+						<div class="w-col w-col-4 w-col-small-4 w-col-tiny-4">
+							<div class="icon-title">Stacked</div>
+							<img src="<%=request.getContextPath() %>/res/images/stacked.png" width="57px"
+								alt="52af8d5da41389d36700003f_stacked.png">
+						</div>
+						<div class="w-col w-col-4 w-col-small-4 w-col-tiny-4">
+							<div class="icon-title">Tetris</div>
+							<img src="<%=request.getContextPath() %>/res/images/tetris.png" width="57px"
+								alt="52af8d65aae9d4d56700005d_tetris.png">
+						</div>
+					</div>
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="w-section section">
+		<div class="w-container">
+			<div class="w-row">
+				<div class="w-col w-col-6 w-clearfix">
+					<h2>Share Contents</h2>
+					<p>プログラミングは孤独な作業になってしまうと長く続きません。特に独学で学んでいる人は”プログラミング=辛い"という結果になりかねません。ここで仲間を見つけて一緒に開発を楽しみましょう。</p>
+					<div class="w-widget w-widget-twitter social-widget">
+						<iframe
+							src="https://platform.twitter.com/widgets/tweet_button.html#url=http%3A%2F%2Fwebflow.com&amp;counturl=webflow.com&amp;text=Check%20out%20this%20site&amp;count=vertical&amp;size=m&amp;dnt=true"
+							scrolling="no" frameborder="0" allowtransparency="true"
+							style="border: none; overflow: hidden; width: 55px; height: 62px;"></iframe>
+					</div>
+					<div class="w-widget w-widget-gplus social-widget">
+						<div class="g-plusone" data-href="http://webflow.com"
+							data-size="tall" data-annotation="bubble" data-width="120"
+							data-recommendations="false" id="___plusone_0"
+							style="width: 50px; height: 60px; text-indent: 0px; margin: 0px; padding: 0px; border-style: none; float: none; line-height: normal; font-size: 1px; vertical-align: baseline; display: inline-block; background: transparent;"></div>
+					</div>
+					<div class="w-widget w-widget-facebook social-widget">
+						<iframe
+							src="https://www.facebook.com/plugins/like.php?href=https%3A%2F%2Ffacebook.com%2Fwebflow&amp;layout=box_count&amp;locale=en_US&amp;action=like&amp;show_faces=false&amp;share=false"
+							scrolling="no" frameborder="0" allowtransparency="true"
+							style="border: none; overflow: hidden; width: 55px; height: 65px;"></iframe>
+					</div>
+				</div>
+				<div class="w-col w-col-6 center">
+					<img src="<%=request.getContextPath() %>/res/images/third-section.jpg" width="250"
+						alt="52ddf261b6d2171f780000ad_third-section.jpg">
+				</div>
+			</div>
+		</div>
+	</div>
+	<div class="w-section section purple">
+		<div class="w-container">
+			<div>
+				<div>copyright 2015&nbsp;laklab.inc&nbsp;</div>
+			</div>
+		</div>
+	</div>
+	<div class="w-section section grey footer">
+		<div class="w-container">
+			<p class="footer-text">いつでもどこでもプログラミング ~programming anywhere~</p>
+			<div class="button-block">
+				<a class="w-inline-block social-button"
+					href="mailto:support@webflow.com?subject=Hello!" target="_blank"><img
+					src="<%=request.getContextPath() %>/res/images/email-icon.png" width="21px"
+					alt="52af8da2aed63fb91400000f_email-icon.png"> </a> <a
+					class="w-inline-block social-button"
+					href="http://facebook.com/webflowapp" target="_blank"><img
+					src="<%=request.getContextPath() %>/res/images/facebook-icon.png" width="21px"
+					alt="52af8da8aed63fb914000010_facebook-icon.png"> </a> <a
+					class="w-inline-block social-button"
+					href="http://twitter.com/webflowapp" target="_blank"><img
+					src="<%=request.getContextPath() %>/res/images/twitter-icon.png" width="21px"
+					alt="52af8db1aed63fb914000011_twitter-icon.png"> </a>
+			</div>
+		</div>
+	</div>
+	<script type="text/javascript"
+		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="<%=request.getContextPath() %>/res/js/webflow.js"></script>
+	<!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 </body>
 </html>
