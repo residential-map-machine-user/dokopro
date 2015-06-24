@@ -3,7 +3,9 @@ package FrontController;
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
 import java.lang.reflect.Method;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.servlet.ServletException;
@@ -39,42 +41,47 @@ public class FrontControllerServlet extends HttpServlet {
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
 		setCharacterEncode(request);
-		RequestURIBean uriObj = null;
-		uriObj = spliteURIToArray(request);
+		List<String> splitedURI = spliteURIToList(request);
 		// リクエストされたコントロラーを取得
-		Class controllerClass = getClass(uriObj);
+		Class controllerClass = getClass(splitedURI.get(0));
 		if (controllerClass != null) {
 			try {
 				BaseController controller = null;
 				// 取得したコントローラーをインスタンス化
 				controller = (BaseController) controllerClass.newInstance();
-				//権限チェック
+				// 権限チェック
 				Util.l(request.getRequestURI());
 				UserBean user = (UserBean) request.getSession().getAttribute(
 						"USER_INF");
-				if (AppConstants.AUTH_MAP.authMap.containsKey(request
-						.getRequestURI())) {
-					if (AppConstants.AUTH_MAP.authMap.get(request
-							.getRequestURI()) == AppConstants.AUTH_FLAG.AUTH_ALL_USER) {
-						 Util.l("すべてのユーザに対する処理");
+				String authKey = splitedURI.get(0) + "/" + splitedURI.get(1);
+				Util.l("権限チェックのkey>>>>>" + authKey);
+				if (AppConstants.AUTH_MAP.authMap.containsKey(authKey)) {
+					if (AppConstants.AUTH_MAP.authMap.get(authKey) == AppConstants.AUTH_FLAG.AUTH_ALL_USER) {
+						Util.l("すべてのユーザに対する処理");
+						if (splitedURI.size() > 2) {
+							request.setAttribute("THIRD", splitedURI.get(2));
+						}
 						doAction(controllerClass, controller, request,
-								response, uriObj);
+								response, splitedURI.get(1));
 					} else {
-						Util.l("すべてのユーザ以外の処理");
-						if(request.getSession().getAttribute("USER_INF") != null){
-							if((Integer)AppConstants.AUTH_MAP.authMap.get(request.getRequestURI()) <= user.getAuthFlag()){
+						if (request.getSession().getAttribute("USER_INF") != null) {
+							if ((Integer) AppConstants.AUTH_MAP.authMap
+									.get(authKey) <= user.getAuthFlag()) {
+								if (splitedURI.size() > 2) {
+									request.setAttribute("THIRD", splitedURI.get(2));
+								}
 								doAction(controllerClass, controller, request,
-										response, uriObj);
+										response, splitedURI.get(1));
 							}
-						}else{
+						} else {
 							controller.goLogin(request, response);
-							Util.l("権限エラー");
+							Util.l("<<<権限エラー>>>");
 						}
 					}
 				} else {
 					// [TODO]エラーページへ飛ばす メッセージは要求されたペーズは存在しません
-					Util.l("リクエストされたページは存在しません");
-					Util.l("定数のhashマップの確認をする");
+					Util.l("********リクエストされたページは存在しません");
+					Util.l("********定数のhashマップの確認をする");
 				}
 			} catch (InstantiationException | IllegalAccessException e) {
 				e.printStackTrace();
@@ -118,13 +125,14 @@ public class FrontControllerServlet extends HttpServlet {
 	 */
 	private void doAction(Class<?> controllerClass, BaseController controller,
 			HttpServletRequest request, HttpServletResponse response,
-			RequestURIBean uriObj) throws NoSuchMethodException,
-			SecurityException, IllegalAccessException,
-			IllegalArgumentException, InvocationTargetException {
+			String actionPath) throws NoSuchMethodException, SecurityException,
+			IllegalAccessException, IllegalArgumentException,
+			InvocationTargetException {
 		// 実行するメソッドの型指定
+		Util.l("アクション名>>>>>" + actionPath);
 		Method actionMethod = controllerClass.getMethod(
-				convertToActionName(uriObj.getActionPath()),
-				HttpServletRequest.class, HttpServletResponse.class);
+				convertToActionName(actionPath), HttpServletRequest.class,
+				HttpServletResponse.class);
 		// メソッドの実行
 		actionMethod.invoke(controller, request, response);
 	}
@@ -134,8 +142,8 @@ public class FrontControllerServlet extends HttpServlet {
 	 * @param request
 	 * @return
 	 */
-	private Class getClass(RequestURIBean uriObj) {
-		String className = convertToControllerName(uriObj.getControllerPath());
+	private Class getClass(String controllerPath) {
+		String className = convertToControllerName(controllerPath);
 		try {
 			// クラスを取得して返す
 			return Class.forName("Controllers." + className);
@@ -158,6 +166,8 @@ public class FrontControllerServlet extends HttpServlet {
 			Util.l("コントローラーの名前>>>>>" + controllerPath);
 			return controllerPath;
 		}
+		controllerPath = controllerPath.substring(0, 1).toUpperCase()
+				+ controllerPath.substring(1);
 		controllerPath += "Controller";
 		Util.l("コントローラーの名前>>>>>" + controllerPath);
 		return controllerPath;
@@ -171,23 +181,22 @@ public class FrontControllerServlet extends HttpServlet {
 	 * @return
 	 */
 	private String convertToActionName(String actionPath) {
-		if (actionPath == null || actionPath.equals("")) {
-			actionPath = "execute";
-			Util.l("アクションの名前>>>>>" + actionPath);
+		if (actionPath.equals("execute")) {
 			return actionPath;
 		}
+		actionPath.toLowerCase();
 		actionPath += "Action";
 		Util.l("アクションの名前>>>>>" + actionPath);
 		return actionPath;
 	}
 
 	/**
-	 * リクエストされたURIをコマンド名にして返すメソッド
+	 * リクエストされたURIをコマンド名にして返すメソッド 一番目にはコントローラの名前 二番目にはアクション名 三番目以降には任意で必要な値
 	 * 
 	 * @param request
 	 * @return RequestURIBean パスの入ったインスタンス
 	 */
-	private RequestURIBean spliteURIToArray(HttpServletRequest request) {
+	private List<String> spliteURIToList(HttpServletRequest request) {
 		// リクエストURI
 		String uriPath = request.getRequestURI();
 		Util.l("URIパス>>>>>" + uriPath);
@@ -197,16 +206,18 @@ public class FrontControllerServlet extends HttpServlet {
 		// パスを分解
 		String[] splitedPath = uriPath.replace(contextPath + "/front/", "")
 				.split("/");
+		List<String> splitedURI = new ArrayList<>();
 		// デバッグ
 		for (int i = 0; i < splitedPath.length; i++) {
+			splitedURI.add(splitedPath[i]);
 			Util.l("スプライト後の結果>>>>" + "[" + i + "]" + splitedPath[i]);
 		}
-		RequestURIBean uriObj = new RequestURIBean();
-		uriObj.setControllerPath(splitedPath[0].substring(0, 1).toUpperCase()
-				+ splitedPath[0].substring(1));
-		if (splitedPath.length > 1) {
-			uriObj.setActionPath(splitedPath[1].toLowerCase());
+		if (splitedURI.get(0).equals("*")) {
+			splitedURI.set(0, "index");
 		}
-		return uriObj;
+		if (splitedURI.size() < 2) {
+			splitedURI.add("execute");
+		}
+		return splitedURI;
 	}
 }

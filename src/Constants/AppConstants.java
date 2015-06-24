@@ -48,25 +48,24 @@ public class AppConstants {
 	public static class AUTH_MAP{
 		public static final HashMap<String, Integer> authMap = new HashMap<String,Integer>(){
 			{
-				put("/dokopro/front/account", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/account/edit", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/admin/addcontents",AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/admin", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/course", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/course/detail", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/course/content", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/error", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/mypage", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/mypage/edit", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/group", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/group/add", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/group/edit", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/group/detail", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/logout", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/login", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/login/main", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/", AUTH_FLAG.AUTH_ALL_USER);
-				put("/dokopro/front/*", AUTH_FLAG.AUTH_ALL_USER);
+				put("account/execute", AUTH_FLAG.AUTH_ALL_USER);
+				put("account/edit", AUTH_FLAG.AUTH_ALL_USER);
+				put("admin/addcontents",AUTH_FLAG.AUTH_ALL_USER);
+				put("admin/execute", AUTH_FLAG.AUTH_ALL_USER);
+				put("course/execute", AUTH_FLAG.AUTH_ALL_USER);
+				put("course/detail", AUTH_FLAG.AUTH_ALL_USER);
+				put("course/content", AUTH_FLAG.AUTH_ALL_USER);
+				put("error/execute", AUTH_FLAG.AUTH_ALL_USER);
+				put("mypage/execute", AUTH_FLAG.AUTH_ALL_USER);
+				put("mypage/edit", AUTH_FLAG.AUTH_ALL_USER);
+				put("group/execute", AUTH_FLAG.AUTH_ALL_USER);
+				put("group/add", AUTH_FLAG.AUTH_ALL_USER);
+				put("group/edit", AUTH_FLAG.AUTH_ALL_USER);
+				put("group/detail", AUTH_FLAG.AUTH_ALL_USER);
+				put("logout/execute", AUTH_FLAG.AUTH_ALL_USER);
+				put("login/execute", AUTH_FLAG.AUTH_ALL_USER);
+				put("login/main", AUTH_FLAG.AUTH_ALL_USER);
+				put("index/execute", AUTH_FLAG.AUTH_ALL_USER);
 			}
 		};
 	}

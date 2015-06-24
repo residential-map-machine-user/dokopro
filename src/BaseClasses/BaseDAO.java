@@ -11,7 +11,6 @@ public class BaseDAO {
 	private String url = AppConstants.DATABASE.DB_URL;
 	private String user = AppConstants.DATABASE.DB_USER;
 	private String pass = AppConstants.DATABASE.DB_PASS;
-
 	public void startConnection() {
 		try {
 			Class.forName("com.mysql.jdbc.Driver");

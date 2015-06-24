@@ -33,16 +33,17 @@ public class UserDAO extends BaseDAO {
 		// 該当するユーザー
 		UserBean user = new UserBean();
 		ResultSet rs = null;
+		startConnection();
 		try {
 			// sql文の作成
 			String sql = "SELECT * FROM table_user"
 					+ " Where account_name = ? AND" + " password = ?;";
 			PreparedStatement prstmt = conn.prepareStatement(sql);
-			int incrementalSymbol = 1;
-			prstmt.setString(incrementalSymbol++,
+			int cnt = 1;
+			prstmt.setString(cnt++,
 					request.getParameter("ACCOUNT_NAME"));
-			prstmt.setString(incrementalSymbol++,
-					request.getParameter("PASSWORD"));
+			prstmt.setString(cnt++,
+					Encrypt.SHA512(request.getParameter("PASSWORD")));
 			rs = prstmt.executeQuery();
 			// 結果の取得
 			if (rs.next()) {
@@ -69,6 +70,7 @@ public class UserDAO extends BaseDAO {
 	public List<UserBean> selectALLUserList() {
 		// ユーザーリスト
 		List<UserBean> userList = new ArrayList<>();
+		startConnection();
 		try {
 			// クエリ文作成
 			String sql = "SELECT * FROM table_user";
@@ -103,6 +105,7 @@ public class UserDAO extends BaseDAO {
 	//ユーザの追加用のメソッド
 	public int addUser(HttpServletRequest request) {
 		// 成功件数
+		startConnection();
 		int successNum = 0;
 		try {
 			// フォームから送られてきた値の取得
@@ -137,6 +140,8 @@ public class UserDAO extends BaseDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			finishConnection();
 		}
 		return successNum;
 	}
@@ -144,6 +149,7 @@ public class UserDAO extends BaseDAO {
 	//ユーザのアカウント名の更新用のメソッド
 	public int updateAccountName(HttpServletRequest request) {
 		int successNum = 0;
+		startConnection();
 		try {
 			// フォームから送られてきた値の取得
 			String accountName = request.getParameter("ACCOUNT_NAME");
@@ -154,16 +160,18 @@ public class UserDAO extends BaseDAO {
 			// sql文の作成
 			String sql = "UPDATE table_user SET account_name=? WHERE user_id=?;";
 			PreparedStatement prstmt = conn.prepareStatement(sql);
-			int incrementalSymbol = 1;
+			int cnt = 1;
 			// 値のセット
-			prstmt.setString(incrementalSymbol++, accountName);
-			prstmt.setInt(incrementalSymbol++, userId);
+			prstmt.setString(cnt++, accountName);
+			prstmt.setInt(cnt++, userId);
 			// SQL実行
 			successNum = prstmt.executeUpdate();
 			Util.l("成功件数" + successNum);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			finishConnection();
 		}
 		return successNum;
 	}
@@ -171,13 +179,14 @@ public class UserDAO extends BaseDAO {
 	//ユーザのパスワード更新用のメソッド
 	public UserBean selectUserForUpdateByUserId(HttpServletRequest request) {
 		UserBean user = new UserBean();
+		startConnection();
 		ResultSet rs = null;
 		try {
 			// sql文の作成
 			String sql = "SELECT password account_name FROM table_user"
 					+ " Where user_id=?;";
 			PreparedStatement prstmt = conn.prepareStatement(sql);
-			int incrementalSymbol = 1;
+			int cnt = 1;
 			rs = prstmt.executeQuery();
 			// 結果の取得
 			if (rs.next()) {
@@ -197,6 +206,7 @@ public class UserDAO extends BaseDAO {
 	//ユーザのパスワードを更新するメソッド
 	public int updateUserPassword(HttpServletRequest request) {
 		int successNum = 0;
+		startConnection();
 		try {
 			UserBean bufferUserInf = selectUserForUpdateByUserId(request);
 			String password = request.getParameter("PASSWORD");
@@ -216,16 +226,18 @@ public class UserDAO extends BaseDAO {
 				// パスワードの暗号化
 				String sql = "UPDATE table_user SET password = ? WHERE user_id=? AND password=?";
 				PreparedStatement prstmt = conn.prepareStatement(sql);
-				int incrementalSymbol = 1;
-				prstmt.setString(incrementalSymbol++, password);
-				prstmt.setString(incrementalSymbol++,
+				int cnt = 1;
+				prstmt.setString(cnt++, password);
+				prstmt.setString(cnt++,
 						bufferUserInf.getPassword());
-				prstmt.setString(incrementalSymbol++,
+				prstmt.setString(cnt++,
 						bufferUserInf.getAccountName());
 				successNum = prstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			finishConnection();
 		}
 		return successNum;
 	}
@@ -233,18 +245,21 @@ public class UserDAO extends BaseDAO {
 	//ユーザ削除用のメソッド
 	public int deleteUser(HttpServletRequest request){
 		int successNum = 0;
+		startConnection();
 		try{
 			int userId = ((UserBean)request.getSession().getAttribute("USER_INF")).getUserId();
 			String accountName = request.getParameter("ACCOUNT_NAME");
 			String sql = "UPDATE table_user SET delete_flag=? WHERE user_id=?";
 			PreparedStatement prstmt = conn.prepareStatement(sql);
-			int incrementalSymbol = 1;
-			prstmt.setBoolean(incrementalSymbol++, true);
-			prstmt.setInt(incrementalSymbol++, userId);
+			int cnt = 1;
+			prstmt.setBoolean(cnt++, true);
+			prstmt.setInt(cnt++, userId);
 			successNum = prstmt.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
-			return successNum;
+			e.printStackTrace();
+		}finally{
+			finishConnection();
 		}
 		return successNum;
 	}
@@ -252,6 +267,7 @@ public class UserDAO extends BaseDAO {
 	//ユーザのメールアドレス更新用のメソッド
 	public int updateUserMail(HttpServletRequest request) {
 		int successNum = 0;
+		startConnection();
 		try {
 			// フォームから送られてきた値の取得
 			String mail = request.getParameter("MAIL");
@@ -262,16 +278,18 @@ public class UserDAO extends BaseDAO {
 			// sql文の作成
 			String sql = "UPDATE table_user SET mail=? WHERE user_id=?;";
 			PreparedStatement prstmt = conn.prepareStatement(sql);
-			int incrementalSymbol = 1;
+			int cnt = 1;
 			// 値のセット
-			prstmt.setString(incrementalSymbol++, mail);
-			prstmt.setInt(incrementalSymbol++, userId);
+			prstmt.setString(cnt++, mail);
+			prstmt.setInt(cnt++, userId);
 			// SQL実行
 			successNum = prstmt.executeUpdate();
 			Util.l("成功件数" + successNum);
 
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			finishConnection();
 		}
 		return successNum;
 	}

@@ -1,12 +1,20 @@
 package Beans;
 
 import java.sql.Date;
+import java.util.List;
 
 public class SubCategoryBean {
 	private int subCategoryId;
 	private String title;
 	private Date createdAt;
 	private Date updatedAt;
+	private List<ContentsBean> contentsList;
+	public List<ContentsBean> getContentsList() {
+		return contentsList;
+	}
+	public void setContentsList(List<ContentsBean> contentsList) {
+		this.contentsList = contentsList;
+	}
 	public int getSubCategoryId() {
 		return subCategoryId;
 	}

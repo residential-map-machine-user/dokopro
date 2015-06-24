@@ -22,6 +22,7 @@ public class ProjectDAO extends BaseDAO {
 	//とりあえずコミットレベル、プロジェクトの説明,プロジェクト名まであれば十分だとして進める.
 	public int addProject(HttpServletRequest request){
 		int successNum = 0;
+		startConnection();
 		try {
 			String projectName  = request.getParameter("PROJECT_NAME");
 			int commitLevel = Integer.parseInt(request.getParameter("COMMIT_LEVEL"));
@@ -35,6 +36,8 @@ public class ProjectDAO extends BaseDAO {
 			successNum = prstmt.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
+		}finally{
+			finishConnection();
 		}
 		return successNum;
 	}
@@ -42,6 +45,7 @@ public class ProjectDAO extends BaseDAO {
 	// プロジェクトを全権表示するメソッド
 	public List<ProjectBean> selectAllProject(HttpServletRequest request) {
 		List<ProjectBean> projectList = new ArrayList<>();
+		startConnection();
 		try {
 			ResultSet rs = null;
 			String sql = "SELECT * FROM table_project;";
@@ -59,6 +63,8 @@ public class ProjectDAO extends BaseDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			finishConnection();
 		}
 		return projectList;
 	}
@@ -66,6 +72,7 @@ public class ProjectDAO extends BaseDAO {
 	// プロジェクトをgroupIdから取得してくるメソッド
 	public List<ProjectBean> selectProjectByGroupId(HttpServletRequest request) {
 		List<ProjectBean> projectList = new ArrayList<>();
+		startConnection();
 		int projectId = Integer.parseInt(request.getParameter("PROJECT_ID"));
 		try {
 			ResultSet rs = null;
@@ -86,6 +93,8 @@ public class ProjectDAO extends BaseDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			finishConnection();
 		}
 		return projectList;
 	}
@@ -93,6 +102,7 @@ public class ProjectDAO extends BaseDAO {
 	// グループをユーザIDから取得してくる
 	public List<ProjectBean> selectProjectByUserId(HttpServletRequest request) {
 		List<ProjectBean> projectList = new ArrayList<>();
+		startConnection();
 		int projectId = Integer.parseInt(request.getParameter("USER_ID"));
 		try {
 			ResultSet rs = null;
@@ -124,6 +134,8 @@ public class ProjectDAO extends BaseDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			finishConnection();
 		}
 		return projectList;
 	}
@@ -131,6 +143,7 @@ public class ProjectDAO extends BaseDAO {
 	// プロジェクトの削除メソッド
 	public int deleteProject(HttpServletRequest request) {
 		int successNum = 0;
+		startConnection();
 		try {
 			int project_id = Integer.parseInt(request
 					.getParameter("PROJECT_ID"));
@@ -140,7 +153,9 @@ public class ProjectDAO extends BaseDAO {
 			prstmt.setInt(incrementalSymbol++, project_id);
 			successNum = prstmt.executeUpdate();
 		} catch (SQLException e) {
-
+			e.printStackTrace();
+		}finally{
+			finishConnection();
 		}
 		return successNum;
 	}
