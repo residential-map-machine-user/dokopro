@@ -88,14 +88,11 @@ public class ItemDAO extends BaseDAO{
 	}
 
 	// 特定のIDに紐づくリストを取得
-	public List<ItemBean> selectItemByContentsId(
-			HttpServletRequest request) {
+	public List<ItemBean> selectItemByContentsId(int contentsId) {
 		ResultSet rs = null;
 		startConnection();
 		List<ItemBean> itemList = new ArrayList<>();
 		try {
-			int contentsId = Integer.parseInt(request
-					.getParameter("CONTENTS_ID"));
 			String sql = "SELECT * FROM table_item WHERE contents_id=?;";
 			PreparedStatement prstmt = conn.prepareStatement(sql);
 			int ctn = 1;

@@ -138,6 +138,9 @@ input[type="submit"] {
 .w-form-done {
   display: none;
   padding: 10px;
+  width:80%;
+  margin:0 auto;
+  text-align:center;
   background-color: #dddddd;
 }
 .w-form-fail {

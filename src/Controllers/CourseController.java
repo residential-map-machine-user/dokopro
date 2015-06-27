@@ -11,10 +11,12 @@ import javax.servlet.http.HttpServletResponse;
 import BaseClasses.BaseController;
 import Beans.CategoryBean;
 import Beans.ContentsBean;
+import Beans.ItemBean;
 import Beans.SubCategoryBean;
 import Constants.AppConstants;
 import DAOs.ContentsDAO;
 import DAOs.CourseDAO;
+import DAOs.ItemDAO;
 import DAOs.SubCategoryDAO;
 import Utils.Util;
 
@@ -54,8 +56,8 @@ public class CourseController extends BaseController {
 	public void detailAction(HttpServletRequest request,
 			HttpServletResponse response) {
 		SubCategoryDAO daoObj = new SubCategoryDAO();
-		int categoryId = Integer.parseInt((String) request
-				.getAttribute("THIRD"));
+		int categoryId = Integer.parseInt(((List<String>) request
+				.getAttribute("PATH")).get(2));
 		List<SubCategoryBean> subcategoryList = daoObj
 				.selectSubCategoryByCategoryId(categoryId);
 		// [TODO]ここるべきなのはsubcategoryのIDに対応した
@@ -89,6 +91,11 @@ public class CourseController extends BaseController {
 	public void contentAction(HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
+			int contentsId = Integer.parseInt(((List<String>) request
+					.getAttribute("PATH")).get(2));
+			ItemDAO daoObj = new ItemDAO();
+			List<ItemBean> itemList = daoObj.selectItemByContentsId(contentsId);
+			request.setAttribute("ITEM", itemList);
 			request.getServletContext()
 					.getRequestDispatcher(
 							AppConstants.FOWARD_PATH.CONST_COURSE_CONTENT_JSP)

@@ -8,6 +8,13 @@ private int deleteFlag;
 private String groupName;
 private Date createdAt;
 private Date updatedAt;
+private String description;
+public String getDescription() {
+	return description;
+}
+public void setDescription(String description) {
+	this.description = description;
+}
 public int getGroupId() {
 	return groupId;
 }

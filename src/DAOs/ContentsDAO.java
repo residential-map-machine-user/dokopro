@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import BaseClasses.BaseDAO;
 import Beans.ContentsBean;
+import Beans.ItemBean;
 
 public class ContentsDAO extends BaseDAO{
 

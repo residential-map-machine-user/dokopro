@@ -1,13 +1,17 @@
 package Controllers;
 
 import java.io.IOException;
+import java.util.ArrayList;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import BaseClasses.BaseController;
+import Beans.GroupBean;
 import Constants.AppConstants;
+import DAOs.GroupDAO;
 import Utils.Util;
 
 public class GroupController extends BaseController {
@@ -16,6 +20,10 @@ public class GroupController extends BaseController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		try {
+			GroupDAO daoObj = new GroupDAO();
+			List<GroupBean> groupList = new ArrayList<>();
+			groupList = daoObj.selectAllGroup();
+			request.setAttribute("GROUPLIST", groupList);
 			request.getServletContext()
 					.getRequestDispatcher(
 							AppConstants.FOWARD_PATH.CONST_GROUP_LIST_JSP)
@@ -56,6 +64,12 @@ public class GroupController extends BaseController {
 	
 	public void detailAction(HttpServletRequest request, HttpServletResponse response){
 		try {
+			GroupDAO daoObj = new GroupDAO();
+			Util.l("グループID" + ((List<String>)request.getAttribute("PATH")).get(2));
+			int groupId = Integer.parseInt(((List<String>)request.getAttribute("PATH")).get(2));
+			GroupBean group = new GroupBean();
+			group = daoObj.selectGroupByGroupId(groupId);
+			request.setAttribute("GROUP", group);
 			request.getServletContext()
 					.getRequestDispatcher(
 							AppConstants.FOWARD_PATH.CONST_GROUP_DETAIL_JSP)

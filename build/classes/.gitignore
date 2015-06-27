@@ -1,6 +1,4 @@
 /Controllers/
-/DAOs/
 /FrontController/
-/Constants/
-/BaseClasses/
+/DAOs/
 /Beans/
