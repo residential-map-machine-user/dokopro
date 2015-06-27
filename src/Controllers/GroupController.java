@@ -37,6 +37,11 @@ public class GroupController extends BaseController {
 	// チーム作成ページへ飛ぶ
 	public void addAction(HttpServletRequest request,
 			HttpServletResponse response) {
+		String method = request.getMethod();
+		if (method.equals("POST")) {
+			GroupDAO daoObj = new GroupDAO();
+			daoObj.addGroup(request);
+		}
 		try {
 			request.getServletContext()
 					.getRequestDispatcher(
@@ -61,12 +66,15 @@ public class GroupController extends BaseController {
 			e.printStackTrace();
 		}
 	}
-	
-	public void detailAction(HttpServletRequest request, HttpServletResponse response){
+
+	public void detailAction(HttpServletRequest request,
+			HttpServletResponse response) {
 		try {
 			GroupDAO daoObj = new GroupDAO();
-			Util.l("グループID" + ((List<String>)request.getAttribute("PATH")).get(2));
-			int groupId = Integer.parseInt(((List<String>)request.getAttribute("PATH")).get(2));
+			Util.l("グループID"
+					+ ((List<String>) request.getAttribute("PATH")).get(2));
+			int groupId = Integer.parseInt(((List<String>) request
+					.getAttribute("PATH")).get(2));
 			GroupBean group = new GroupBean();
 			group = daoObj.selectGroupByGroupId(groupId);
 			request.setAttribute("GROUP", group);

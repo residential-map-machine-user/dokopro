@@ -14,7 +14,7 @@
       <div class="separationyoko"></div>
       <div class="changaccountinfowrapper">
         <div class="w-form">
-          <form id="email-form" name="email-form" data-name="Email Form" action="<%=request.getContextPath()%>/front/group/add">
+          <form id="email-form" name="email-form" data-name="Email Form" action="<%=request.getContextPath()%>/front/group/add" method="post">
             <label for="name-2">チーム名</label>
             <input class="w-input" id="name-2" type="text" placeholder="Androider" name="GROUP_NAME" data-name="Name 2" required="required">
             <label for="email-5">チーム説明</label>

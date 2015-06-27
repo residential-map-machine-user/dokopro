@@ -55,6 +55,7 @@ public class UserDAO extends BaseDAO {
 				user.setUserTypes(rs.getInt("user_type"));
 				user.setCreatedAt(rs.getDate("created_at"));
 				user.setUpdatedAt(rs.getDate("updated_at"));
+				Util.l(rs.getString("account_name"));
 				Util.l("データベース処理っている");
 			}
 		} catch (SQLException sqlException) {

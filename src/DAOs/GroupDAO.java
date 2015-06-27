@@ -59,7 +59,7 @@ public class GroupDAO extends BaseDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			finishConnection();
 		}
 		return groupList;
@@ -86,28 +86,58 @@ public class GroupDAO extends BaseDAO {
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
-		}finally{
+		} finally {
 			finishConnection();
 		}
 		return group;
 	}
 
 	// 削除系のメソッド(フラグ管理バージョン)
-	public int deleteGroup(HttpServletRequest request){
-		  int successNum = 0;
-		  try{
-		    int deleteFlag = Integer.parseInt(request.getParameter("DELETE_FLAG"));
-		    String sql = "UPDATE table_ SET delete_flag=? WHERE group_id=?;";
-		    PreparedStatement prstmt = conn.prepareStatement(sql);
-		    int ctn = 1;
-		    prstmt.setInt(ctn++, deleteFlag);
-		    successNum = prstmt.executeUpdate();
-		  }catch(SQLException e){
-		    e.printStackTrace();
-		    return successNum;
-		  }
-		  return successNum;
+	public int deleteGroup(HttpServletRequest request) {
+		int successNum = 0;
+		try {
+			int deleteFlag = Integer.parseInt(request
+					.getParameter("DELETE_FLAG"));
+			String sql = "UPDATE table_ SET delete_flag=? WHERE group_id=?;";
+			PreparedStatement prstmt = conn.prepareStatement(sql);
+			int cnt = 1;
+			prstmt.setInt(cnt++, deleteFlag);
+			successNum = prstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+			return successNum;
 		}
+		return successNum;
+	}
+
+	/**
+	 * 
+	 * @param userId
+	 * @return
+	 */
+	public List<GroupBean> selectGroupByUserId(int userId) {
+		startConnection();
+		ResultSet rs = null;
+		List<GroupBean> groupList = new ArrayList<>();
+		try {
+			String sql = "SELECT table_group.group_name, table_group.description from(table_user  INNER JOIN(table_group_member INNER JOIN table_group ON table_group_member.group_id = table_group.group_id) ON table_user.user_id = table_group_member.user_id) WHERE table_user.user_id=?;";
+			PreparedStatement pr = conn.prepareStatement(sql);
+			int cnt = 1;
+			pr.setInt(cnt++, userId);
+			rs = pr.executeQuery();
+			while (rs.next()) {
+				GroupBean group = new GroupBean();
+				group.setGroupName(rs.getString("group_name"));
+				group.setDescription(rs.getString("description"));
+				groupList.add(group);
+			}
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			finishConnection();
+		}
+		return groupList;
+	}
 
 	// 編集系のメソッド(一括の編集)
 	public int updateGroup(HttpServletRequest request) {

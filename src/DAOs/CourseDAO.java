@@ -10,9 +10,6 @@ import javax.servlet.http.HttpServletRequest;
 
 import BaseClasses.BaseDAO;
 import Beans.CategoryBean;
-import Beans.ContentsBean;
-import Beans.ItemBean;
-import Beans.SubCategoryBean;
 
 public class CourseDAO extends BaseDAO {
 	// 結局ここのDAOに付いてはほとんどデフォルトで表示しておくものなので最初はallで対応しておく
@@ -66,6 +63,30 @@ public class CourseDAO extends BaseDAO {
 				categoryList.add(category);
 			}
 		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			finishConnection();
+		}
+		return categoryList;
+	} 
+	//select table_group_project.project_id, table_group_project.project_name,table_group_project.commit_level, table_group_project.project_summery, table_group_project.project_type, table_group_project.created_at,table_group_project.updated_at from (table_user  INNER JOIN(table_group_member INNER JOIN(table_group  INNER JOIN table_group_project ON table_group.group_id = table_group_project.group_id) ON table_group_member.group_id = table_group.group_id) ON table_user.user_id = table_group_member.user_id) WHERE table_user.user_id=?
+	public List<CategoryBean> selectCategoryByUserId(int userId){
+		startConnection();
+		ResultSet rs = null;
+		List<CategoryBean> categoryList = new ArrayList<>();
+		try {
+			String sql = "SELECT table_category.category_name from(((((table_user INNER JOIN table_check_point ON table_user.user_id = table_check_point.user_id) INNER JOIN table_item ON table_check_point.item_id = table_item.item_id) INNER JOIN table_contents ON table_item.contents_id = table_contents.contents_id) INNER JOIN table_sub_category ON table_contents.sub_category_id=table_sub_category.sub_category_id) INNER JOIN table_category ON table_sub_category.category_id=table_category.category_id) WHERE table_user.user_id=? group by table_category.category_name;";
+			PreparedStatement pr = conn.prepareStatement(sql);
+			int cnt = 1;
+			pr.setInt(cnt, userId);
+			rs = pr.executeQuery();
+			while(rs.next()){
+				CategoryBean category = new CategoryBean();
+				category.setCategoryName(rs.getString("category_name"));
+				categoryList.add(category);
+			}
+		} catch (SQLException e) {
+			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}finally{
 			finishConnection();

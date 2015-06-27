@@ -1,14 +1,19 @@
 package Controllers;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import BaseClasses.BaseController;
+import Beans.CategoryBean;
+import Beans.GroupBean;
+import Beans.UserBean;
 import Constants.AppConstants;
-
+import DAOs.CourseDAO;
+import DAOs.GroupDAO;
 public class MypageController extends BaseController {
 	/**
 	 *マイページへ飛ぶ
@@ -16,6 +21,14 @@ public class MypageController extends BaseController {
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		try {
+			GroupDAO groupObj = new GroupDAO();
+			CourseDAO courseObj = new CourseDAO();
+			UserBean user = (UserBean)request.getSession().getAttribute("USER_INF");
+			int userId = user.getUserId();
+			List<GroupBean> groupList = groupObj.selectGroupByUserId(userId);
+			List<CategoryBean>categoryList = courseObj.selectCategoryByUserId(userId);
+			request.setAttribute("GROUP_LIST", groupList);
+			request.setAttribute("CATEGORY_LIST", categoryList);
 			request.getServletContext()
 					.getRequestDispatcher(
 							AppConstants.FOWARD_PATH.CONST_MYPAGE_JSP)

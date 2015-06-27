@@ -40,7 +40,7 @@ public class FrontControllerServlet extends HttpServlet {
 	 */
 	public void doPost(HttpServletRequest request, HttpServletResponse response)
 			throws ServletException, IOException {
-		setCharacterEncode(request);
+		request.setCharacterEncoding("utf-8");
 		List<String> splitedURI = spliteURIToList(request);
 		// リクエストされたコントロラーを取得
 		Class controllerClass = getClass(splitedURI.get(0));
@@ -95,16 +95,6 @@ public class FrontControllerServlet extends HttpServlet {
 				e.printStackTrace();
 			}
 		}
-	}
-
-	/**
-	 * 
-	 * @param request
-	 * @throws IOException
-	 */
-	private void setCharacterEncode(HttpServletRequest request)
-			throws IOException {
-		request.setCharacterEncoding("UTF-8");
 	}
 
 	/**
