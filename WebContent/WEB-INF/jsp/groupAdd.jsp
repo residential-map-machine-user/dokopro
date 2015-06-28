@@ -19,10 +19,6 @@
             <input class="w-input" id="name-2" type="text" placeholder="Androider" name="GROUP_NAME" data-name="Name 2" required="required">
             <label for="email-5">チーム説明</label>
             <input class="w-input" id="email-5" type="text" placeholder="e.gこのチームは優れたUIを研究するチームです" name="GROUP_DESCRIPTION" data-name="Email 5" required="required">
-            <label for="email-6">プロジェクト名</label>
-            <input class="w-input" id="email-6" type="text" placeholder="e.gかっこいいUIを探して写経しよう" name="email-6" data-name="Email 6">
-            <label for="email-7">プロジェクト開始時期</label>
-            <input class="w-input" id="email-7" type="text" placeholder="2015/2/1" name="email-7" data-name="Email 7">
             <input class="w-button" type="submit" value="作成" data-wait="チーム作成中です">
           </form>
           <div class="w-form-done">

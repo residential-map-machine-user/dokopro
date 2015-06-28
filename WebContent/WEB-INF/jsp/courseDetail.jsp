@@ -17,21 +17,35 @@
 		}
 	%>
 	<div class="w-section section">
-		<div class="w-container">
-			<div class="w-row">
-			<%for(int i =0;i < subcategoryList.size();i++){ %>
-				<div class="w-col w-col-3">
-					<div class="unitcourseitem">
-						<h1 class="coursedetailtitle"><%=subcategoryList.get(i).getTitle() %></h1>
-						<ul class="coursedetailitems">
-						<%for(int j=0; j<subcategoryList.get(i).getContentsList().size();j++){ %>
-							<li><a href="<%=request.getContextPath()%>/front/course/content/<%=subcategoryList.get(i).getContentsList().get(j).getContentsId()%>"><%=subcategoryList.get(i).getContentsList().get(j).getContentsTitle()%></a></li>
-						<% } %>
-						</ul>
+		<div class="row">
+			<%
+				for (int i = 0; i < subcategoryList.size(); i++) {
+			%>
+			<div class="col-md-3">
+				<h1 class="coursedetailtitle"><%=subcategoryList.get(i).getTitle()%></h1>
+				<ul class="list-group">
+					<%
+						for (int j = 0; j < subcategoryList.get(i).getContentsList()
+									.size(); j++) {
+					%>
+					<li class="list-group-item"><a
+						href="<%=request.getContextPath()%>/front/course/content/<%=subcategoryList.get(i).getContentsList().get(j)
+							.getContentsId()%>"><%=subcategoryList.get(i).getContentsList().get(j)
+							.getContentsTitle()%></a></li>
+					<div class="progress">
+						<div class="progress-bar" role="progressbar" aria-valuenow="60"
+							aria-valuemin="0" aria-valuemax="100" style="width: 60%;">
+							60%</div>
 					</div>
-				</div>
-				<%} %>
+					<%
+						}
+					%>
+
+				</ul>
 			</div>
+			<%
+				}
+			%>
 		</div>
 	</div>
 	<script type="text/javascript"

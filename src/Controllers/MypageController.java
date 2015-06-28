@@ -14,19 +14,21 @@ import Beans.UserBean;
 import Constants.AppConstants;
 import DAOs.CourseDAO;
 import DAOs.GroupDAO;
+
 public class MypageController extends BaseController {
 	/**
-	 *マイページへ飛ぶ
+	 * マイページへ飛ぶ
 	 */
 	@Override
 	public void execute(HttpServletRequest request, HttpServletResponse response) {
 		try {
 			GroupDAO groupObj = new GroupDAO();
 			CourseDAO courseObj = new CourseDAO();
-			UserBean user = (UserBean)request.getSession().getAttribute("USER_INF");
+			UserBean user = (UserBean) request.getSession().getAttribute("USER_INF");
 			int userId = user.getUserId();
 			List<GroupBean> groupList = groupObj.selectGroupByUserId(userId);
-			List<CategoryBean>categoryList = courseObj.selectCategoryByUserId(userId);
+			List<CategoryBean> categoryList = courseObj
+					.selectCategoryByUserId(userId);
 			request.setAttribute("GROUP_LIST", groupList);
 			request.setAttribute("CATEGORY_LIST", categoryList);
 			request.getServletContext()
@@ -38,9 +40,10 @@ public class MypageController extends BaseController {
 			e.printStackTrace();
 		}
 	}
-	
+
 	/**
 	 * マイページ情報の編集処理へ飛ぶ
+	 * 
 	 * @param request
 	 * @param response
 	 */

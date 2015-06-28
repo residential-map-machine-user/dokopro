@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.ArrayList" import="java.util.List"
-	import="Beans.CategoryBean"%>
+	import="Beans.CategoryBean" import="Beans.UserBean"%>
 <!DOCTYPE html>
 <!-- This site was created in Webflow. http://www.webflow.com-->
 <!-- Last Published: Mon Apr 20 2015 01:31:28 GMT+0000 (UTC) -->
@@ -16,12 +16,16 @@
 			<h1 class="catchphrasemypage">コース選択</h1>
 			<div class="w-row courseexplanationcontainer">
 				<div class="w-col w-col-6 column1">
-					<h2>プログラミング</h2>
-					<p class="courseselectparagraph">Webアプリの作成などページを動的に変更することをメインに進めていきます。言語はJavaです。java以外は出来ないのでコース作成しません。</p>
+					<div class="couresobject">
+						<h2 class="typechoolse">プログラミング</h2>
+						<p class="courseselectparagraph">Webアプリの作成などページを動的に変更することをメインに進めていきます。言語はJavaです。java以外は出来ないのでコース作成しません。</p>
+					</div>
 				</div>
 				<div class="w-col w-col-6 column1">
-					<h2>デザイン</h2>
-					<p class="courseselectparagraph">Html,Css,Javascriptをメインに勉強します。javascriptでページを動的に操作したりすることができます。最終的にはjQueryを勉強します。</p>
+					<div class="couresobject">
+						<h2 class="typechoolse">デザイン</h2>
+						<p class="courseselectparagraph">Html,Css,Javascriptをメインに勉強します。javascriptでページを動的に操作したりすることができます。最終的にはjQueryを勉強します。</p>
+					</div>
 				</div>
 			</div>
 		</div>
@@ -34,10 +38,15 @@
 						<div class="w-row">
 							<%
 								List<CategoryBean> categoryList = new ArrayList<CategoryBean>();
-							if(request.getAttribute("CATEGORY") instanceof List<?>) {
-								categoryList = (List<CategoryBean>) request
-										.getAttribute("CATEGORY");
-							}
+								if (request.getAttribute("CATEGORY_LIST") instanceof List<?>) {
+									categoryList = (List<CategoryBean>) request
+											.getAttribute("CATEGORY_LIST");
+								}
+								UserBean user = new UserBean();
+								if(request.getSession().getAttribute("USER_INF") instanceof UserBean){
+									user = (UserBean)request.getSession().getAttribute("USER_INF");
+								}
+								int userId = user.getUserId();
 							%>
 							<%
 								for (int i = 0; i < categoryList.size(); i++) {
@@ -48,7 +57,7 @@
 								</a>
 								<div><%=categoryList.get(i).getCategoryName()%></div>
 								<a class="button choosecoursebtton"
-									href="<%=request.getContextPath()%>/front/course/detail/<%=categoryList.get(i).getCategoryId()%>"><%=categoryList.get(i).getCategoryName()%>を受講する</a>
+									href="<%=request.getContextPath()%>/front/course/detail/<%=categoryList.get(i).getCategoryId()%>/<%=userId%>"><%=categoryList.get(i).getCategoryName()%>を受講する</a>
 							</div>
 							<%
 								}

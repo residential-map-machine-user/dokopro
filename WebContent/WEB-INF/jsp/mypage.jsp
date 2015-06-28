@@ -1,23 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@page import="Beans.UserBean" %>
+<%@page import="Beans.UserBean" import="Beans.CategoryBean"
+	import="Beans.GroupBean" import="java.util.List"
+	import="java.util.ArrayList"%>
 <!DOCTYPE html>
 <jsp:include page="/WEB-INF/jsp/header.jsp" />
 <body>
 	<header class="w-section navbar">
-		
 		<%
-		UserBean user = new UserBean();
-		if(request.getSession().getAttribute("USER_INF") instanceof UserBean){
-			user =((UserBean)request.getSession().getAttribute("USER_INF"));
-		}
+			UserBean user = new UserBean();
+			if (request.getSession().getAttribute("USER_INF") instanceof UserBean) {
+				user = ((UserBean) request.getSession()
+						.getAttribute("USER_INF"));
+			}
+			List<CategoryBean> categoryList = new ArrayList<CategoryBean>();
+			List<GroupBean> groupList = new ArrayList<GroupBean>();
+			if (request.getAttribute("GROUP_LIST") instanceof List<?>) {
+				groupList = (List<GroupBean>) request
+						.getAttribute("GROUP_LIST");
+			}
+			if (request.getAttribute("CATEGORY_LIST") instanceof List<?>) {
+				categoryList = (List<CategoryBean>) request
+						.getAttribute("CATEGORY_LIST");
+			}
 		%>
 	</header>
 	<div class="w-section">
 		<div class="w-container tab">
 			<div class="pic">
-				<img class="slefpic" src="<%=request.getContextPath()%>/res/images/IMG_0181.JPG" alt="5534004c86ac3db85c9909a5_IMG_0181.JPG">
-				<div class="username"><%=user.getAccountName() %></div>
+				<img class="slefpic"
+					src="<%=request.getContextPath()%>/res/images/IMG_0181.JPG"
+					alt="5534004c86ac3db85c9909a5_IMG_0181.JPG">
+				<div class="username"><%=user.getAccountName()%></div>
 			</div>
 			<div class="sepself"></div>
 			<div>
@@ -34,37 +48,21 @@
 						<div class="w-tab-pane" data-w-tab="Tab 1">
 							<div>
 								<div class="w-row">
-									<div class="w-col w-col-3">
-										<img src="<%=request.getContextPath() %>/res/images/HTML5_logo_and_wordmark.svg.png" width="175"
-											alt="5533fe98fd7ee5b552c33fce_HTML5_logo_and_wordmark.svg.png">
-									</div>
-									<div class="w-col w-col-3">
-										<img class="php" src="<%=request.getContextPath() %>/res/images/phplogo-highres.png" width="188"
-											alt="5533fee6fd7ee5b552c33fd3_phplogo-highres.png">
-									</div>
-									<div class="w-col w-col-3">
-										<img class="csss" src="<%=request.getContextPath() %>/res/images/css3.jpg" width="188"
-											alt="5533ff05fd7ee5b552c33fd5_css3.jpg">
-									</div>
-									<div class="w-col w-col-3">
-										<img src="<%=request.getContextPath() %>/res/images/java_logo.png" width="188"
-											alt="5533ff1086ac3db85c990951_java_logo.png">
-									</div>
+									<div class="w-col w-col-3"></div>
 								</div>
 								<div>
 									<div class="w-row">
 										<div class="w-col w-col-3">
 											<ul class="w-list-unstyled">
-												<li>
-													<div>HTML基礎 進捗率30%</div>
-												</li>
-												<li>HTMLを理解しよう&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;進捗率20%</li>
-												<li>HTML応用&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;</li>
+												<%
+													for (int i = 0; i < categoryList.size(); i++) {
+												%>
+												<li><%=categoryList.get(i).getCategoryName()%></li>
+												<%
+													}
+												%>
 											</ul>
 										</div>
-										<div class="w-col w-col-3"></div>
-										<div class="w-col w-col-3"></div>
-										<div class="w-col w-col-3"></div>
 									</div>
 								</div>
 							</div>
@@ -74,30 +72,13 @@
 								<div class="w-row">
 									<div class="w-col w-col-3">
 										<ul class="w-list-unstyled">
-											<li>デザイナー思考チーム</li>
-											<li>デザイン王子</li>
-											<li>erdesin</li>
-										</ul>
-									</div>
-									<div class="w-col w-col-3">
-										<ul class="w-list-unstyled">
-											<li>HTML好きチーム</li>
-											<li>HTMl王子</li>
-											<li>erdesin</li>
-										</ul>
-									</div>
-									<div class="w-col w-col-3">
-										<ul class="w-list-unstyled">
-											<li>Javaでいくチーム</li>
-											<li>java王子</li>
-											<li>erdesin</li>
-										</ul>
-									</div>
-									<div class="w-col w-col-3">
-										<ul class="w-list-unstyled">
-											<li>phpでばりばりチーム</li>
-											<li>デザイン王子</li>
-											<li>erdesin</li>
+											<%
+												for (int i = 0; i < groupList.size(); i++) {
+											%>
+											<li><%=groupList.get(i).getGroupName()%></li>
+											<%
+												}
+											%>
 										</ul>
 									</div>
 								</div>

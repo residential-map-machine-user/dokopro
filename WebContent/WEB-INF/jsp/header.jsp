@@ -17,6 +17,12 @@
 	href="<%=request.getContextPath()%>/res/css/webflow.css">
 <link rel="stylesheet" type="text/css"
 	href="<%=request.getContextPath()%>/res/css/pg-int.webflow.css">
+<link rel="stylesheet"
+	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
+<script type="text/javascript"
+	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script
 	src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
 <script>
@@ -49,8 +55,10 @@
 				class="courselistnavitem"
 				href="<%=request.getContextPath()%>/front/group">チーム一覧</a>
 			<div class="w-clearfix entrybuttonwrapper">
-				
-				<%if(request.getSession().getAttribute("USER_INF") == null){ %>
+
+				<%
+					if (request.getSession().getAttribute("USER_INF") == null) {
+				%>
 				<div class="w-clearfix headerbuttonwrapper">
 					<a class="button" href="<%=request.getContextPath()%>/front/login">&nbsp;ログイン</a>
 				</div>
@@ -58,31 +66,48 @@
 					<a class="button"
 						href="<%=request.getContextPath()%>/front/account">新規登録</a>
 				</div>
-				<%}else{ %>
-				<%-- <a class="courselistnavitem"
-				href="<%=request.getContextPath()%>/front/course/mypage">マイページ</a> --%>
+				<%
+					} else {
+				%>
 				<div class="dropdown">
-  <button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-expanded="true">
-  <% String account =((UserBean)request.getSession().getAttribute("USER_INF")).getAccountName();%>
-  <%=account %>
-    <span class="caret"></span>
-  </button>
-  <ul class="dropdown-menu" role="menu" aria-labelledby="dropdownMenu1">
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="<%=request.getContextPath() %>/front/mypage">マイページ</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="<%=request.getContextPath()%>/front/account/edit">アカウント設定</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="<%=request.getContextPath()%>/front/admin">管理者メニュー</a></li>
-    <li role="presentation"><a role="menuitem" tabindex="-1" href="<%=request.getContextPath()%>/front/logout">サインアウト</a></li>
-  </ul>
-</div>
-				<% } %>
+
+					<!-- ここが表示されるボタン <a>タグでもOK -->
+					<button class="btn btn-default dropdown-toggle" type="button"
+						id="dropdownMenu1" data-toggle="dropdown">
+						<%
+							String account = ((UserBean) request.getSession().getAttribute(
+										"USER_INF")).getAccountName();
+						%>
+						<%=account%>
+						<span class="caret"></span>
+					</button>
+					<!-- ボタンここまで -->
+
+					<!-- ここはボタンを押すと表示されるリスト -->
+					<ul class="dropdown-menu" role="menu"
+						aria-labelledby="dropdownMenu1">
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							href="<%=request.getContextPath()%>/front/mypage">マイページ</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							href="<%=request.getContextPath()%>/front/account/edit">アカウント設定</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							href="<%=request.getContextPath()%>/front/admin">管理者メニュー</a></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							href="<%=request.getContextPath()%>/front/logout">サインアウト</a></li>
+						<li role="presentation" class="divider"></li>
+						<li role="presentation"><a role="menuitem" tabindex="-1"
+							href="#">Separated link</a></li>
+					</ul>
+					<!-- リストここまで -->
+					<%
+						}
+					%>
+				</div>
+				<nav class="w-nav-menu" role="navigation"></nav>
 			</div>
-			<nav class="w-nav-menu" role="navigation"></nav>
 		</div>
+		<script type="text/javascript"
+			src="<%=request.getContextPath()%>/res/js/webflow.js"></script>
+		<!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 	</div>
-	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
-	<script type="text/javascript"
-		src="<%=request.getContextPath()%>/res/js/webflow.js"></script>
-	<!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
-</div>
 </html>

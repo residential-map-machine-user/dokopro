@@ -31,9 +31,7 @@
 <link rel="apple-touch-icon" href="<%=request.getContextPath() %>/res/images/webclip-slate.png">
 </head>
 <body>
-	<header class="w-section navbar">
 	<jsp:include page="/WEB-INF/jsp/header.jsp"/>
-	</header>
 	<div class="w-section section hero">
 		<div class="w-container">
 			<div class="w-row">

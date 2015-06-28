@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import BaseClasses.BaseDAO;
 import Beans.GroupBean;
+import Utils.Util;
 
 public class GroupDAO extends BaseDAO {
 	// グループの作成
@@ -18,12 +19,11 @@ public class GroupDAO extends BaseDAO {
 	// グループの編集
 	// グループの表示(selectByUserId)
 	// メンバーの表示(selectByGroupId)
-	public int addGroup(HttpServletRequest request) {
+	public int addGroup(String groupName, String description) {
 		int successNum = 0;
 		startConnection();
 		try {
-			String groupName = request.getParameter("GROUP_NAME");
-			String description = request.getParameter("GROUP_DESCRIPTION");
+
 			String sql = "INSERT INTO table_group (group_name,description) values(?,?);";
 			PreparedStatement prstmt = conn.prepareStatement(sql);
 			int ctn = 1;
@@ -37,7 +37,24 @@ public class GroupDAO extends BaseDAO {
 		}
 		return successNum;
 	}
-
+	
+	public int addGroupMember(int groupId, int userId){
+		int successNum = 0;
+		startConnection();
+		try {
+			String sql = "INSERT INTO table_group_member (group_id,user_id) values(?,?);";
+			PreparedStatement prstmt = conn.prepareStatement(sql);
+			int ctn = 1;
+			prstmt.setInt(ctn++, groupId);
+			prstmt.setInt(ctn++, userId);
+			successNum = prstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			finishConnection();
+		}
+		return successNum;
+	}
 	// セレクト系のメソッド
 	public List<GroupBean> selectAllGroup() {
 		ResultSet rs = null;
@@ -123,6 +140,7 @@ public class GroupDAO extends BaseDAO {
 			String sql = "SELECT table_group.group_name, table_group.description from(table_user  INNER JOIN(table_group_member INNER JOIN table_group ON table_group_member.group_id = table_group.group_id) ON table_user.user_id = table_group_member.user_id) WHERE table_user.user_id=?;";
 			PreparedStatement pr = conn.prepareStatement(sql);
 			int cnt = 1;
+			Util.l("??????????????????" + userId + "");
 			pr.setInt(cnt++, userId);
 			rs = pr.executeQuery();
 			while (rs.next()) {
@@ -138,7 +156,7 @@ public class GroupDAO extends BaseDAO {
 		}
 		return groupList;
 	}
-
+	
 	// 編集系のメソッド(一括の編集)
 	public int updateGroup(HttpServletRequest request) {
 		int successNum = 0;

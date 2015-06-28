@@ -19,52 +19,79 @@
 		<%
 			List<GroupBean> groupList = new ArrayList<GroupBean>();
 			if (groupList instanceof List<?>) {
-				groupList = (List<GroupBean>) request.getAttribute("GROUPLIST");
+				groupList = (List<GroupBean>) request
+						.getAttribute("GROUP_LIST");
 			}
 		%>
 	</header>
 	<div class="w-section">
 		<div class="w-container">
 			<h1 class="teamlisthead">チーム一覧</h1>
-			<div>
-				<a class="button"
-					href="<%=request.getContextPath()%>/front/group/add">チーム作成</a>
-			</div>
+			<a class="button teamaddbutton"
+				href="<%=request.getContextPath()%>/front/group/add">新規チーム作成</a>
+			<div></div>
 		</div>
 	</div>
 	<div class="w-section">
-		<div class="w-container">
-			<div class="w-row">
-				<%
-					for (int i = 0; i < groupList.size(); i++) {
-				%>
-				<div class="w-col w-col-3">
+		<div class="w-container"></div>
+	</div>
+	<%
+		for (int i = 0; i < groupList.size(); i++) {
+	%>
+	<div class="w-section wrapperteaminfo">
+		<div class="w-container teaminfo">
+			<div>
+				<div>
 					<div>
-						<h1 class="teamnameing">
+						<h1 class="teamtitle">
 							<a
-								href="<%=request.getContextPath()%>/front/group/detail/<%=groupList.get(i).getGroupId()%>"><%=groupList.get(i).getGroupName()%>
-							</a>
+								href="<%=request.getContextPath()%>/front/group/detail/<%=groupList.get(i).getGroupId()%>"><%=groupList.get(i).getGroupName()%></a>
 						</h1>
-						<div>
-							<p><%=groupList.get(i).getDescription() %></p>
-							<div>
-								<div class="w-row">
-									<div class="w-col w-col-6">
-										<div class="teamhowmuch">人数 ４人</div>
+					</div>
+					<div class="teamex">
+						<p>チーム概要</p>
+						<p><%=groupList.get(i).getDescription()%></p>
+					</div>
+				</div>
+				<div>
+					<div>
+						<div class="row">
+							<div class="col-md-4">
+								<div class="panel panel-info">
+									<div class="panel-heading">
+										<h3 class="panel-title">ViewPagerの実装</h3>
 									</div>
-									<div class="w-col w-col-6">
-										<div class="statusoftem">募集中</div>
+									<div class="panel-body">３時間でViewPagerの実装までこぎつけるプロジェクトです</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="panel panel-info">
+									<div class="panel-heading">
+										<h3 class="panel-title">ViewPagerの実装</h3>
 									</div>
+									<div class="panel-body">３時間でViewPagerの実装までこぎつけるプロジェクトです</div>
+								</div>
+							</div>
+							<div class="col-md-4">
+								<div class="panel panel-info">
+									<div class="panel-heading">
+										<h3 class="panel-title">ViewPagerの実装</h3>
+									</div>
+									<div class="panel-body">３時間でViewPagerの実装までこぎつけるプロジェクトです</div>
 								</div>
 							</div>
 						</div>
+						<div></div>
+					</div>
+					<div class="joinbuttonwrapper">
+						<a class="button" href="<%=request.getContextPath()%>/front/group/addgroupmember/<%=groupList.get(i).getGroupId()%>">Join</a>
 					</div>
 				</div>
-				<%
-					}
-				%>
 			</div>
 		</div>
+		<%
+			}
+		%>
 	</div>
 	<!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 </body>

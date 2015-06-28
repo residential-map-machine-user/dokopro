@@ -23,18 +23,14 @@ public class CourseDAO extends BaseDAO {
 	// 消す:フラグで管理する
 
 	// 追加系のメソッド
-	public int addCategory(HttpServletRequest request) {
+	public int addCategory(String categoryName) {
 		int successNum = 0;
-
 		startConnection();
 		try {
-			String categoryName = request.getParameter("CATEGORY_NAME");
-			String belongTo = request.getParameter("BELONG_TO");
-			String sql = "INSERT INTO table_category (category_name,belong_to) values(?,?);";
+			String sql = "INSERT INTO table_category (category_name) values(?);";
 			PreparedStatement prstmt = conn.prepareStatement(sql);
 			int ctn = 1;
 			prstmt.setString(ctn++, categoryName);
-			prstmt.setString(ctn++, belongTo);
 			successNum = prstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -43,7 +39,24 @@ public class CourseDAO extends BaseDAO {
 		}
 		return successNum;
 	}
-
+	
+	public int addUserToItem(int userId, int categoryId){
+		int successNum = 0;
+		startConnection();
+		try {
+			String sql = "INSERT INTO table_check_point (user_id,item_id) SELECT ?,table_item.item_id from (((table_category JOIN table_sub_category ON table_sub_category.category_id=table_category.category_id) JOIN table_contents ON table_contents.sub_category_id=table_sub_category.sub_category_id) JOIN table_item ON table_item.contents_id = table_contents.contents_id) WHERE table_category.category_id =?;";
+			PreparedStatement prstmt = conn.prepareStatement(sql);
+			int ctn = 1;
+			prstmt.setInt(ctn++, userId);
+			prstmt.setInt(ctn++, categoryId);
+			successNum = prstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		}finally{
+			finishConnection();
+		}
+		return successNum;
+	}
 	// セレクト系のメソッド
 	public List<CategoryBean> selectAllCategory() {
 		ResultSet rs = null;
@@ -69,6 +82,7 @@ public class CourseDAO extends BaseDAO {
 		}
 		return categoryList;
 	} 
+	
 	//select table_group_project.project_id, table_group_project.project_name,table_group_project.commit_level, table_group_project.project_summery, table_group_project.project_type, table_group_project.created_at,table_group_project.updated_at from (table_user  INNER JOIN(table_group_member INNER JOIN(table_group  INNER JOIN table_group_project ON table_group.group_id = table_group_project.group_id) ON table_group_member.group_id = table_group.group_id) ON table_user.user_id = table_group_member.user_id) WHERE table_user.user_id=?
 	public List<CategoryBean> selectCategoryByUserId(int userId){
 		startConnection();

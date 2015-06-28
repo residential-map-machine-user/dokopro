@@ -15,43 +15,81 @@
 			group = (GroupBean) request.getAttribute("GROUP");
 		}
 	%>
-	<div class="w-section wrapperteaminfo">
-		<div class="w-container teaminfo">
-			<div>
-				<div>
+	<div class="row">
+		<div class="w-section section">
+			<div class="w-container teaminfo">
+				<div class="row">
 					<div>
-						<h1 class="teamtitle">
-							TEAM:<%=group.getGroupName()%></h1>
-					</div>
-					<p><%=group.getDescription()%></p>
-				</div>
-				<div>
-					<div class="w-row">
-						<div class="w-col w-col-6">
-							<div>人数:5人</div>
-						</div>
-						<div class="w-col w-col-6">
+						<div>
 							<div>
-								チームタイプ:<%
-								
-							%>
+								<h1 class="teamtitle"><%=group.getGroupName()%></h1>
 							</div>
+							<div class="teamex">
+								<p>チーム概要</p>
+								<p><%=group.getDescription()%></p>
+							</div>
+						</div>
+						<div>
+							<div></div>
+							<div></div>
 						</div>
 					</div>
 				</div>
 			</div>
-			<div>
-				<div class="w-form">
-					<form class="submitteamjoin" id="email-form" name="email-form"
-						data-name="Email Form">
-						<input class="w-button" type="submit" value="参加する"
-							data-wait="登録処理中...">
-					</form>
-					<div class="w-form-done">
-						<p>登録完了しました</p>
+		</div>
+	</div>
+	<div class="w-section">
+		<div class="w-container">
+			<div class="row">
+				<div class="col-md-4">
+					<div class="panel panel-info">
+						<div class="panel-heading">ViewPagerの実装</div>
+						<div class="panel-body">
+							<p>３時間でViewPagerの実装までこぎつけるプロジェクトです</p>
+						</div>
+
+						<!-- List group -->
+						<ul class="list-group">
+							<li class="list-group-item">メンバー</li>
+							<li class="list-group-item">開始時期</li>
+							<li class="list-group-item">終了時期</li>
+							<li class="list-group-item">コミットレベル</li>
+							<li class="list-group-item">その他</li>
+						</ul>
 					</div>
-					<div class="w-form-fail">
-						<p>登録に失敗しました。</p>
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-info">
+						<div class="panel-heading">ViewPagerの実装</div>
+						<div class="panel-body">
+							<p>３時間でViewPagerの実装までこぎつけるプロジェクトです</p>
+						</div>
+
+						<!-- List group -->
+						<ul class="list-group">
+							<li class="list-group-item">メンバー</li>
+							<li class="list-group-item">開始時期</li>
+							<li class="list-group-item">終了時期</li>
+							<li class="list-group-item">コミットレベル</li>
+							<li class="list-group-item">その他</li>
+						</ul>
+					</div>
+				</div>
+				<div class="col-md-4">
+					<div class="panel panel-info">
+						<div class="panel-heading">ViewPagerの実装</div>
+						<div class="panel-body">
+							<p>３時間でViewPagerの実装までこぎつけるプロジェクトです</p>
+						</div>
+
+						<!-- List group -->
+						<ul class="list-group">
+							<li class="list-group-item">メンバー</li>
+							<li class="list-group-item">開始時期</li>
+							<li class="list-group-item">終了時期</li>
+							<li class="list-group-item">コミットレベル</li>
+							<li class="list-group-item">その他</li>
+						</ul>
 					</div>
 				</div>
 			</div>

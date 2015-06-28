@@ -20,15 +20,15 @@ public class SubCategoryDAO extends BaseDAO {
 	// 編集:サブカテゴリーを編集する
 	// 消す:フラグで管理する
 	// 追加系のメソッド
-	public int addSubCategory(HttpServletRequest request) {
+	public int addSubCategory(int categoryId,String subCategoryName) {
 		int successNum = 0;
 		startConnection();
 		try {
-			String title = request.getParameter("TITLE");
-			String sql = "INSERT INTO table_sub_category (title) values(?);";
+			String sql = "INSERT INTO table_sub_category (category_id,title) values(?,?);";
 			PreparedStatement prstmt = conn.prepareStatement(sql);
 			int ctn = 1;
-			prstmt.setString(ctn++, title);
+			prstmt.setInt(ctn++, categoryId);
+			prstmt.setString(ctn++,subCategoryName);
 			successNum = prstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -39,7 +39,7 @@ public class SubCategoryDAO extends BaseDAO {
 	}
 
 	// セレクト系のメソッド
-	public List<SubCategoryBean> selectAllSubCategory(HttpServletRequest request) {
+	public List<SubCategoryBean> selectAllSubCategory() {
 		ResultSet rs = null;
 		startConnection();
 		List<SubCategoryBean> subCategoryList = new ArrayList<>();
@@ -50,8 +50,9 @@ public class SubCategoryDAO extends BaseDAO {
 			while (rs.next()) {
 				SubCategoryBean subCategory = new SubCategoryBean();
 				subCategory.setTitle(rs.getString("title"));
-				subCategory.setCreatedAt(rs.getDate("created_at"));
-				subCategory.setUpdatedAt(rs.getDate("updated_at"));
+				subCategory.setSubCategoryId(rs.getInt("sub_category_id"));
+//				subCategory.setCreatedAt(rs.getDate("created_at"));
+//				subCategory.setUpdatedAt(rs.getDate("updated_at"));
 				subCategoryList.add(subCategory);
 			}
 		} catch (SQLException e) {

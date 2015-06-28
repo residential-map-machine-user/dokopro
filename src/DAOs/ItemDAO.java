@@ -29,30 +29,16 @@ public class ItemDAO extends BaseDAO{
 	// complete_flag=1;
 	// while(rs){}
 	// 追加系のメソッド
-	public int addItem(HttpServletRequest request) {
+	public int addItem(int contentsId, String itemTitle, String itemText) {
 		int successNum = 0;
 		startConnection();
 		try {
-			String[] images = request.getParameterValues("IMAGES");
-			String bufferSqlForImages = "";
-			String bufferSqlForQuestionSymbol = "";
-			if (images != null) {
-				for (int i = 1; i <= images.length; i++) {
-					bufferSqlForImages += ",image" + i;
-					bufferSqlForQuestionSymbol += ",?";
-				}
-			}
-			String itemTitle = request.getParameter("ITEM_TITLE");
-			String itemText = request.getParameter("ITEM_TEXT");
-			String sql = "INSERT INTO table_item (item_title, item_text"
-					+ bufferSqlForImages + ") values(?, ?" + bufferSqlForQuestionSymbol+ ");";
+			String sql = "INSERT INTO table_item (contents_id,item_title, item_text) values(?,?,?);";
 			PreparedStatement prstmt = conn.prepareStatement(sql);
 			int ctn = 1;
+			prstmt.setInt(ctn++, contentsId);
 			prstmt.setString(ctn++, itemTitle);
 			prstmt.setString(ctn++, itemText);
-			for(int i = 1; i <= images.length; i++){
-				prstmt.setString(ctn++, images[i-1]);
-			}
 			successNum = prstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();

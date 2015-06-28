@@ -13,6 +13,7 @@ import Beans.CategoryBean;
 import Beans.ContentsBean;
 import Beans.ItemBean;
 import Beans.SubCategoryBean;
+import Beans.UserBean;
 import Constants.AppConstants;
 import DAOs.ContentsDAO;
 import DAOs.CourseDAO;
@@ -36,7 +37,7 @@ public class CourseController extends BaseController {
 				Util.l(item.getBelongTo());
 				Util.l(item.getCreatedAt().toString());
 			}
-			request.setAttribute("CATEGORY", categoryList);
+			request.setAttribute("CATEGORY_LIST", categoryList);
 			request.getServletContext()
 					.getRequestDispatcher(
 							AppConstants.FOWARD_PATH.CONST_COURSE_INDEX_JSP)
@@ -56,22 +57,20 @@ public class CourseController extends BaseController {
 	public void detailAction(HttpServletRequest request,
 			HttpServletResponse response) {
 		SubCategoryDAO daoObj = new SubCategoryDAO();
+		CourseDAO courseObj = new CourseDAO();
 		int categoryId = Integer.parseInt(((List<String>) request
 				.getAttribute("PATH")).get(2));
+		int userId = ((UserBean) request.getSession().getAttribute("USER_INF"))
+				.getUserId();
 		List<SubCategoryBean> subcategoryList = daoObj
 				.selectSubCategoryByCategoryId(categoryId);
-		// [TODO]ここるべきなのはsubcategoryのIDに対応した
+		courseObj.addUserToItem(userId, categoryId);
+		//ここで今は一つ一つdbから取得してきているけれどjoinして一回で取得してきた方がいい
 		for (int i = 0; i < subcategoryList.size(); i++) {
 			ContentsDAO contentsDAO = new ContentsDAO();
 			List<ContentsBean> contentsList = contentsDAO
 					.selectContentsBySubCategoryId(subcategoryList.get(i)
 							.getSubCategoryId());
-			Util.l("カテゴリーID********************"
-					+ subcategoryList.get(i).getSubCategoryId());
-			for (ContentsBean contents : contentsList) {
-				Util.l("コンテンツタイトル*****" + contents.getContentsTitle());
-				Util.l("コンテンツID*****" + contents.getContentsId());
-			}
 			subcategoryList.get(i).setContentsList(
 					contentsDAO.selectContentsBySubCategoryId(subcategoryList
 							.get(i).getSubCategoryId()));

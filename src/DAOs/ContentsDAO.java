@@ -23,15 +23,15 @@ public class ContentsDAO extends BaseDAO{
 	// 消す:フラグで管理する
 
 	// 追加系のメソッド
-	public int addContents(HttpServletRequest request) {
+	public int addContents(int subCategoryId, String title) {
 		int successNum = 0;
 		startConnection();
 		try {
-			String contentsTitle = request.getParameter("CONTENTS_TITLE");
-			String sql = "INSERT INTO table_contents (contents_title) values(?);";
+			String sql = "INSERT INTO table_contents (sub_category_id,contents_title) values(?,?);";
 			PreparedStatement prstmt = conn.prepareStatement(sql);
 			int ctn = 1;
-			prstmt.setString(ctn++, contentsTitle);
+			prstmt.setInt(ctn++, subCategoryId);
+			prstmt.setString(ctn++, title);
 			successNum = prstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -42,7 +42,7 @@ public class ContentsDAO extends BaseDAO{
 	}
 
 	// セレクト系のメソッド
-	public List<ContentsBean> selectAllContents(HttpServletRequest request) {
+	public List<ContentsBean> selectAllContents() {
 		ResultSet rs = null;
 		List<ContentsBean> contentsList = new ArrayList<>();
 		startConnection();
@@ -53,6 +53,7 @@ public class ContentsDAO extends BaseDAO{
 			while (rs.next()) {
 				ContentsBean contents = new ContentsBean();
 				contents.setContentsTitle(rs.getString("contents_title"));
+				contents.setContentsId(rs.getInt("contents_id"));
 				contents.setCreatedAt(rs.getDate("created_at"));
 				contents.setUpdatedAt(rs.getDate("updated_at"));
 				contentsList.add(contents);

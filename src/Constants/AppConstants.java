@@ -29,7 +29,12 @@ public class AppConstants {
 		public static final String CONST_GROUP_ADD_JSP = "/WEB-INF/jsp/groupAdd.jsp";
 		public static final String CONST_GROUP_DETAIL_JSP = "/WEB-INF/jsp/groupDetail.jsp";
 		public static final String CONST_ADMIN_INDEX_JSP =  "/WEB-INF/jsp/adminSelect.jsp";
-		public static final String CONST_ADMIN_ADD_CONTENTS_JSP =  "/WEB-INF/jsp/adminaddcontents.jsp";
+		public static final String CONST_ADMIN_ADD_CONTENT_JSP =  "/WEB-INF/jsp/selectContentAdd.jsp";
+		public static final String CONST_ADMIN_ADD_CONTENTS_JSP = "/WEB-INF/jsp/contentsAdd.jsp";
+		public static final String CONST_ADMIN_ADD_CATEGORY_JSP = "/WEB-INF/jsp/categoryAdd.jsp";
+		public static final String CONST_ADMIN_ADD_SUB_CATEGORY_JSP = "/WEB-INF/jsp/subCategoryAdd.jsp";
+		public static final String CONST_ADMIN_ADD_ITEM_JSP = "/WEB-INF/jsp/itemAdd.jsp";
+		
 	}
 	
 	//コントローラクラス権限
@@ -50,7 +55,7 @@ public class AppConstants {
 			{
 				put("account/execute", AUTH_FLAG.AUTH_ALL_USER);
 				put("account/edit", AUTH_FLAG.AUTH_ALL_USER);
-				put("admin/addcontents",AUTH_FLAG.AUTH_ALL_USER);
+				put("admin/addcontent",AUTH_FLAG.AUTH_ALL_USER);
 				put("admin/execute", AUTH_FLAG.AUTH_ALL_USER);
 				put("course/execute", AUTH_FLAG.AUTH_ALL_USER);
 				put("course/detail", AUTH_FLAG.AUTH_ALL_USER);
@@ -62,10 +67,15 @@ public class AppConstants {
 				put("group/add", AUTH_FLAG.AUTH_ALL_USER);
 				put("group/edit", AUTH_FLAG.AUTH_ALL_USER);
 				put("group/detail", AUTH_FLAG.AUTH_ALL_USER);
+				put("group/addgroupmember", AUTH_FLAG.AUTH_ALL_USER);
 				put("logout/execute", AUTH_FLAG.AUTH_ALL_USER);
 				put("login/execute", AUTH_FLAG.AUTH_ALL_USER);
 				put("login/main", AUTH_FLAG.AUTH_ALL_USER);
 				put("index/execute", AUTH_FLAG.AUTH_ALL_USER);
+				put("admin/addcontents", AUTH_FLAG.AUTH_ALL_USER);
+				put("admin/addcategory", AUTH_FLAG.AUTH_ALL_USER);
+				put("admin/addsubcategory", AUTH_FLAG.AUTH_ALL_USER);
+				put("admin/additem", AUTH_FLAG.AUTH_ALL_USER);
 			}
 		};
 	}

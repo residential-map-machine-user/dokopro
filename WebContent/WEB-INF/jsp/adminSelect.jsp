@@ -12,24 +12,39 @@
 		<div>
 			<div class="w-row">
 				<div class="w-col w-col-6">
-					<a class="button" href="#">チーム削除</a>
+					<div class="selectaction4admin">
+						<h3>
+							<a href="<%=request.getContextPath()%>/front/admin/addcontent">コンテンツ追加</a>
+						</h3>
+					</div>
 				</div>
 				<div class="w-col w-col-6">
-					<a class="button" href="#">ユーザ削除</a>
+					<div class="selectaction4admin">
+						<h3>
+							<a href="<%=request.getContextPath()%>"></a>ユーザ削除
+						</h3>
+					</div>
 				</div>
 			</div>
 			<div class="w-row">
 				<div class="w-col w-col-6">
-					<a class="button" href="#">コンテンツ追加</a>
+					<div class="selectaction4admin">
+						<h3>
+							<a href="<%=request.getContextPath()%>"></a>グループ削除
+						</h3>
+					</div>
 				</div>
 				<div class="w-col w-col-6">
-					<a class="button" href="#">コンテンツ編集</a>
+					<div class="selectaction4admin">
+						<h3>
+							<a href="<%=request.getContextPath()%>"></a>コンテンツ編集
+						</h3>
+					</div>
 				</div>
 			</div>
 		</div>
 	</div>
-	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script type="text/javascript" src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
 	<!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
 </body>
 </html>

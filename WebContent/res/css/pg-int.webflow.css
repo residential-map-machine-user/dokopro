@@ -145,7 +145,6 @@ p {
 .section {
   padding-top: 65px;
   padding-bottom: 65px;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.09);
 }
 .section.hero {
   height: 437px;
@@ -296,6 +295,16 @@ p {
   font-family: Bitter, serif;
   color: #837d99;
   text-decoration: none;
+}
+.selectaction4admin {
+  margin-top: 10px;
+  margin-bottom: 10px;
+  border: 1px solid transparent;
+  border-radius: 10px;
+  background-color: #bbf;
+  box-shadow: #2b2a70 0px 0px 25px 0px inset;
+  opacity: 0.64;
+  text-align: center;
 }
 .footer-link:hover {
   border-bottom: 1px solid rgba(131, 125, 153, 0.86);
@@ -504,7 +513,7 @@ p {
   float: left;
 }
 .courselistnavitem {
-  width: 60px;
+  width: 80px;
   height: 100%;
   margin-left: 10px;
   padding-top: 8px;
@@ -517,14 +526,17 @@ p {
   height: auto;
 }
 .topimagecontainer {
-  border: 3px solid black;
+  display: block;
+  float: none;
+  clear: none;
   border-radius: 0px;
-  background-color: #253445;
+  background-color: transparent;
+  opacity: 1;
 }
 .catchphrasemypage {
   margin-top: -1px;
   padding-top: 53px;
-  color: #d6cbcb;
+  color: black;
   text-decoration: none;
 }
 .designercontainer {
@@ -538,17 +550,21 @@ p {
   text-align: left;
 }
 .explanationcourse {
-  background-color: #06f;
-  background-image: -webkit-radial-gradient(50% 50%, circle, black, white);
-  background-image: radial-gradient(circle at 50% 50%, black, white);
+  background-color: transparent;
+}
+.couresobject {
+  height: 150px;
+  padding-right: 11px;
+  padding-left: 11px;
+  border-radius: 10px;
+  box-shadow: #635c5c 0px 0px 6px 0px;
 }
 .column1 {
   margin-top: 49px;
   margin-bottom: 39px;
   padding-top: 0px;
-  border: 1px solid white;
-  border-radius: 50px;
-  box-shadow: #c5bcd1 1px 1px 3px 0px, white 0px 0px 6px 0px, white 0px 0px 12px 0px;
+  border-radius: 20px;
+  box-shadow: none;
 }
 .courseexplanationcontainer {
   margin-right: 62px;
@@ -676,6 +692,7 @@ p {
   box-shadow: white 0px 0px 6px 0px;
 }
 .teamlisthead {
+  float: left;
   color: black;
   text-align: left;
 }
@@ -735,7 +752,7 @@ p {
   width: 50%;
   height: 30px;
   float: left;
-  border: 1px dotted black;
+  border: 
 }
 .smallse {
   width: 50%;
@@ -758,6 +775,7 @@ p {
 }
 .unitcourseitem {
   border: 1px dotted #59b1bd;
+  width:auto;
 }
 .selectedcourese {
   margin-top: 26px;
@@ -765,7 +783,8 @@ p {
 }
 .wrapperteaminfo {
   display: block;
-  margin-top: 100px;
+  margin:0 auto;
+  margin-top:100px;
 }
 .teamtitle {
   color: black;
@@ -774,8 +793,9 @@ p {
   text-align: center;
 }
 .teaminfo {
-  border: 1px solid #6d62d1;
-  border-radius: 20px;
+  border-radius: 10px;
+  box-shadow: #878282 0px 0px 6px 0px;
+  margin:0 auto;
 }
 .indexparagraph {
   font-size: 20px;
@@ -791,6 +811,56 @@ p {
 }
 .groupeditwrapper {
   margin-top: 50px;
+}
+.contentstitle {
+  box-shadow: none;
+}
+.joinbuttonwrapper {
+  text-align: center;
+}
+.projectname {
+  color: rgba(0, 0, 0, 0.4);
+}
+.teamex {
+  border-top: 1.5px none #8c8585;
+  border-bottom: 1.5px none #8c8585;
+  box-shadow: none;
+}
+.projectwraper {
+  box-shadow: white 0px 0px 6px 0px;
+}
+.projetclisttietle {
+  color: black;
+  font-size: 24px;
+}
+.projectde {
+  margin-right: 1px;
+  padding-right: 16px;
+  padding-left: 16px;
+  color: #918989;
+}
+.projectunit {
+  border-radius: 20px;
+  box-shadow: #689399 0px 0px 6px 0px;
+}
+.typechoolse {
+  color: #171515;
+}
+.couresobject {
+  height: 150px;
+  padding-right: 11px;
+  padding-left: 11px;
+  border-radius: 10px;
+  box-shadow: #635c5c 0px 0px 6px 0px;
+}
+.button.teamaddbutton {
+  float: right;
+  background-color: transparent;
+  box-shadow: none;
+  -webkit-transform: none;
+  -ms-transform: none;
+  transform: none;
+  color: black;
 }
 @media (max-width: 991px) {
   p {
@@ -829,7 +899,8 @@ p {
   .section {
     padding-top: 33px;
     padding-bottom: 33px;
-    text-align: center;
+    padding-right:30px;
+    padding-left:30px:
   }
   .section.hero {
     padding-right: 38px;
