@@ -1,6 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
-<%@ page import="Beans.GroupBean"%>
+<%@ page import="Beans.GroupBean" import="Beans.ProjectBean"
+	import="java.util.ArrayList" import="java.util.List"%>
 <!DOCTYPE html PUBLIC "-//W3C//DTD HTML 4.01 Transitional//EN" "http://www.w3.org/TR/html4/loose.dtd">
 <html>
 <head>
@@ -13,6 +14,11 @@
 		GroupBean group = new GroupBean();
 		if (request.getAttribute("GROUP") instanceof GroupBean) {
 			group = (GroupBean) request.getAttribute("GROUP");
+		}
+		List<ProjectBean> projectList = new ArrayList<ProjectBean>();
+		if (request.getAttribute("PROJECT_LIST") instanceof List<?>) {
+			projectList = (List<ProjectBean>) request
+					.getAttribute("PROJECT_LIST");
 		}
 	%>
 	<div class="row">
@@ -41,57 +47,29 @@
 	<div class="w-section">
 		<div class="w-container">
 			<div class="row">
+				<%
+					for (int i = 0; i < projectList.size(); i++) {
+				%>
 				<div class="col-md-4">
 					<div class="panel panel-info">
-						<div class="panel-heading">ViewPagerの実装</div>
+						<div class="panel-heading"><%=projectList.get(i).getProjectName()%></div>
 						<div class="panel-body">
-							<p>３時間でViewPagerの実装までこぎつけるプロジェクトです</p>
+							<p><%=projectList.get(i).getProjectSummery()%></p>
 						</div>
 
 						<!-- List group -->
 						<ul class="list-group">
 							<li class="list-group-item">メンバー</li>
-							<li class="list-group-item">開始時期</li>
-							<li class="list-group-item">終了時期</li>
-							<li class="list-group-item">コミットレベル</li>
+							<li class="list-group-item">開始時期<%=projectList.get(i).getDayStart()%></li>
+							<li class="list-group-item">終了時期<%=projectList.get(i).getDayStart()%></li>
+							<li class="list-group-item">コミットレベル<%=projectList.get(i).getCommitLevel()%></li>
 							<li class="list-group-item">その他</li>
 						</ul>
 					</div>
 				</div>
-				<div class="col-md-4">
-					<div class="panel panel-info">
-						<div class="panel-heading">ViewPagerの実装</div>
-						<div class="panel-body">
-							<p>３時間でViewPagerの実装までこぎつけるプロジェクトです</p>
-						</div>
-
-						<!-- List group -->
-						<ul class="list-group">
-							<li class="list-group-item">メンバー</li>
-							<li class="list-group-item">開始時期</li>
-							<li class="list-group-item">終了時期</li>
-							<li class="list-group-item">コミットレベル</li>
-							<li class="list-group-item">その他</li>
-						</ul>
-					</div>
-				</div>
-				<div class="col-md-4">
-					<div class="panel panel-info">
-						<div class="panel-heading">ViewPagerの実装</div>
-						<div class="panel-body">
-							<p>３時間でViewPagerの実装までこぎつけるプロジェクトです</p>
-						</div>
-
-						<!-- List group -->
-						<ul class="list-group">
-							<li class="list-group-item">メンバー</li>
-							<li class="list-group-item">開始時期</li>
-							<li class="list-group-item">終了時期</li>
-							<li class="list-group-item">コミットレベル</li>
-							<li class="list-group-item">その他</li>
-						</ul>
-					</div>
-				</div>
+				<%
+					}
+				%>
 			</div>
 		</div>
 	</div>

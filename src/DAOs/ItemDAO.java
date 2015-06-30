@@ -49,7 +49,7 @@ public class ItemDAO extends BaseDAO{
 	}
 
 	// セレクト系のメソッド
-	public List<ItemBean> selectItem(HttpServletRequest request) {
+	public List<ItemBean> selectAllItem() {
 		ResultSet rs = null;
 		startConnection();
 		List<ItemBean> itemList = new ArrayList<>();
@@ -60,6 +60,7 @@ public class ItemDAO extends BaseDAO{
 			while (rs.next()) {
 				ItemBean item = new ItemBean();
 				item.setItemTitle(rs.getString("item_title"));
+				item.setItemId(rs.getInt("item_id"));
 				item.setItemText(rs.getString("item_text"));
 				item.setCreatedAt(rs.getDate("created_at"));
 				item.setUpdatedAt(rs.getDate("updated_at"));
@@ -87,6 +88,7 @@ public class ItemDAO extends BaseDAO{
 			while (rs.next()) {
 				ItemBean item = new ItemBean();
 				item.setItemTitle(rs.getString("item_title"));
+				item.setItemId(rs.getInt("item_id"));
 				item.setItemText(rs.getString("item_text"));
 				item.setCreatedAt(rs.getDate("created_at"));
 				item.setUpdatedAt(rs.getDate("updated_at"));
@@ -144,6 +146,23 @@ public class ItemDAO extends BaseDAO{
 			successNum = prstmt.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
+		}finally{
+			finishConnection();
+		}
+		return successNum;
+	}
+	
+	public int addCheckPoint(int userId, int itemId){
+		int successNum = 0;
+		startConnection();
+		try{
+			String sql = "INSERT INTO table_check_point (user_id,item_id, complete_flag) values(?,?,1);";
+			PreparedStatement pr = conn.prepareStatement(sql);
+			int cnt = 1;
+			pr.setInt(cnt++, userId);
+			pr.setInt(cnt++, itemId);
+			successNum = pr.executeUpdate();
+		}catch(SQLException e){
 		}finally{
 			finishConnection();
 		}

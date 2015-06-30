@@ -10,6 +10,7 @@ import javax.servlet.http.HttpServletRequest;
 
 import BaseClasses.BaseDAO;
 import Beans.ProjectBean;
+import Utils.Util;
 
 public class ProjectDAO extends BaseDAO {
 	// 必要なメソッド
@@ -28,12 +29,12 @@ public class ProjectDAO extends BaseDAO {
 			int commitLevel = Integer.parseInt(request.getParameter("COMMIT_LEVEL"));
 			String projectSummery = request.getParameter("PROJECT_SUMMERY");
 			String sql = "INSERT INTO table_group_project (project_name,project_summery,commit_level) values(?,?,?);";
-			PreparedStatement prstmt = conn.prepareStatement(sql);
-			int incrementalSymbol = 1;
-			prstmt.setString(incrementalSymbol++, projectName);
-			prstmt.setString(incrementalSymbol++,projectSummery);
-			prstmt.setInt(incrementalSymbol++, commitLevel);
-			successNum = prstmt.executeUpdate();
+			PreparedStatement pr = conn.prepareStatement(sql);
+			int cnt = 1;
+			pr.setString(cnt++, projectName);
+			pr.setString(cnt++,projectSummery);
+			pr.setInt(cnt++, commitLevel);
+			successNum = pr.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
 		}finally{
@@ -49,8 +50,8 @@ public class ProjectDAO extends BaseDAO {
 		try {
 			ResultSet rs = null;
 			String sql = "SELECT * FROM table_project;";
-			PreparedStatement prstmt = conn.prepareStatement(sql);
-			rs = prstmt.executeQuery();
+			PreparedStatement pr = conn.prepareStatement(sql);
+			rs = pr.executeQuery();
 			while (rs.next()) {
 				ProjectBean project = new ProjectBean();
 				project.setProjectId(rs.getInt("project_id"));
@@ -70,17 +71,16 @@ public class ProjectDAO extends BaseDAO {
 	}
 
 	// プロジェクトをgroupIdから取得してくるメソッド
-	public List<ProjectBean> selectProjectByGroupId(HttpServletRequest request) {
+	public List<ProjectBean> selectProjectByGroupId(int groupId) {
 		List<ProjectBean> projectList = new ArrayList<>();
 		startConnection();
-		int projectId = Integer.parseInt(request.getParameter("PROJECT_ID"));
 		try {
 			ResultSet rs = null;
-			String sql = "SELECT * FROM table_project WHERE project_id=?;";
-			PreparedStatement prstmt = conn.prepareStatement(sql);
-			int incrementalSymbol = 1;
-			prstmt.setInt(incrementalSymbol++, projectId);
-			rs = prstmt.executeQuery();
+			String sql = "SELECT * FROM table_group_project WHERE group_id=?;";
+			PreparedStatement pr = conn.prepareStatement(sql);
+			int cnt = 1;
+			pr.setInt(cnt++, groupId);
+			rs = pr.executeQuery();
 			while (rs.next()) {
 				ProjectBean project = new ProjectBean();
 				project.setProjectId(rs.getInt("project_id"));
@@ -89,7 +89,14 @@ public class ProjectDAO extends BaseDAO {
 				project.setProjectType(rs.getInt("project_type"));
 				project.setCreatedAt(rs.getDate("created_at"));
 				project.setUpdatedAt(rs.getDate("updated_at"));
+				project.setProjectName(rs.getString("project_name"));
+				project.setDayStart(rs.getDate("day_start"));
+				project.setDayStart(rs.getDate("day_finish"));
 				projectList.add(project);
+				Util.l("DBプロジェクト>>>>>>"+ rs.getInt("project_id"));
+				Util.l("DBプロジェクト>>>>>>"+ rs.getString("project_name"));
+				Util.l("DBプロジェクト>>>>>>"+ rs.getString("project_summery"));
+				Util.l("DBプロジェクト>>>>>>"+ rs.getInt("commit_level"));
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();
@@ -118,10 +125,10 @@ public class ProjectDAO extends BaseDAO {
 			 * この３つのセレクト文を使えばうまくuser_idからプロジェクト情報を取得してこれるはず
 			 */
 			String sql = "select table_group_project.project_id, table_group_project.project_name,table_group_project.commit_level, table_group_project.project_summery, table_group_project.project_type, table_group_project.created_at,table_group_project.updated_at from (table_user  INNER JOIN(table_group_member INNER JOIN(table_group  INNER JOIN table_group_project ON table_group.group_id = table_group_project.group_id) ON table_group_member.group_id = table_group.group_id) ON table_user.user_id = table_group_member.user_id) WHERE table_user.user_id=?";
-			PreparedStatement prstmt = conn.prepareStatement(sql);
-			int incrementalSymbol = 1;
-			prstmt.setInt(incrementalSymbol++, projectId);
-			rs = prstmt.executeQuery();
+			PreparedStatement pr = conn.prepareStatement(sql);
+			int cnt = 1;
+			pr.setInt(cnt++, projectId);
+			rs = pr.executeQuery();
 			while (rs.next()) {
 				ProjectBean project = new ProjectBean();
 				project.setProjectId(rs.getInt("project_id"));
@@ -148,10 +155,10 @@ public class ProjectDAO extends BaseDAO {
 			int project_id = Integer.parseInt(request
 					.getParameter("PROJECT_ID"));
 			String sql = "UPDATE table_group_project set delete_flag=1 WHERE project_id=?;";
-			PreparedStatement prstmt = conn.prepareStatement(sql);
-			int incrementalSymbol = 1;
-			prstmt.setInt(incrementalSymbol++, project_id);
-			successNum = prstmt.executeUpdate();
+			PreparedStatement pr = conn.prepareStatement(sql);
+			int cnt = 1;
+			pr.setInt(cnt++, project_id);
+			successNum = pr.executeUpdate();
 		} catch (SQLException e) {
 			e.printStackTrace();
 		}finally{

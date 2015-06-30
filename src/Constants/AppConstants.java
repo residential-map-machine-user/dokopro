@@ -60,6 +60,7 @@ public class AppConstants {
 				put("course/execute", AUTH_FLAG.AUTH_ALL_USER);
 				put("course/detail", AUTH_FLAG.AUTH_ALL_USER);
 				put("course/content", AUTH_FLAG.AUTH_ALL_USER);
+				put("course/item", AUTH_FLAG.AUTH_ALL_USER);
 				put("error/execute", AUTH_FLAG.AUTH_ALL_USER);
 				put("mypage/execute", AUTH_FLAG.AUTH_ALL_USER);
 				put("mypage/edit", AUTH_FLAG.AUTH_ALL_USER);

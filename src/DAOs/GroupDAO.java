@@ -55,6 +55,7 @@ public class GroupDAO extends BaseDAO {
 		}
 		return successNum;
 	}
+	
 	// セレクト系のメソッド
 	public List<GroupBean> selectAllGroup() {
 		ResultSet rs = null;
@@ -137,7 +138,7 @@ public class GroupDAO extends BaseDAO {
 		ResultSet rs = null;
 		List<GroupBean> groupList = new ArrayList<>();
 		try {
-			String sql = "SELECT table_group.group_name, table_group.description from(table_user  INNER JOIN(table_group_member INNER JOIN table_group ON table_group_member.group_id = table_group.group_id) ON table_user.user_id = table_group_member.user_id) WHERE table_user.user_id=?;";
+			String sql = "SELECT table_group.group_name, table_group.description from (((table_group_project INNER JOIN table_group ON table_group_project.group_id = table_group.group_id) INNER JOIN table_group_member ON table_group.group_id = table_group_member.group_id) INNER JOIN table_user ON table_group_member.user_id = table_user.user_id) WHERE table_user.user_id=? GROUP BY table_group.group_name;";
 			PreparedStatement pr = conn.prepareStatement(sql);
 			int cnt = 1;
 			Util.l("??????????????????" + userId + "");

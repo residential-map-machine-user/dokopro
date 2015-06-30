@@ -1,7 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" import="java.util.ArrayList"
-	import="Beans.GroupBean"%>
+	import="Beans.GroupBean" import="Beans.ProjectBean"%>
 <!DOCTYPE html>
 <!-- This site was created in Webflow. http://www.webflow.com-->
 <!-- Last Published: Mon Apr 20 2015 01:31:28 GMT+0000 (UTC) -->
@@ -18,9 +18,14 @@
 		<jsp:include page="/WEB-INF/jsp/header.jsp" />
 		<%
 			List<GroupBean> groupList = new ArrayList<GroupBean>();
-			if (groupList instanceof List<?>) {
+			if (request.getAttribute("GROUP_LIST") instanceof List<?>) {
 				groupList = (List<GroupBean>) request
 						.getAttribute("GROUP_LIST");
+			}
+			List<List<ProjectBean>> nestedProjectList = new ArrayList<List<ProjectBean>>();
+			if (request.getAttribute("NESTED_PROJECT_LIST") instanceof List<?>) {
+				nestedProjectList = (List<List<ProjectBean>>) request
+						.getAttribute("NESTED_PROJECT_LIST");
 			}
 		%>
 	</header>
@@ -56,35 +61,22 @@
 				<div>
 					<div>
 						<div class="row">
+							<%for(int j=0;j < nestedProjectList.get(i).size();j++){ %>
 							<div class="col-md-4">
 								<div class="panel panel-info">
 									<div class="panel-heading">
-										<h3 class="panel-title">ViewPagerの実装</h3>
+										<h3 class="panel-title"><%=nestedProjectList.get(i).get(j).getProjectName() %></h3>
 									</div>
-									<div class="panel-body">３時間でViewPagerの実装までこぎつけるプロジェクトです</div>
+									<div class="panel-body"><%=nestedProjectList.get(i).get(j).getProjectSummery() %></div>
 								</div>
 							</div>
-							<div class="col-md-4">
-								<div class="panel panel-info">
-									<div class="panel-heading">
-										<h3 class="panel-title">ViewPagerの実装</h3>
-									</div>
-									<div class="panel-body">３時間でViewPagerの実装までこぎつけるプロジェクトです</div>
-								</div>
-							</div>
-							<div class="col-md-4">
-								<div class="panel panel-info">
-									<div class="panel-heading">
-										<h3 class="panel-title">ViewPagerの実装</h3>
-									</div>
-									<div class="panel-body">３時間でViewPagerの実装までこぎつけるプロジェクトです</div>
-								</div>
-							</div>
+							<%} %>
 						</div>
 						<div></div>
 					</div>
 					<div class="joinbuttonwrapper">
-						<a class="button" href="<%=request.getContextPath()%>/front/group/addgroupmember/<%=groupList.get(i).getGroupId()%>">Join</a>
+						<a class="button"
+							href="<%=request.getContextPath()%>/front/group/detail/<%=groupList.get(i).getGroupId()%>">詳細</a>
 					</div>
 				</div>
 			</div>

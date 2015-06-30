@@ -10,9 +10,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import BaseClasses.BaseController;
 import Beans.GroupBean;
+import Beans.ProjectBean;
 import Beans.UserBean;
 import Constants.AppConstants;
 import DAOs.GroupDAO;
+import DAOs.ProjectDAO;
 import Utils.Util;
 
 public class GroupController extends BaseController {
@@ -24,7 +26,21 @@ public class GroupController extends BaseController {
 			GroupDAO daoObj = new GroupDAO();
 			List<GroupBean> groupList = new ArrayList<>();
 			groupList = daoObj.selectAllGroup();
-
+			ProjectDAO projectObj = new ProjectDAO();
+			List<List<ProjectBean>> nestedProjectList = new ArrayList<>();
+			for (int i = 0; i < groupList.size(); i++) {
+				List<ProjectBean> projectList = new ArrayList<>();
+				projectList = projectObj.selectProjectByGroupId(groupList
+						.get(i).getGroupId());
+				nestedProjectList.add(projectList);
+				Util.l("グループID" + groupList.get(i).getGroupId());
+				for (int j = 0; j < projectList.size(); j++) {
+					Util.l("コントローラプロジェクト" + projectList.get(j).getProjectName());
+					Util.l("コントローラプロジェクト"
+							+ projectList.get(j).getProjectSummery());
+				}
+			}
+			request.setAttribute("NESTED_PROJECT_LIST", nestedProjectList);
 			request.setAttribute("GROUP_LIST", groupList);
 			request.getServletContext()
 					.getRequestDispatcher(
@@ -75,13 +91,18 @@ public class GroupController extends BaseController {
 			HttpServletResponse response) {
 		try {
 			GroupDAO daoObj = new GroupDAO();
+			ProjectDAO projectObj = new ProjectDAO();
 			Util.l("グループID"
 					+ ((List<String>) request.getAttribute("PATH")).get(2));
 			int groupId = Integer.parseInt(((List<String>) request
 					.getAttribute("PATH")).get(2));
+			List<ProjectBean> projectList = new ArrayList<>();
+			projectList = projectObj.selectProjectByGroupId(groupId);
+			request.setAttribute("PROJECT_LIST", projectList);
 			GroupBean group = new GroupBean();
 			group = daoObj.selectGroupByGroupId(groupId);
 			request.setAttribute("GROUP", group);
+			request.setAttribute("PROJECT_LIST", projectList);
 			request.getServletContext()
 					.getRequestDispatcher(
 							AppConstants.FOWARD_PATH.CONST_GROUP_DETAIL_JSP)
@@ -96,7 +117,7 @@ public class GroupController extends BaseController {
 			HttpServletResponse response) {
 		try {
 			GroupDAO daoObj = new GroupDAO();
-			//[TODO]グループに重複してメンバーの登録を行わないように確認する
+			// [TODO]グループに重複してメンバーの登録を行わないように確認する
 			int groupId = Integer.parseInt(((List<String>) request
 					.getAttribute("PATH")).get(2));
 			GroupBean group = daoObj.selectGroupByGroupId(groupId);

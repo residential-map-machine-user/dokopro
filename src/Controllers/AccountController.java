@@ -54,8 +54,23 @@ public class AccountController extends BaseController {
 						.forward(request, response);
 			} else if (request.getMethod().equals("POST")) {
 				UserDAO dbObj = new UserDAO();
-				int registerNum = dbObj.updateAccountName(request);
-				if (registerNum == 1) {
+				String accountName = request.getParameter("ACCOUNT_NAME");
+				String mail = request.getParameter("MAIL");
+				String password = request.getParameter("PASSWORD");
+				String newPassword = request.getParameter("NEW_PASSWORD");
+				String checkPassword = request.getParameter("CHECK_PASSWORD");
+				UserBean user = new UserBean();
+				user = (UserBean)request.getSession().getAttribute("USER_INF");
+				int userId = user.getUserId();
+				int registerNum = 0;
+				if(accountName != null &&!accountName.equals("null") && !accountName.equals("")){
+					registerNum = dbObj.updateAccountName(accountName, userId);
+				}else if(mail != null && !mail.equals("") && !mail.equals("null")){
+					registerNum = dbObj.updateUserMail(mail, userId);
+				}else if(password != null && !password.equals("") && !password.equals("null")){
+					registerNum = dbObj.updateUserPassword(password, newPassword, checkPassword, userId);
+				}
+				if (registerNum >= 1) {
 					request.getServletContext()
 							.getRequestDispatcher(
 									AppConstants.FOWARD_PATH.CONST_ACCOUNT_COMPLETE_JSP)

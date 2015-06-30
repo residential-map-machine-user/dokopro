@@ -9,6 +9,21 @@ public class ProjectBean {
 	private int projectType;
 	private Date createdAt;
 	private Date updatedAt;
+	private Date dayStart;
+	private Date dayFinish;
+	private String projectName;
+	public Date getDayStart() {
+		return dayStart;
+	}
+	public void setDayStart(Date dayStart) {
+		this.dayStart = dayStart;
+	}
+	public Date getDayFinish() {
+		return dayFinish;
+	}
+	public void setDayFinish(Date dayFinish) {
+		this.dayFinish = dayFinish;
+	}
 	public int getProjectId() {
 		return projectId;
 	}
@@ -44,5 +59,11 @@ public class ProjectBean {
 	}
 	public void setUpdatedAt(Date updatedAt) {
 		this.updatedAt = updatedAt;
+	}
+	public String getProjectName() {
+		return projectName;
+	}
+	public void setProjectName(String projectName) {
+		this.projectName = projectName;
 	}
 }

@@ -145,6 +145,18 @@ p {
 .section {
   padding-top: 65px;
   padding-bottom: 65px;
+  margin:0 auto;
+  max-width:900px;
+}
+.section-2 {
+  margin:0 auto;
+  background-image: url('../images/background.jpg');
+  background-size: cover;
+  text-align: center;
+  background-color: #f5f6f7;
+  padding-top: 49px;
+  padding-bottom: 49px;
+  text-align: center;
 }
 .section.hero {
   height: 437px;
@@ -867,6 +879,12 @@ p {
     font-size: 14px;
     line-height: 21px;
   }
+  .section {
+  padding-top: 65px;
+  padding-bottom: 65px;
+  margin:0 auto;
+  max-width:700px;
+}
   .button.socialsiginin {
     -webkit-transform: none;
     -ms-transform: none;
@@ -891,17 +909,18 @@ p {
   h2 {
     margin-top: 0px;
   }
+  .section {
+  padding-top: 65px;
+  padding-bottom: 65px;
+  margin:0 auto;
+  max-width:470px;
+}
   .button.socialsiginin {
     -webkit-transform: none;
     -ms-transform: none;
     transform: none;
   }
-  .section {
-    padding-top: 33px;
-    padding-bottom: 33px;
-    padding-right:30px;
-    padding-left:30px:
-  }
+
   .section.hero {
     padding-right: 38px;
     padding-bottom: 52px;
@@ -959,8 +978,12 @@ p {
     line-height: 23px;
   }
   .section {
-    text-align: center;
-  }
+  padding-top: 65px;
+  padding-bottom: 65px;
+  margin:0 auto;
+  max-width:450px;
+}
+
   .section.white {
     padding-top: 0px;
     padding-bottom: 0px;

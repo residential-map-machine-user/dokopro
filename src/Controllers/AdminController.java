@@ -150,4 +150,29 @@ public class AdminController extends BaseController {
 			e.printStackTrace();
 		}
 	}
+	
+	public void editAction(HttpServletRequest request,
+			HttpServletResponse response){
+		try {
+			if (request.getMethod().equals("GET")) {
+				ContentsDAO daoObj = new ContentsDAO();
+				List<ContentsBean> contentsList = new ArrayList<>();
+				contentsList = daoObj.selectAllContents();
+				request.setAttribute("CONTENTS_LIST", contentsList);
+				request.getServletContext()
+						.getRequestDispatcher(
+								AppConstants.FOWARD_PATH.CONST_ADMIN_ADD_ITEM_JSP)
+						.forward(request, response);
+			} else if (request.getMethod().equals("POST")) {
+				ItemDAO daoObj = new ItemDAO();
+				int contentsId = Integer.parseInt(request.getParameter("CONTENTS_ID"));
+				String itemTitle = request.getParameter("ITEM_TITLE");
+				String itemText = request.getParameter("ITEM_TEXT");
+				daoObj.addItem(contentsId, itemTitle, itemText);
+				execute(request,response);
+			}
+		} catch (ServletException | IOException e) {
+			e.printStackTrace();
+		}
+	}
 }

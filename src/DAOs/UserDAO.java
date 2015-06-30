@@ -148,14 +148,11 @@ public class UserDAO extends BaseDAO {
 	}
 
 	//ユーザのアカウント名の更新用のメソッド
-	public int updateAccountName(HttpServletRequest request) {
+	public int updateAccountName(String accountName, int userId) {
 		int successNum = 0;
 		startConnection();
 		try {
 			// フォームから送られてきた値の取得
-			String accountName = request.getParameter("ACCOUNT_NAME");
-			int userId = ((UserBean) request.getSession().getAttribute(
-					"USER_INF")).getUserId();
 			Util.l("ok1>>>>>" + accountName);
 			Util.l("チェック結果>>>>>" + checkUserName(accountName));
 			// sql文の作成
@@ -205,34 +202,22 @@ public class UserDAO extends BaseDAO {
 	}
 	
 	//ユーザのパスワードを更新するメソッド
-	public int updateUserPassword(HttpServletRequest request) {
+	public int updateUserPassword(String password, String newPassword, String checkPassword, int userId) {
 		int successNum = 0;
 		startConnection();
 		try {
-			UserBean bufferUserInf = selectUserForUpdateByUserId(request);
-			String password = request.getParameter("PASSWORD");
-			String newPassword = request.getParameter("NEW_PASSWORD");
-			String checkPassword = request.getParameter("CHECK_PASSWORD");
-			int userId = ((UserBean) request.getSession().getAttribute(
-					"UESR_INF")).getUserId();
-			UserBean user = selectUserForLogin(request);
 			Util.l("ok1>>>>>" + password + checkPassword + newPassword);
 			Util.l("チェック結果" + checkUserPassword(newPassword));
 			String encryptedOldPassword = Encrypt.SHA512(newPassword);
 			String encryptedNewPassword = Encrypt.SHA512(newPassword);
-			if (!encryptedOldPassword.equals(bufferUserInf.getPassword())) {
-				return successNum;
-			}
 			if (newPassword.equals(checkPassword)) {
 				// パスワードの暗号化
 				String sql = "UPDATE table_user SET password = ? WHERE user_id=? AND password=?";
 				PreparedStatement prstmt = conn.prepareStatement(sql);
 				int cnt = 1;
-				prstmt.setString(cnt++, password);
-				prstmt.setString(cnt++,
-						bufferUserInf.getPassword());
-				prstmt.setString(cnt++,
-						bufferUserInf.getAccountName());
+				prstmt.setString(cnt++, encryptedNewPassword);
+				prstmt.setInt(cnt++,userId);
+				prstmt.setString(cnt++,encryptedOldPassword);
 				successNum = prstmt.executeUpdate();
 			}
 		} catch (SQLException e) {
@@ -266,14 +251,10 @@ public class UserDAO extends BaseDAO {
 	}
 	
 	//ユーザのメールアドレス更新用のメソッド
-	public int updateUserMail(HttpServletRequest request) {
+	public int updateUserMail(String mail, int userId) {
 		int successNum = 0;
 		startConnection();
 		try {
-			// フォームから送られてきた値の取得
-			String mail = request.getParameter("MAIL");
-			int userId = ((UserBean) request.getSession().getAttribute(
-					"USER_INF")).getUserId();
 			Util.l("ok1>>>>>" + mail);
 			Util.l("チェック結果>>>>>" + checkUserName(mail));
 			// sql文の作成

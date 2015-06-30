@@ -250,6 +250,7 @@ textarea.w-select {
   margin-top: 3px;
 }
 .w-container {
+	max-width:900px;
   padding-right:30px;
   padding-left:30px;
   margin:0 auto;

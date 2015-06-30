@@ -17,6 +17,7 @@
 			<%
 				for (int i = 0; i < itemList.size(); i++) {
 			%>
+
 			<h1 class="heading"><%=itemList.get(i).getItemTitle()%></h1>
 			<p class="personalizedcontents">
 				<%=itemList.get(i).getItemText()%>
@@ -24,8 +25,8 @@
 				<form class="w-clearfix formposition" id="email-form"
 					name="email-form" data-name="Email Form">
 					<div class="w-checkbox check">
-						<input class="w-checkbox-input" id="checkbox" type="checkbox"
-							name="checkbox" data-name="Checkbox"> <label
+						<input class="w-checkbox-input" id="ITEM_<%=itemList.get(i).getItemId()%>" type="checkbox"
+							name="COMPLETE_FLAG" data-name="Checkbox" value=""> <label
 							class="w-form-label" for="checkbox">チェックポイント</label>
 					</div>
 					<label for="name"></label>
@@ -36,8 +37,29 @@
 			%>
 		</div>
 	</div>
-	<script type="text/javascript"
-		src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	<script>
+		$(document).ready(function() {
+			$('input').change(function() {
+				var itemId = $(this).attr("id").split("_")[1];
+				console.log(itemId);
+				if ($(this).is(':checked')) {
+					$.ajax({
+						   type: "GET",
+						   url: "http://localhost:8080/dokopro/front/course/item/" + itemId,
+						   success: function(msg){
+							  if(msq === "OK"){
+								  $('')
+							  }
+						     alert( "Data Saved: " + msg );
+						   }
+						 });
+				} else {
+					
+				}
+			});
+		});
+	</script>
 	<!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+
 </body>
 </html>

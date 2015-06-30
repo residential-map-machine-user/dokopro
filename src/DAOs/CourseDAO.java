@@ -57,6 +57,7 @@ public class CourseDAO extends BaseDAO {
 		}
 		return successNum;
 	}
+	
 	// セレクト系のメソッド
 	public List<CategoryBean> selectAllCategory() {
 		ResultSet rs = null;

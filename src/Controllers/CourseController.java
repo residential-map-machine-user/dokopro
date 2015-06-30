@@ -18,6 +18,7 @@ import Constants.AppConstants;
 import DAOs.ContentsDAO;
 import DAOs.CourseDAO;
 import DAOs.ItemDAO;
+import DAOs.JoinCategoryDAO;
 import DAOs.SubCategoryDAO;
 import Utils.Util;
 
@@ -39,8 +40,7 @@ public class CourseController extends BaseController {
 			}
 			request.setAttribute("CATEGORY_LIST", categoryList);
 			request.getServletContext()
-					.getRequestDispatcher(
-							AppConstants.FOWARD_PATH.CONST_COURSE_INDEX_JSP)
+					.getRequestDispatcher(AppConstants.FOWARD_PATH.CONST_COURSE_INDEX_JSP)
 					.forward(request, response);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
@@ -54,32 +54,26 @@ public class CourseController extends BaseController {
 	 * @param request
 	 * @param response
 	 */
-	public void detailAction(HttpServletRequest request,
-			HttpServletResponse response) {
+	public void detailAction(HttpServletRequest request, HttpServletResponse response) {
 		SubCategoryDAO daoObj = new SubCategoryDAO();
-		CourseDAO courseObj = new CourseDAO();
-		int categoryId = Integer.parseInt(((List<String>) request
-				.getAttribute("PATH")).get(2));
-		int userId = ((UserBean) request.getSession().getAttribute("USER_INF"))
-				.getUserId();
-		List<SubCategoryBean> subcategoryList = daoObj
-				.selectSubCategoryByCategoryId(categoryId);
-		courseObj.addUserToItem(userId, categoryId);
-		//ここで今は一つ一つdbから取得してきているけれどjoinして一回で取得してきた方がいい
+		JoinCategoryDAO categoryObj = new JoinCategoryDAO();
+		int categoryId = Integer.parseInt(((List<String>) request.getAttribute("PATH")).get(2));
+		List<SubCategoryBean> subcategoryList = daoObj.selectSubCategoryByCategoryId(categoryId);
+		int userId = ((UserBean) request.getSession().getAttribute("USER_INF")).getUserId();
+		Util.l("受講用のフラグ" + categoryObj.addUserToJoinCategoryTable(userId, categoryId));
+		// ここで今は一つ一つdbから取得してきているけれどjoinして一回で取得してきた方がいい
 		for (int i = 0; i < subcategoryList.size(); i++) {
 			ContentsDAO contentsDAO = new ContentsDAO();
 			List<ContentsBean> contentsList = contentsDAO
-					.selectContentsBySubCategoryId(subcategoryList.get(i)
-							.getSubCategoryId());
+					.selectContentsBySubCategoryId(subcategoryList.get(i).getSubCategoryId());
 			subcategoryList.get(i).setContentsList(
-					contentsDAO.selectContentsBySubCategoryId(subcategoryList
-							.get(i).getSubCategoryId()));
+					contentsDAO.selectContentsBySubCategoryId(subcategoryList.get(i)
+							.getSubCategoryId()));
 		}
 		request.setAttribute("SUB_CATEGORY", subcategoryList);
 		try {
 			request.getServletContext()
-					.getRequestDispatcher(
-							AppConstants.FOWARD_PATH.CONST_COURSE_DETAIL_JSP)
+					.getRequestDispatcher(AppConstants.FOWARD_PATH.CONST_COURSE_DETAIL_JSP)
 					.forward(request, response);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
@@ -87,21 +81,33 @@ public class CourseController extends BaseController {
 		}
 	}
 
-	public void contentAction(HttpServletRequest request,
-			HttpServletResponse response) {
+	public void contentAction(HttpServletRequest request, HttpServletResponse response) {
 		try {
-			int contentsId = Integer.parseInt(((List<String>) request
-					.getAttribute("PATH")).get(2));
+			int contentsId = Integer.parseInt(((List<String>) request.getAttribute("PATH")).get(2));
 			ItemDAO daoObj = new ItemDAO();
 			List<ItemBean> itemList = daoObj.selectItemByContentsId(contentsId);
 			request.setAttribute("ITEM", itemList);
 			request.getServletContext()
-					.getRequestDispatcher(
-							AppConstants.FOWARD_PATH.CONST_COURSE_CONTENT_JSP)
+					.getRequestDispatcher(AppConstants.FOWARD_PATH.CONST_COURSE_CONTENT_JSP)
 					.forward(request, response);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
+		}
+	}
+
+	public void itemAction(HttpServletRequest request, HttpServletResponse response)
+			throws IOException {
+		int itemId = Integer.parseInt(((List<String>) request.getAttribute("PATH")).get(2));
+		int userId = ((UserBean) request.getSession().getAttribute("USER_INF")).getUserId();
+		ItemDAO daoObj = new ItemDAO();
+		int successNum = daoObj.addCheckPoint(userId, itemId);
+		Util.l("チェックポイントテーブル成功件数" + successNum);
+		if (successNum >= 1) {
+			response.getWriter().print("OK");
+
+		} else {
+			response.getWriter().print("NG");
 		}
 	}
 }
