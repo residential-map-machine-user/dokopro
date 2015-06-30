@@ -74,10 +74,10 @@
 						</div>
 						<div></div>
 					</div>
-					<div class="joinbuttonwrapper">
+					<%-- <div class="joinbuttonwrapper">
 						<a class="button"
 							href="<%=request.getContextPath()%>/front/group/detail/<%=groupList.get(i).getGroupId()%>">詳細</a>
-					</div>
+					</div> --%>
 				</div>
 			</div>
 		</div>

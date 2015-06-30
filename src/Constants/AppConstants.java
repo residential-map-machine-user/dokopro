@@ -77,6 +77,7 @@ public class AppConstants {
 				put("admin/addcategory", AUTH_FLAG.AUTH_ALL_USER);
 				put("admin/addsubcategory", AUTH_FLAG.AUTH_ALL_USER);
 				put("admin/additem", AUTH_FLAG.AUTH_ALL_USER);
+				put("group/join", AUTH_FLAG.AUTH_ALL_USER);
 			}
 		};
 	}

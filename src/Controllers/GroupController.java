@@ -112,7 +112,28 @@ public class GroupController extends BaseController {
 			e.printStackTrace();
 		}
 	}
-
+	
+	public void joinAction(HttpServletRequest request,
+			HttpServletResponse response) {
+		try {
+			GroupDAO daoObj = new GroupDAO();
+			// [TODO]グループに重複してメンバーの登録を行わないように確認する
+			int groupId = Integer.parseInt(((List<String>) request
+					.getAttribute("PATH")).get(2));
+			GroupBean group = daoObj.selectGroupByGroupId(groupId);
+			int userId = ((UserBean) request.getSession().getAttribute(
+					"USER_INF")).getUserId();
+			int successNum = 0;
+			successNum = daoObj.addGroupMember(groupId, userId);
+			Util.l("登録成功件数" + successNum );
+			request.getServletContext()
+					.getRequestDispatcher(
+							AppConstants.FOWARD_PATH.CONST_GROUP_DETAIL_JSP)
+					.forward(request, response);
+		} catch (ServletException | IOException e) {
+			e.printStackTrace();
+		}
+	}
 	public void addgroupmemberAction(HttpServletRequest request,
 			HttpServletResponse response) {
 		try {

@@ -30,6 +30,23 @@
 							<div>
 								<h1 class="teamtitle"><%=group.getGroupName()%></h1>
 							</div>
+							<script>
+							$(document).ready(function(){
+								var button = $('#joinButton')
+								button.click(function(){
+									var groupId = "<%=group.getGroupId()%>";
+									$.ajax({
+										   type: "GET",
+										   url: "http://localhost:8080/dokopro/front/group/join/" + groupId,
+										   success: function(msg){
+												  button.text("参加中");
+												  console.log("登録を完了しました");
+											  }
+										   })
+									});
+								});
+							</script>
+							<div style="float:right;font-famly:メイリオ;"><button type="button" id="joinButton">参加する</button></div>
 							<div class="teamex">
 								<p>チーム概要</p>
 								<p><%=group.getDescription()%></p>
