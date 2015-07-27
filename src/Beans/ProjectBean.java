@@ -18,7 +18,6 @@ public class ProjectBean {
 	public void setDayStart(Date dayStart) {
 		this.dayStart = dayStart;
 	}
-//	a
 	public Date getDayFinish() {
 		return dayFinish;
 	}
