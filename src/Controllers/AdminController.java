@@ -33,7 +33,7 @@ public class AdminController extends BaseController {
 			e.printStackTrace();
 		}
 	}
-
+	
 	public void addcontentAction(HttpServletRequest request,
 			HttpServletResponse response) {
 		try {
@@ -58,7 +58,7 @@ public class AdminController extends BaseController {
 				SubCategoryDAO daoObj = new SubCategoryDAO();
 				CourseDAO courseObj = new CourseDAO();
 				List<SubCategoryBean> subcategoryList = daoObj.selectAllSubCategory();
-				request.setAttribute("SUB_CATEGORY_LIST", subcategoryList);
+				request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.SUB_CATEGORY_LIST, subcategoryList);
 				request.getServletContext()
 						.getRequestDispatcher(
 								AppConstants.FOWARD_PATH.CONST_ADMIN_ADD_CONTENTS_JSP)
@@ -109,7 +109,7 @@ public class AdminController extends BaseController {
 					Util.l(item.getBelongTo());
 					Util.l(item.getCreatedAt().toString());
 				}
-				request.setAttribute("CATEGORY_LIST", categoryList);
+				request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.CATEGORY_LIST, categoryList);
 				request.getServletContext()
 						.getRequestDispatcher(
 								AppConstants.FOWARD_PATH.CONST_ADMIN_ADD_SUB_CATEGORY_JSP)
@@ -133,7 +133,7 @@ public class AdminController extends BaseController {
 				ContentsDAO daoObj = new ContentsDAO();
 				List<ContentsBean> contentsList = new ArrayList<>();
 				contentsList = daoObj.selectAllContents();
-				request.setAttribute("CONTENTS_LIST", contentsList);
+				request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.CONTENTS_LIST, contentsList);
 				request.getServletContext()
 						.getRequestDispatcher(
 								AppConstants.FOWARD_PATH.CONST_ADMIN_ADD_ITEM_JSP)
@@ -158,7 +158,7 @@ public class AdminController extends BaseController {
 				ContentsDAO daoObj = new ContentsDAO();
 				List<ContentsBean> contentsList = new ArrayList<>();
 				contentsList = daoObj.selectAllContents();
-				request.setAttribute("CONTENTS_LIST", contentsList);
+				request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.CONTENTS_LIST, contentsList);
 				request.getServletContext()
 						.getRequestDispatcher(
 								AppConstants.FOWARD_PATH.CONST_ADMIN_ADD_ITEM_JSP)

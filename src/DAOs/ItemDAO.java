@@ -168,4 +168,20 @@ public class ItemDAO extends BaseDAO{
 		}
 		return successNum;
 	}
+	public int deleteCheckPoint(int userId, int itemId){
+		int successNum = 0;
+		startConnection();
+		try{
+			String sql = "UPDATE table_check_point SET complete_flag=0 WHERE user_id=? AND item_id=?;";
+			PreparedStatement pr = conn.prepareStatement(sql);
+			int cnt = 1;
+			pr.setInt(cnt++, userId);
+			pr.setInt(cnt++, itemId);
+			successNum = pr.executeUpdate();
+		}catch(SQLException e){
+		}finally{
+			finishConnection();
+		}
+		return successNum;
+	}
 }

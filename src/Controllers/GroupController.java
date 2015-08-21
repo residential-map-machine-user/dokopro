@@ -40,8 +40,8 @@ public class GroupController extends BaseController {
 							+ projectList.get(j).getProjectSummery());
 				}
 			}
-			request.setAttribute("NESTED_PROJECT_LIST", nestedProjectList);
-			request.setAttribute("GROUP_LIST", groupList);
+			request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.NESTED_PROJECT, nestedProjectList);
+			request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.GROUP_LIST, groupList);
 			request.getServletContext()
 					.getRequestDispatcher(
 							AppConstants.FOWARD_PATH.CONST_GROUP_LIST_JSP)
@@ -98,11 +98,11 @@ public class GroupController extends BaseController {
 					.getAttribute("PATH")).get(2));
 			List<ProjectBean> projectList = new ArrayList<>();
 			projectList = projectObj.selectProjectByGroupId(groupId);
-			request.setAttribute("PROJECT_LIST", projectList);
+			request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.PROJECT_LIST, projectList);
 			GroupBean group = new GroupBean();
 			group = daoObj.selectGroupByGroupId(groupId);
-			request.setAttribute("GROUP", group);
-			request.setAttribute("PROJECT_LIST", projectList);
+			request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.GROUP, group);
+			request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.PROJECT_LIST, projectList);
 			request.getServletContext()
 					.getRequestDispatcher(
 							AppConstants.FOWARD_PATH.CONST_GROUP_DETAIL_JSP)
@@ -144,7 +144,7 @@ public class GroupController extends BaseController {
 			GroupBean group = daoObj.selectGroupByGroupId(groupId);
 			int userId = ((UserBean) request.getSession().getAttribute(
 					"USER_INF")).getUserId();
-			request.setAttribute("GROUP", group);
+			request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.GROUP, group);
 			daoObj.addGroupMember(groupId, userId);
 			request.getServletContext()
 					.getRequestDispatcher(

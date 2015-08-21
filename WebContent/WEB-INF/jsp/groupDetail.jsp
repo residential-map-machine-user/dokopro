@@ -12,15 +12,22 @@
 	<jsp:include page="/WEB-INF/jsp/header.jsp" />
 	<%
 		GroupBean group = new GroupBean();
-		if (request.getAttribute("GROUP") instanceof GroupBean) {
-			group = (GroupBean) request.getAttribute("GROUP");
-		}
-		List<ProjectBean> projectList = new ArrayList<ProjectBean>();
-		if (request.getAttribute("PROJECT_LIST") instanceof List<?>) {
-			projectList = (List<ProjectBean>) request
-					.getAttribute("PROJECT_LIST");
-		}
+			if (request.getAttribute("GROUP") instanceof GroupBean) {
+		group = (GroupBean) request.getAttribute("GROUP");
+			}
+			List<ProjectBean> projectList = new ArrayList<ProjectBean>();
+			if (request.getAttribute("PROJECT_LIST") instanceof List<?>) {
+		projectList = (List<ProjectBean>) request
+				.getAttribute("PROJECT_LIST");
+			}
 	%>
+	<script>
+		$(document).ready(function(){
+			$(".panel-info").on("click",function(){
+				window.location = $(this).find("a").attr("href");
+			});
+		});
+	</script>
 	<div class="row">
 		<div class="w-section section">
 			<div class="w-container teaminfo">
@@ -35,18 +42,25 @@
 								var button = $('#joinButton')
 								button.click(function(){
 									var groupId = "<%=group.getGroupId()%>";
-									$.ajax({
-										   type: "GET",
-										   url: "http://localhost:8080/dokopro/front/group/join/" + groupId,
-										   success: function(msg){
-												  button.text("参加中");
-												  console.log("登録を完了しました");
-											  }
-										   })
-									});
-								});
+																$
+																		.ajax({
+																			type : "GET",
+																			url : "http://localhost:8080/dokopro/front/group/join/"
+																					+ groupId,
+																			success : function(
+																					msg) {
+																				button
+																						.text("参加中");
+																				console
+																						.log("登録を完了しました");
+																			}
+																		})
+															});
+												});
 							</script>
-							<div style="float:right;font-famly:メイリオ;"><button type="button" id="joinButton">参加する</button></div>
+							<div style="float: right; font-famly: メイリオ;">
+								<button type="button" id="joinButton">参加する</button>
+							</div>
 							<div class="teamex">
 								<p>チーム概要</p>
 								<p><%=group.getDescription()%></p>
@@ -69,7 +83,7 @@
 				%>
 				<div class="col-md-4">
 					<div class="panel panel-info">
-						<div class="panel-heading"><%=projectList.get(i).getProjectName()%></div>
+						<div class="panel-heading"><a href="<%=request.getContextPath()%>/front/project/detail/<%=projectList.get(i).getProjectId()%>"><%=projectList.get(i).getProjectName()%></a></div>
 						<div class="panel-body">
 							<p><%=projectList.get(i).getProjectSummery()%></p>
 						</div>
@@ -77,8 +91,8 @@
 						<!-- List group -->
 						<ul class="list-group">
 							<li class="list-group-item">メンバー</li>
-							<li class="list-group-item">開始時期<%=projectList.get(i).getDayStart()%></li>
-							<li class="list-group-item">終了時期<%=projectList.get(i).getDayStart()%></li>
+							<%-- <li class="list-group-item">開始時期<%=projectList.get(i).getDayStart()%></li>
+							<li class="list-group-item">終了時期<%=projectList.get(i).getDayStart()%></li> --%>
 							<li class="list-group-item">コミットレベル<%=projectList.get(i).getCommitLevel()%></li>
 							<li class="list-group-item">その他</li>
 						</ul>

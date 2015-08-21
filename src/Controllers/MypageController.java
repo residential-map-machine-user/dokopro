@@ -29,8 +29,8 @@ public class MypageController extends BaseController {
 			List<GroupBean> groupList = groupObj.selectGroupByUserId(userId);
 			List<CategoryBean> categoryList = courseObj
 					.selectCategoryByUserId(userId);
-			request.setAttribute("GROUP_LIST", groupList);
-			request.setAttribute("CATEGORY_LIST", categoryList);
+			request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.GROUP_LIST, groupList);
+			request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.CATEGORY_LIST, categoryList);
 			request.getServletContext()
 					.getRequestDispatcher(
 							AppConstants.FOWARD_PATH.CONST_MYPAGE_JSP)

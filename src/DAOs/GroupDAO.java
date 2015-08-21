@@ -23,7 +23,6 @@ public class GroupDAO extends BaseDAO {
 		int successNum = 0;
 		startConnection();
 		try {
-
 			String sql = "INSERT INTO table_group (group_name,description) values(?,?);";
 			PreparedStatement prstmt = conn.prepareStatement(sql);
 			int ctn = 1;
@@ -138,7 +137,7 @@ public class GroupDAO extends BaseDAO {
 		ResultSet rs = null;
 		List<GroupBean> groupList = new ArrayList<>();
 		try {
-			String sql = "SELECT table_group.group_name, table_group.description from (((table_group_project INNER JOIN table_group ON table_group_project.group_id = table_group.group_id) INNER JOIN table_group_member ON table_group.group_id = table_group_member.group_id) INNER JOIN table_user ON table_group_member.user_id = table_user.user_id) WHERE table_user.user_id=? GROUP BY table_group.group_name;";
+			String sql = "SELECT table_group.group_name, table_group.description from ((table_group INNER JOIN table_group_member ON table_group.group_id = table_group_member.group_id) INNER JOIN table_user ON table_group_member.user_id = table_user.user_id) WHERE table_user.user_id=? GROUP BY table_group.group_name;";
 			PreparedStatement pr = conn.prepareStatement(sql);
 			int cnt = 1;
 			Util.l("??????????????????" + userId + "");

@@ -37,7 +37,7 @@ public class LoginController extends BaseController {
 		UserDAO dbObj = new UserDAO();
 		UserBean userObj = dbObj.selectUserForLogin(request);
 		if(userObj.getAccountName() != null){
-			request.getSession().setAttribute("USER_INF", userObj);
+			request.getSession().setAttribute(AppConstants.REQUEST_ATTIRIBUTE.USER_INF, userObj);
 			Util.l(((UserBean)request.getSession().getAttribute("USER_INF")).getAuthFlag() + "");
 			//[TODO]　ログインしたあとに同じページに戻ってくる
 			goCourseIndex(request, response);

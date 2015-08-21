@@ -18,13 +18,13 @@
 				<div class="w-col w-col-6 column1">
 					<div class="couresobject">
 						<h2 class="typechoolse">プログラミング</h2>
-						<p class="courseselectparagraph">Webアプリの作成などページを動的に変更することをメインに進めていきます。言語はJavaです。java以外は出来ないのでコース作成しません。</p>
+						<p class="courseselectparagraph clearfix">Webアプリの作成などページを動的に変更することをメインに進めていきます。言語はJavaです。java以外は出来ないのでコース作成しません。</p>
 					</div>
 				</div>
 				<div class="w-col w-col-6 column1">
 					<div class="couresobject">
 						<h2 class="typechoolse">デザイン</h2>
-						<p class="courseselectparagraph">Html,Css,Javascriptをメインに勉強します。javascriptでページを動的に操作したりすることができます。最終的にはjQueryを勉強します。</p>
+						<p class="courseselectparagraph clearfix">Html,Css,Javascriptをメインに勉強します。javascriptでページを動的に操作したりすることができます。最終的にはjQueryを勉強します。</p>
 					</div>
 				</div>
 			</div>

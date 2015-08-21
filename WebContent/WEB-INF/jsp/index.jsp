@@ -1,37 +1,13 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
 	pageEncoding="UTF-8"%>
 <!DOCTYPE html>
-<!-- This site was created in Webflow. http://www.webflow.com-->
-<!-- Last Published: Mon Apr 20 2015 01:31:28 GMT+0000 (UTC) -->
-<html data-wf-site="5529405753ab13dd4efff00c"
-	data-wf-page="5529405753ab13dd4efff00e">
-<head>
-<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
-<meta charset="utf-8">
-<title>Slate Template</title>
-<meta name="viewport" content="width=device-width, initial-scale=1">
-<meta name="generator" content="Webflow">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/res/css/normalize.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/res/css/webflow.css">
-<link rel="stylesheet" type="text/css" href="<%=request.getContextPath() %>/res/css/pg-int.webflow.css">
-<script
-	src="https://ajax.googleapis.com/ajax/libs/webfont/1.4.7/webfont.js"></script>
-<script>
-	WebFont
-			.load({
-				google : {
-					families : [ "Montserrat:400,700",
-							"Bitter:400,700,400italic",
-							"Ubuntu:300,300italic,400,400italic,500,500italic,700,700italic" ]
-				}
-			});
-</script>
-<script type="text/javascript" src="<%=request.getContextPath() %>/res/js/modernizr.js"></script>
-<link rel="shortcut icon" type="image/x-icon" href="<%=request.getContextPath() %>/res/images/webclip-slate.png">
-<link rel="apple-touch-icon" href="<%=request.getContextPath() %>/res/images/webclip-slate.png">
-</head>
 <body>
 	<jsp:include page="/WEB-INF/jsp/header.jsp"/>
+	<style>
+		.section{
+			max-width:100%;
+		}
+	</style>
 	<div class="w-section section hero">
 		<div class="w-container">
 			<div class="w-row">

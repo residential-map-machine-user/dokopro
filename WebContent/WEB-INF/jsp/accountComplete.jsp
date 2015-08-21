@@ -15,7 +15,7 @@
 					<div class="separationyoko"></div>
 					<div>
 						<h3>
-							登録は正常に完了しました。<a href="#">ホーム画面へ</a>
+							登録は正常に完了しました。<a href="<%=request.getContextPath() %>/front/login">ホーム画面へ</a>
 						</h3>
 					</div>
 				</div>

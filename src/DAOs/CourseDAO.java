@@ -178,4 +178,24 @@ public class CourseDAO extends BaseDAO {
 		}
 		return successNum;
 	}
+	
+	public List<Integer> selectItemByUserId(int userId, int contentsId){
+		List<Integer> itemIdList = new ArrayList<>();
+		startConnection();
+		try{
+			ResultSet rs = null;
+			String sql = "select table_item.item_id,table_contents.contents_id,table_check_point.complete_flag from (((((table_user JOIN table_check_point ON table_check_point.user_id=table_user.user_id) JOIN table_item ON table_item.item_id=table_check_point.item_id) JOIN table_contents ON table_contents.contents_id=table_item.contents_id) JOIN table_sub_category ON table_sub_category.sub_category_id=table_contents.sub_category_id) JOIN table_category ON table_category.category_id=table_sub_category.category_id) WHERE table_user.user_id=? AND table_contents.contents_id=? AND table_check_point.complete_flag=1;";
+			PreparedStatement pr = conn.prepareStatement(sql);
+			int cnt = 1;
+			pr.setInt(cnt++, userId);
+			pr.setInt(cnt++, contentsId);
+			rs = pr.executeQuery();
+			while(rs.next()){
+				itemIdList.add(rs.getInt("item_id"));
+			}
+		}catch(SQLException e){
+			
+		}
+		return itemIdList; 
+	} 
 }

@@ -58,14 +58,14 @@ public class FrontControllerServlet extends HttpServlet {
 				if (AppConstants.AUTH_MAP.authMap.containsKey(authKey)) {
 					if (AppConstants.AUTH_MAP.authMap.get(authKey) == AppConstants.AUTH_FLAG.AUTH_ALL_USER) {
 						Util.l("すべてのユーザに対する処理");
-						request.setAttribute("PATH", splitedURI);
+						request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.PATH, splitedURI);
 						doAction(controllerClass, controller, request,
 								response, splitedURI.get(1));
 					} else {
 						if (request.getSession().getAttribute("USER_INF") != null) {
 							if ((Integer) AppConstants.AUTH_MAP.authMap
 									.get(authKey) <= user.getAuthFlag()) {
-								request.setAttribute("PATH", splitedURI);
+								request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.PATH, splitedURI);
 								doAction(controllerClass, controller, request,
 										response, splitedURI.get(1));
 							}

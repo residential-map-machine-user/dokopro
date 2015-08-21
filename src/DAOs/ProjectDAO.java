@@ -18,22 +18,20 @@ public class ProjectDAO extends BaseDAO {
 	// プロジェクトを編集するメソッド
 	// プロジェクトを削除するメソッド
 	// プロジェクトを表示するメソッド
-	
+
 	//プロジェクト作成用のメソッド
 	//とりあえずコミットレベル、プロジェクトの説明,プロジェクト名まであれば十分だとして進める.
-	public int addProject(HttpServletRequest request){
+	public int addProject(String projectName, int commitLevel, String projectSummery, int groupId){
 		int successNum = 0;
 		startConnection();
 		try {
-			String projectName  = request.getParameter("PROJECT_NAME");
-			int commitLevel = Integer.parseInt(request.getParameter("COMMIT_LEVEL"));
-			String projectSummery = request.getParameter("PROJECT_SUMMERY");
-			String sql = "INSERT INTO table_group_project (project_name,project_summery,commit_level) values(?,?,?);";
+			String sql = "INSERT INTO table_group_project (project_name,project_summery,commit_level, group_id) values(?,?,?,?);";
 			PreparedStatement pr = conn.prepareStatement(sql);
 			int cnt = 1;
 			pr.setString(cnt++, projectName);
 			pr.setString(cnt++,projectSummery);
 			pr.setInt(cnt++, commitLevel);
+			pr.setInt(cnt++, groupId);
 			successNum = pr.executeUpdate();
 		}catch(SQLException e){
 			e.printStackTrace();
@@ -42,7 +40,7 @@ public class ProjectDAO extends BaseDAO {
 		}
 		return successNum;
 	}
-	
+
 	// プロジェクトを全権表示するメソッド
 	public List<ProjectBean> selectAllProject(HttpServletRequest request) {
 		List<ProjectBean> projectList = new ArrayList<>();
@@ -58,8 +56,8 @@ public class ProjectDAO extends BaseDAO {
 				project.setCommitLevel(rs.getInt("commit_level"));
 				project.setProjectSummery(rs.getString("project_summery"));
 				project.setProjectType(rs.getInt("project_type"));
-				project.setCreatedAt(rs.getDate("created_at"));
-				project.setUpdatedAt(rs.getDate("updated_at"));
+				project.setCreatedAt(rs.getTimestamp("created_at"));
+				project.setUpdatedAt(rs.getTimestamp("updated_at"));
 				projectList.add(project);
 			}
 		} catch (SQLException e) {
@@ -87,11 +85,11 @@ public class ProjectDAO extends BaseDAO {
 				project.setCommitLevel(rs.getInt("commit_level"));
 				project.setProjectSummery(rs.getString("project_summery"));
 				project.setProjectType(rs.getInt("project_type"));
-				project.setCreatedAt(rs.getDate("created_at"));
-				project.setUpdatedAt(rs.getDate("updated_at"));
+//				project.setCreatedAt(rs.getTimestamp("created_at"));
+//				project.setUpdatedAt(rs.getTimestamp("updated_at"));
 				project.setProjectName(rs.getString("project_name"));
-				project.setDayStart(rs.getDate("day_start"));
-				project.setDayStart(rs.getDate("day_finish"));
+//				project.setDayStart(rs.getTimestamp("day_start"));
+//				project.setDayStart(rs.getTimestamp("day_finish"));
 				projectList.add(project);
 				Util.l("DBプロジェクト>>>>>>"+ rs.getInt("project_id"));
 				Util.l("DBプロジェクト>>>>>>"+ rs.getString("project_name"));
@@ -135,8 +133,8 @@ public class ProjectDAO extends BaseDAO {
 				project.setCommitLevel(rs.getInt("commit_level"));
 				project.setProjectSummery(rs.getString("project_summery"));
 				project.setProjectType(rs.getInt("project_type"));
-				project.setCreatedAt(rs.getDate("created_at"));
-				project.setUpdatedAt(rs.getDate("updated_at"));
+				project.setCreatedAt(rs.getTimestamp("created_at"));
+				project.setUpdatedAt(rs.getTimestamp("updated_at"));
 				projectList.add(project);
 			}
 		} catch (SQLException e) {
@@ -147,6 +145,18 @@ public class ProjectDAO extends BaseDAO {
 		return projectList;
 	}
 
+	public ProjectBean selectProjectById(int projectId){
+		ProjectBean project = new ProjectBean();
+		try{
+			String sql = "S";
+			PreparedStatement pr = conn.prepareStatement(sql);
+			int cnt = 1;
+			pr.setInt(cnt++, projectId);
+		}catch(SQLException e){
+			e.printStackTrace();
+		}
+		return project;
+	}
 	// プロジェクトの削除メソッド
 	public int deleteProject(HttpServletRequest request) {
 		int successNum = 0;

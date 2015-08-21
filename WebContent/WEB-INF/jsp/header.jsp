@@ -20,7 +20,7 @@
 <link rel="stylesheet"
 	href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css">
 <script type="text/javascript"
-	src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+	src="<%=request.getContextPath()%>/res/js/jquery-2.1.4.js"></script>
 <script
 	src="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/js/bootstrap.min.js"></script>
 <script
@@ -37,6 +37,7 @@
 </script>
 <script type="text/javascript"
 	src="<%=request.getContextPath()%>/res/js/modernizr.js"></script>
+
 <link rel="shortcut icon" type="image/x-icon"
 	href="/<%=request.getContextPath()%>/res/images/webclip-slate.png">
 <link rel="apple-touch-icon"
@@ -75,8 +76,8 @@
 					<button class="btn btn-default dropdown-toggle" type="button"
 						id="dropdownMenu1" data-toggle="dropdown">
 						<%
-							String account = ((UserBean) request.getSession().getAttribute(
-										"USER_INF")).getAccountName();
+							String account = ((UserBean) request.getSession().getAttribute("USER_INF"))
+										.getAccountName();
 						%>
 						<%=account%>
 						<span class="caret"></span>
@@ -94,9 +95,7 @@
 							href="<%=request.getContextPath()%>/front/admin">管理者メニュー</a></li>
 						<li role="presentation"><a role="menuitem" tabindex="-1"
 							href="<%=request.getContextPath()%>/front/logout">サインアウト</a></li>
-						<li role="presentation" class="divider"></li>
-						<li role="presentation"><a role="menuitem" tabindex="-1"
-							href="#">Separated link</a></li>
+
 					</ul>
 					<!-- リストここまで -->
 					<%

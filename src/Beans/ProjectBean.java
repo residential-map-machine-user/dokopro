@@ -1,27 +1,29 @@
 package Beans;
 
-import java.sql.Date;
+import java.sql.Timestamp;
+
+
 
 public class ProjectBean {
 	private int projectId;
 	private int commitLevel;
 	private String projectSummery;
 	private int projectType;
-	private Date createdAt;
-	private Date updatedAt;
-	private Date dayStart;
-	private Date dayFinish;
+	private Timestamp createdAt;
+	private Timestamp updatedAt;
+	private Timestamp dayStart;
+	private Timestamp dayFinish;
 	private String projectName;
-	public Date getDayStart() {
+	public Timestamp getDayStart() {
 		return dayStart;
 	}
-	public void setDayStart(Date dayStart) {
+	public void setDayStart(Timestamp dayStart) {
 		this.dayStart = dayStart;
 	}
-	public Date getDayFinish() {
+	public Timestamp getDayFinish() {
 		return dayFinish;
 	}
-	public void setDayFinish(Date dayFinish) {
+	public void setDayFinish(Timestamp dayFinish) {
 		this.dayFinish = dayFinish;
 	}
 	public int getProjectId() {
@@ -48,16 +50,16 @@ public class ProjectBean {
 	public void setProjectType(int projectType) {
 		this.projectType = projectType;
 	}
-	public Date getCreatedAt() {
+	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
-	public Date getUpdatedAt() {
+	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUpdatedAt(Date updatedAt) {
+	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 	public String getProjectName() {

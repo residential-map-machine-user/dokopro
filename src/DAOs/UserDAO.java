@@ -210,15 +210,18 @@ public class UserDAO extends BaseDAO {
 			Util.l("チェック結果" + checkUserPassword(newPassword));
 			String encryptedOldPassword = Encrypt.SHA512(newPassword);
 			String encryptedNewPassword = Encrypt.SHA512(newPassword);
+			String encryptedCheckPassword = Encrypt.SHA512(checkPassword);
 			if (newPassword.equals(checkPassword)) {
 				// パスワードの暗号化
-				String sql = "UPDATE table_user SET password = ? WHERE user_id=? AND password=?";
+				Util.l("sql処理");
+				String sql = "UPDATE table_user SET password=? WHERE user_id=?;";
 				PreparedStatement prstmt = conn.prepareStatement(sql);
 				int cnt = 1;
 				prstmt.setString(cnt++, encryptedNewPassword);
 				prstmt.setInt(cnt++,userId);
-				prstmt.setString(cnt++,encryptedOldPassword);
+//				prstmt.setString(cnt++,encryptedOldPassword);
 				successNum = prstmt.executeUpdate();
+				Util.l(successNum + "");
 			}
 		} catch (SQLException e) {
 			e.printStackTrace();

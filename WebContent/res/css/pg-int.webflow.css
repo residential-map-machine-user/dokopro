@@ -63,7 +63,7 @@ p {
   margin-left: 12px;
   padding-right: 4px;
   float: none;
-  border-radius: 50px;
+/*   border-radius: 50px; */
   font-family: Bitter, serif;
   color: #a1a1a1;
   font-size: 14px;
@@ -518,8 +518,8 @@ p {
   text-align: justify;
 }
 .loginbutton {
-  margin-left: 160px;
-  padding-right: 13px;
+	display:block;
+	margin: 0 auto;
 }
 .courselistjump {
   float: left;
@@ -814,6 +814,7 @@ p {
 }
 .courseselectparagraph {
   font-size: 20px;
+  overflow:auto;
 }
 .teamexplanationparagraph {
   font-size: 20px;

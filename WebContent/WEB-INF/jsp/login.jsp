@@ -7,6 +7,7 @@
 <html data-wf-site="5529405753ab13dd4efff00c"
 	data-wf-page="5530dadb38615e9e376d3839">
 <body>
+
 	<jsp:include page="/WEB-INF/jsp/header.jsp" />
 	<div class="w-section wraplogin">
 		<div class="w-container wraplogindisp">
@@ -43,8 +44,14 @@
 							<div class="separationlinediv"></div>
 							<div class="socialsigninwraper">
 								<div class="facebookloginwrap">
-									<a class="button socialsiginin" href="#">facebookでログイン</a>
+									<fb:login-button scope="public_profile,email"
+										onlogin="checkLoginState();">
+									</fb:login-button>
 								</div>
+								<!--  -->
+
+
+								<div id="status"></div>
 								<div class="googleloginwrap">
 									<a class="button socialsiginin" href="#">googleでログイン</a>
 								</div>
@@ -55,7 +62,7 @@
 			</div>
 			<div>
 				<div class="navtoregister">
-					まだ<a href="#">Dokopro</a>に登録していませんか ?
+					まだ<a href="<%=request.getContextPath()%>/front/account">Dokopro</a>に登録していませんか ?
 				</div>
 			</div>
 		</div>

@@ -16,11 +16,17 @@
 <body>
 	<header class="w-section navbar">
 		<jsp:include page="/WEB-INF/jsp/header.jsp" />
+		<script>
+			$(document).ready(function(){
+				$(".w-container").on("click", function(){
+					window.location=$(this).find("a").attr("href");
+				});
+			});
+		</script>
 		<%
 			List<GroupBean> groupList = new ArrayList<GroupBean>();
 			if (request.getAttribute("GROUP_LIST") instanceof List<?>) {
-				groupList = (List<GroupBean>) request
-						.getAttribute("GROUP_LIST");
+				groupList = (List<GroupBean>) request.getAttribute("GROUP_LIST");
 			}
 			List<List<ProjectBean>> nestedProjectList = new ArrayList<List<ProjectBean>>();
 			if (request.getAttribute("NESTED_PROJECT_LIST") instanceof List<?>) {
@@ -34,6 +40,7 @@
 			<h1 class="teamlisthead">チーム一覧</h1>
 			<a class="button teamaddbutton"
 				href="<%=request.getContextPath()%>/front/group/add">新規チーム作成</a>
+				<a class="button teamaddbutton" href="<%=request.getContextPath()%>/front/project/add">新規プロジェクト作成</a>
 			<div></div>
 		</div>
 	</div>
@@ -61,16 +68,20 @@
 				<div>
 					<div>
 						<div class="row">
-							<%for(int j=0;j < nestedProjectList.get(i).size();j++){ %>
+							<%
+								for (int j = 0; j < nestedProjectList.get(i).size(); j++) {
+							%>
 							<div class="col-md-4">
 								<div class="panel panel-info">
 									<div class="panel-heading">
-										<h3 class="panel-title"><%=nestedProjectList.get(i).get(j).getProjectName() %></h3>
+										<h3 class="panel-title"><%=nestedProjectList.get(i).get(j).getProjectName()%></h3>
 									</div>
-									<div class="panel-body"><%=nestedProjectList.get(i).get(j).getProjectSummery() %></div>
+									<div class="panel-body"><a href="<%=request.getContextPath()%>/front/project/detail/<%=nestedProjectList.get(i).get(j).getProjectId()%>"><%=nestedProjectList.get(i).get(j).getProjectSummery()%></a></div>
 								</div>
 							</div>
-							<%} %>
+							<%
+								}
+							%>
 						</div>
 						<div></div>
 					</div>

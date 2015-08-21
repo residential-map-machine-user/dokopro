@@ -10,6 +10,7 @@ import BaseClasses.BaseController;
 import Beans.UserBean;
 import Constants.AppConstants;
 import DAOs.UserDAO;
+import Utils.Util;
 
 public class AccountController extends BaseController {
 	/**
@@ -27,8 +28,8 @@ public class AccountController extends BaseController {
 						.forward(request, response);
 			} else if (request.getMethod().equals("POST")) {
 				UserDAO dbObj = new UserDAO();
-				int registerNum = dbObj.addUser(request);
-				if (registerNum == 1) {
+				int registerCount = dbObj.addUser(request);
+				if (registerCount == 1) {
 					request.getServletContext()
 							.getRequestDispatcher(
 									AppConstants.FOWARD_PATH.CONST_ACCOUNT_COMPLETE_JSP)
@@ -47,6 +48,7 @@ public class AccountController extends BaseController {
 			HttpServletResponse response) {
 		// アクションの権限をセット
 		try {
+			Util.l("リクエストの種類" + ":" + request.getMethod());
 			if (request.getMethod().equals("GET")) {
 				request.getServletContext()
 						.getRequestDispatcher(
@@ -62,15 +64,16 @@ public class AccountController extends BaseController {
 				UserBean user = new UserBean();
 				user = (UserBean)request.getSession().getAttribute("USER_INF");
 				int userId = user.getUserId();
-				int registerNum = 0;
+				int registerCount = 0;
 				if(accountName != null &&!accountName.equals("null") && !accountName.equals("")){
-					registerNum = dbObj.updateAccountName(accountName, userId);
+					registerCount = dbObj.updateAccountName(accountName, userId);
 				}else if(mail != null && !mail.equals("") && !mail.equals("null")){
-					registerNum = dbObj.updateUserMail(mail, userId);
+					registerCount = dbObj.updateUserMail(mail, userId);
 				}else if(password != null && !password.equals("") && !password.equals("null")){
-					registerNum = dbObj.updateUserPassword(password, newPassword, checkPassword, userId);
+					Util.l("パスワード更新処理");
+					registerCount = dbObj.updateUserPassword(password, newPassword, checkPassword, userId);
 				}
-				if (registerNum >= 1) {
+				if (registerCount >= 1) {
 					request.getServletContext()
 							.getRequestDispatcher(
 									AppConstants.FOWARD_PATH.CONST_ACCOUNT_COMPLETE_JSP)

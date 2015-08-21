@@ -19,11 +19,11 @@
             <div class="w-form">
               <form id="email-form" name="email-form" data-name="Email Form" action="<%=request.getContextPath() %>/front/account" method="post">
                 <label for="name-2">アカウント名</label>
-                <input class="w-input" id="name-2" type="text" placeholder="アカウント名を入力してください" name="ACCOUNT_NAME" data-name="Name 2">
+                <input class="w-input" id="name-2" type="text" placeholder="アカウント名を入力してください(英数字5~15文字)" name="ACCOUNT_NAME" data-name="Name 2">
                 <label for="email-4">メールアドレス</label>
                 <input class="w-input" id="email-4" type="email" placeholder="メールアドレスを入力してください" name="MAIL" data-name="Email 4" required="required">
                 <label for="email-5">パスワード</label>
-                <input class="w-input" id="email-5" type="password" placeholder="パスワードを入力してください" name="PASSWORD" data-name="Email 5" required="required">
+                <input class="w-input" id="email-5" type="password" placeholder="パスワードを入力してください(英数字8~15文字)" name="PASSWORD" data-name="Email 5" required="required">
                 <label for="email-6">パスワード（確認)</label>
                 <input class="w-input" id="email-6" type="password" placeholder="パスワード（確認）を入力してください" name="CHECK_PASSWORD" data-name="Email 6" required="required">
                 <input class="w-button registerbutton" type="submit" value="登録" data-wait="Please wait...">
@@ -38,7 +38,7 @@
           </div>
           <div class="w-col w-col-6 w-clearfix column3">
             <div class="separationlinediv"></div>
-            <div class="movetologin">すでに<a href="#">Dokopro</a>のアカウントをお持ちですか？</div>
+            <div class="movetologin">すでに<a href="<%=request.getContextPath()%>/front/login">Dokopro</a>のアカウントをお持ちですか？</div>
           </div>
         </div>
       </div>
