@@ -62,8 +62,8 @@ public class ItemDAO extends BaseDAO{
 				item.setItemTitle(rs.getString("item_title"));
 				item.setItemId(rs.getInt("item_id"));
 				item.setItemText(rs.getString("item_text"));
-				item.setCreatedAt(rs.getDate("created_at"));
-				item.setUpdatedAt(rs.getDate("updated_at"));
+				item.setCreatedAt(rs.getTimestamp("created_at"));
+				item.setUpdatedAt(rs.getTimestamp("updated_at"));
 				itemList.add(item);
 			}
 		} catch (SQLException e) {
@@ -90,8 +90,8 @@ public class ItemDAO extends BaseDAO{
 				item.setItemTitle(rs.getString("item_title"));
 				item.setItemId(rs.getInt("item_id"));
 				item.setItemText(rs.getString("item_text"));
-				item.setCreatedAt(rs.getDate("created_at"));
-				item.setUpdatedAt(rs.getDate("updated_at"));
+				item.setCreatedAt(rs.getTimestamp("created_at"));
+				item.setUpdatedAt(rs.getTimestamp("updated_at"));
 				itemList.add(item);
 			}
 		} catch (SQLException e) {

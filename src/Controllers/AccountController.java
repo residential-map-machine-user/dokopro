@@ -10,6 +10,7 @@ import BaseClasses.BaseController;
 import Beans.UserBean;
 import Constants.AppConstants;
 import DAOs.UserDAO;
+import Utils.JavaMail;
 import Utils.Util;
 
 public class AccountController extends BaseController {
@@ -29,6 +30,11 @@ public class AccountController extends BaseController {
 			} else if (request.getMethod().equals("POST")) {
 				UserDAO dbObj = new UserDAO();
 				int registerCount = dbObj.addUser(request);
+				if(registerCount == 1){
+					JavaMail mailManager = new JavaMail();
+					String userMail = request.getParameter("MAIL");
+					mailManager.sendMail(AppConstants.HOST, AppConstants.FROM_ADDRRESS, userMail);
+				}
 				if (registerCount == 1) {
 					request.getServletContext()
 							.getRequestDispatcher(

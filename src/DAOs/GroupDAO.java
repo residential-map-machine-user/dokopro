@@ -69,8 +69,8 @@ public class GroupDAO extends BaseDAO {
 				group.setGroupName(rs.getString("group_name"));
 				group.setGroupId(rs.getInt("group_id"));
 				group.setDeleteFlag(rs.getInt("delete_flag"));
-				group.setCreatedAt(rs.getDate("created_at"));
-				group.setUpdatedAt(rs.getDate("updated_at"));
+				group.setCreatedAt(rs.getTimestamp("created_at"));
+				group.setUpdatedAt(rs.getTimestamp("updated_at"));
 				group.setDescription(rs.getString("description"));
 				groupList.add(group);
 			}
@@ -97,8 +97,8 @@ public class GroupDAO extends BaseDAO {
 				group.setGroupName(rs.getString("group_name"));
 				group.setGroupId(rs.getInt("group_id"));
 				group.setDeleteFlag(rs.getInt("delete_flag"));
-				group.setCreatedAt(rs.getDate("created_at"));
-				group.setUpdatedAt(rs.getDate("updated_at"));
+				group.setCreatedAt(rs.getTimestamp("created_at"));
+				group.setUpdatedAt(rs.getTimestamp("updated_at"));
 				group.setDescription(rs.getString("description"));
 			}
 		} catch (SQLException e) {

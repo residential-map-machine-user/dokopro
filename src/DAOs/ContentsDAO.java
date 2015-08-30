@@ -54,8 +54,8 @@ public class ContentsDAO extends BaseDAO{
 				ContentsBean contents = new ContentsBean();
 				contents.setContentsTitle(rs.getString("contents_title"));
 				contents.setContentsId(rs.getInt("contents_id"));
-				contents.setCreatedAt(rs.getDate("created_at"));
-				contents.setUpdatedAt(rs.getDate("updated_at"));
+				contents.setCreatedAt(rs.getTimestamp("created_at"));
+				contents.setUpdatedAt(rs.getTimestamp("updated_at"));
 				contentsList.add(contents);
 			}
 		} catch (SQLException e) {
@@ -81,8 +81,8 @@ public class ContentsDAO extends BaseDAO{
 				ContentsBean contents = new ContentsBean();
 				contents.setContentsTitle(rs.getString("contents_title"));
 				contents.setContentsId(rs.getInt("contents_id"));
-//				contents.setCreatedAt(rs.getDate("created_at"));
-//				contents.setUpdatedAt(rs.getDate("updated_at"));
+//				contents.setCreatedAt(rs.getTimestamp("created_at"));
+//				contents.setUpdatedAt(rs.getTimestamp("updated_at"));
 				contentsList.add(contents);
 			}
 		} catch (SQLException e) {

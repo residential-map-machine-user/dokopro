@@ -22,7 +22,7 @@ $(function() {
   var typing = false;
   var lastTypingTime;
   var $currentInput = $usernameInput.focus();
-  
+
   //追加部分
   var userId = $("#hidden_user_id").text();
   console.log("user_id:" + userId);
@@ -41,7 +41,16 @@ $(function() {
     }
     log(message);
   }
+  username = cleanInput(userName.trim());
 
+  if (username) {
+	  console.log("メッセージ送信");
+    sendMessage();
+    socket.emit('stop typing');
+    typing = false;
+  } else {
+    setUsername();
+  }
   // Sets the client's username
   function setUsername () {
     username = cleanInput(userName.trim());
@@ -78,7 +87,7 @@ $(function() {
     var $el = $('<li>').addClass('log').text(message);
     addMessageElement($el, options);
   }
-  
+
   // Adds the visual chat message to the message list
   function addChatMessage (data, options) {
     // Don't fade the message in if there is an 'X was typing'

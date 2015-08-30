@@ -36,7 +36,6 @@ public class CourseController extends BaseController {
 				Util.l(item.getCategoryName());
 				Util.l(item.getCategoryId() + "");
 				Util.l(item.getBelongTo());
-				Util.l(item.getCreatedAt().toString());
 			}
 			request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.CATEGORY_LIST, categoryList);
 			request.getServletContext()
@@ -56,13 +55,14 @@ public class CourseController extends BaseController {
 	 */
 	public void detailAction(HttpServletRequest request, HttpServletResponse response) {
 		SubCategoryDAO daoObj = new SubCategoryDAO();
-//		JoinCategoryDAO categoryObj = new JoinCategoryDAO();
+		// JoinCategoryDAO categoryObj = new JoinCategoryDAO();
 		int categoryId = Integer.parseInt(((List<String>) request.getAttribute("PATH")).get(2));
 		Util.l("カテゴリーID" + categoryId);
 		List<SubCategoryBean> subcategoryList = daoObj.selectSubCategoryByCategoryId(categoryId);
 		UserBean user = (UserBean) request.getSession().getAttribute("USER_INF");
 		Util.l("detailのここまで来てる");
-//		Util.l("受講用のフラグ" + categoryObj.addUserToJoinCategoryTable(userId, categoryId));
+		// Util.l("受講用のフラグ" + categoryObj.addUserToJoinCategoryTable(userId,
+		// categoryId));
 		// ここで今は一つ一つdbから取得してきているけれどjoinして一回で取得してきた方がいい
 		for (int i = 0; i < subcategoryList.size(); i++) {
 			ContentsDAO contentsDAO = new ContentsDAO();
@@ -74,7 +74,7 @@ public class CourseController extends BaseController {
 		}
 		request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.SUB_CATEGORY, subcategoryList);
 		request.setAttribute(AppConstants.REQUEST_ATTIRIBUTE.CATEGORY_ID, categoryId);
-		Util.l((Integer)request.getAttribute(AppConstants.REQUEST_ATTIRIBUTE.CATEGORY_ID) + "");
+		Util.l((Integer) request.getAttribute(AppConstants.REQUEST_ATTIRIBUTE.CATEGORY_ID) + "");
 		try {
 			request.getServletContext()
 					.getRequestDispatcher(AppConstants.FOWARD_PATH.CONST_COURSE_DETAIL_JSP)
@@ -119,7 +119,7 @@ public class CourseController extends BaseController {
 			int userId = ((UserBean) request.getSession().getAttribute("USER_INF")).getUserId();
 			ItemDAO daoObj = new ItemDAO();
 			int successNum = daoObj.deleteCheckPoint(userId, itemId);
-			Util.l("item ID :" + itemId +  "userID : " + userId);
+			Util.l("item ID :" + itemId + "userID : " + userId);
 		}
 	}
 

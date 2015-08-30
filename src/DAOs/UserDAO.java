@@ -53,8 +53,8 @@ public class UserDAO extends BaseDAO {
 				user.setAccountName(rs.getString("account_name"));
 				user.setDeleteFlag(rs.getInt("delete_flag"));
 				user.setUserTypes(rs.getInt("user_type"));
-				user.setCreatedAt(rs.getDate("created_at"));
-				user.setUpdatedAt(rs.getDate("updated_at"));
+				user.setCreatedAt(rs.getTimestamp("created_at"));
+				user.setUpdatedAt(rs.getTimestamp("updated_at"));
 				Util.l(rs.getString("account_name"));
 				Util.l("データベース処理っている");
 			}
@@ -89,8 +89,8 @@ public class UserDAO extends BaseDAO {
 				user.setAccountName(rs.getString("account_name"));
 				user.setDeleteFlag(rs.getInt("delete_flag"));
 				user.setUserTypes(rs.getInt("user_type"));
-				user.setCreatedAt(rs.getDate("created_at"));
-				user.setUpdatedAt(rs.getDate("updated_at"));
+				user.setCreatedAt(rs.getTimestamp("created_at"));
+				user.setUpdatedAt(rs.getTimestamp("updated_at"));
 				userList.add(user);
 			}
 		} catch (SQLException e) {

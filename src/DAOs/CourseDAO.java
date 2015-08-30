@@ -71,8 +71,8 @@ public class CourseDAO extends BaseDAO {
 				CategoryBean category = new CategoryBean();
 				category.setCategoryName(rs.getString("category_name"));
 				category.setBelongTo(rs.getString("belong_to"));
-				category.setCreatedAt(rs.getDate("created_at"));
-				category.setUpdatedAt(rs.getDate("updated_at"));
+//				category.setCreatedAt(rs.getTimestamp("created_at"));
+//				category.setUpdatedAt(rs.getTimestamp("updated_at"));
 				category.setCategoryId(rs.getInt("category_id"));
 				categoryList.add(category);
 			}
@@ -124,8 +124,8 @@ public class CourseDAO extends BaseDAO {
 	// CategoryBean category = new CategoryBean();
 	// category.setCategoryName(rs.getString("category_name"));
 	// category.setBelongTo(rs.getString("belong_to"));
-	// category.setCreatedAt(rs.getDate("created_at"));
-	// category.setUpdatedAt(rs.getDate("updated_at"));
+	// category.setCreatedAt(rs.getTimestamp("created_at"));
+	// category.setUpdatedAt(rs.getTimestamp("updated_at"));
 	// categoryList.add(category);
 	// }
 	// }catch(SQLException e){

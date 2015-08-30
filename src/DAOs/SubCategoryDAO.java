@@ -51,8 +51,8 @@ public class SubCategoryDAO extends BaseDAO {
 				SubCategoryBean subCategory = new SubCategoryBean();
 				subCategory.setTitle(rs.getString("title"));
 				subCategory.setSubCategoryId(rs.getInt("sub_category_id"));
-//				subCategory.setCreatedAt(rs.getDate("created_at"));
-//				subCategory.setUpdatedAt(rs.getDate("updated_at"));
+//				subCategory.setCreatedAt(rs.getTimestamp("created_at"));
+//				subCategory.setUpdatedAt(rs.getTimestamp("updated_at"));
 				subCategoryList.add(subCategory);
 			}
 		} catch (SQLException e) {

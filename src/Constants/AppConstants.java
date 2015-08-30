@@ -37,6 +37,7 @@ public class AppConstants {
 		public static final String CONST_PROJECT_ADD_JSP = "/WEB-INF/jsp/projectAdd.jsp";
 		public static final String CONST_PROJECT_DETAIL_JSP = "/WEB-INF/jsp/projectDetail.jsp";
 		public static final String CONST_PROJECT_LIST_JSP = "/WEB-INF/jsp/projectList.jsp";
+		public static final String CONST_TASK_LIST_JSP = "/WEB-INF/jsp/taskList.jsp";
 
 	}
 
@@ -102,7 +103,11 @@ public class AppConstants {
 				put("progress/getcompleteitemidlist", AUTH_FLAG.AUTH_SIGNEDIN_USER);
 				put("project/add",AUTH_FLAG.AUTH_SIGNEDIN_USER);
 				put("project/detail", AUTH_FLAG.AUTH_SIGNEDIN_USER);
+				put("project/task", AUTH_FLAG.AUTH_SIGNEDIN_USER);
 			}
 		};
 	}
+	
+	public static String FROM_ADDRRESS = "test@mail.localhost";
+	public static String HOST = "localhost";
 }

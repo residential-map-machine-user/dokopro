@@ -1,13 +1,13 @@
 package Beans;
 
-import java.sql.Date;
+import java.sql.Timestamp;
 import java.util.List;
 
 public class SubCategoryBean {
 	private int subCategoryId;
 	private String title;
-	private Date createdAt;
-	private Date updatedAt;
+	private Timestamp createdAt;
+	private Timestamp updatedAt;
 	private List<ContentsBean> contentsList;
 	public List<ContentsBean> getContentsList() {
 		return contentsList;
@@ -27,16 +27,16 @@ public class SubCategoryBean {
 	public void setTitle(String title) {
 		this.title = title;
 	}
-	public Date getCreatedAt() {
+	public Timestamp getCreatedAt() {
 		return createdAt;
 	}
-	public void setCreatedAt(Date createdAt) {
+	public void setCreatedAt(Timestamp createdAt) {
 		this.createdAt = createdAt;
 	}
-	public Date getUpdatedAt() {
+	public Timestamp getUpdatedAt() {
 		return updatedAt;
 	}
-	public void setUpdatedAt(Date updatedAt) {
+	public void setUpdatedAt(Timestamp updatedAt) {
 		this.updatedAt = updatedAt;
 	}
 }

@@ -2,31 +2,169 @@
 	pageEncoding="UTF-8"%>
 <%@ page import="java.util.List" import="java.util.ArrayList"
 	import="Beans.CategoryBean" import="Beans.UserBean"%>
-<% UserBean user = null;
-if(request.getSession().getAttribute("USER_INF") instanceof UserBean){
-	user = (UserBean)request.getSession().getAttribute("USER_INF");
-} 
-String projectId = "";
-if(request.getAttribute("PROJECT_ID") instanceof String){
-	projectId = (String)request.getAttribute("PROJECT_ID");
-}
+<%
+	UserBean user = null;
+	if (request.getSession().getAttribute("USER_INF") instanceof UserBean) {
+		user = (UserBean) request.getSession().getAttribute("USER_INF");
+	}
+	String projectId = "";
+	if (request.getAttribute("PROJECT_ID") instanceof String) {
+		projectId = (String) request.getAttribute("PROJECT_ID");
+	}
 %>
-<!DOCTYPE html>
-<!-- This site was created in Webflow. http://www.webflow.com-->
-<!-- Last Published: Mon Apr 20 2015 01:31:28 GMT+0000 (UTC) -->
-<html data-wf-site="5529405753ab13dd4efff00c"
-	data-wf-page="5533380986ac3db85c98f433">
+<html>
 <body>
-<div id="hidden_user_name" style="display:none"><%=user.getAccountName()%></div>
-<div id="hidden_user_id" style="display:none"><%=user.getUserId()%></div>
-<div id="hidden_project_id" style="display:none"><%=projectId %></div>
-	<header class="w-section navbar">
-		<jsp:include page="/WEB-INF/jsp/header.jsp" />
-	</header>
-	<div class="w-section">
-		<div>
-			<h1 class="contentsadd">プロジェクト詳細</h1>
-		</div>
+	<jsp:include page="/WEB-INF/jsp/header.jsp" />
+</head>
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/res/css/reset.css">
+<link rel="stylesheet"
+	href="<%=request.getContextPath()%>/res/css/task.css">
+<script
+	src="http://cdnjs.cloudflare.com/ajax/libs/jquery/1.11.1/jquery.min.js"></script>
+<script
+	src="<%=request.getContextPath()%>/res/js/imagesloaded.pkgd.min.js"></script>
+<script src="<%=request.getContextPath()%>/res/js/masonry.pkgd.min.js"></script>
+<script src="<%=request.getContextPath()%>/res/js/task.js"></script>
+<script src="<%=request.getContextPath()%>/res/js/socket.io.js"></script>
+<script src="<%=request.getContextPath()%>/res/js/main.js"></script>
+<div id="hidden_user_name" style="display: none"><%=user.getAccountName()%></div>
+<div id="hidden_user_id" style="display: none"><%=user.getUserId()%></div>
+<div id="hidden_project_id" style="display: none"><%=projectId%></div>
+<div class="wrapper">
+	<div class="container">
+		<ul class="photo-tile">
+			<li><a href="#">
+					<div class="item-photo">
+						<h2>dummy data dummy data dummy datadummy datadummy
+							datadummy datadummy datadummy data</h2>
+						<p>
+					</div>
+					<div class="item-info c2"></div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c1"></div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c5"></div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c4">
+						<h1>Sakura</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c1">
+						<h1>Antique interior light</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c5">
+						<h1>Clock tower</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info">
+						<h1>No image</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c2">
+						<h1>Matsuyama Catsle</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c3">
+						<h1>Rainbow</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c1">
+						<h1>Tiger</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c5">
+						<h1>Classic car</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c3">
+						<h1>Cat chocolates</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c2">
+						<h1>View</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c4">
+						<h1>Sakura</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c1">
+						<h1>Interior light</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info">
+						<h1>No image</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c5">
+						<h1>Classic car</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c2">
+						<h1>Sakura</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c2">
+						<h1>Matsuyama Catsle</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c5">
+						<h1>Rainbow</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c3">
+						<h1>Tiger</h1>
+					</div>
+			</a></li>
+			<li><a href="#">
+					<div class="item-photo"></div>
+					<div class="item-info c4">
+						<h1>Sakura</h1>
+					</div>
+			</a></li>
+		</ul>
 	</div>
 	<section class="chat-wrapper">
 		<ul class="pages">
@@ -45,9 +183,6 @@ if(request.getAttribute("PROJECT_ID") instanceof String){
 			</li>
 		</ul>
 	</section>
-
-	<script src="<%=request.getContextPath()%>/res/js/socket.io.js"></script>
-	<script src="<%=request.getContextPath()%>/res/js/main.js"></script>
-	<!--[if lte IE 9]><script src="https://cdnjs.cloudflare.com/ajax/libs/placeholders/3.0.2/placeholders.min.js"></script><![endif]-->
+</div>
 </body>
 </html>

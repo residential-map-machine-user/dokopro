@@ -1,4 +1,4 @@
-package FrontController;
+package Servlet;
 
 import java.io.IOException;
 import java.lang.reflect.InvocationTargetException;
@@ -26,7 +26,6 @@ public class FrontControllerServlet extends HttpServlet {
 	// [TODO] メール用のサーバーを作る。
 	// [TODO] アクセストークンをサーバに接続
 	// [TODO] レッドマインの導入
-	// []
 	/**
 	 * 
 	 */
@@ -34,7 +33,8 @@ public class FrontControllerServlet extends HttpServlet {
 			throws ServletException, IOException {
 		doPost(request, response);
 	}
-
+	
+	
 	/**
 	 * 
 	 */

@@ -38,6 +38,7 @@ public class ProjectController extends BaseController {
 		}
 	}
 	
+	
 	public void detailAction(HttpServletRequest request, HttpServletResponse response){
 		try {
 			List<String> uriList = (ArrayList<String>)request.getAttribute(AppConstants.REQUEST_ATTIRIBUTE.PATH);
@@ -49,6 +50,13 @@ public class ProjectController extends BaseController {
 					.forward(request, response);
 		} catch (ServletException | IOException e) {
 			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
+	}
+	public void taskAction(HttpServletRequest request, HttpServletResponse response){
+		try{
+			request.getServletContext().getRequestDispatcher(AppConstants.FOWARD_PATH.CONST_TASK_LIST_JSP).forward(request, response);
+		} catch(ServletException | IOException e){
 			e.printStackTrace();
 		}
 	}
